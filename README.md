@@ -1,1 +1,2 @@
-# SE3646.N21-DoAn
+# CheemsManager
+a Project managment app using Flutter and firebase
