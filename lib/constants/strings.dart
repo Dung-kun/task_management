@@ -51,6 +51,20 @@ class AppStrings {
   // username
   static const String sendRequest = 'send_request';
 
+  /// [Reset Password]
+  static const String resetPassword = 'reset_password';
+  static const String resetPasswordDes = 'please_create_new_password';
+  static const String resetCode = 'reset_password';
+  static const String enterYourNumber = 'enter_your_number';
+  static const String newPassword = 'new_password';
+  // passwordHint
+  // passwordValid
+  static const String confirmPassword = 'confirm_password';
+  static const String confirmPasswordHint = 'enter_your_confirm_password';
+  static const String confirmPasswordValid = 'incorrect_confirm_password';
+  static const String changePassword = 'change_password';
+  static const String invalidActionCode = 'invalid_action_code';
+  // userDisable
   // userNotFound
   static const String expiredActionCode = 'expired_action_code';
   static const String weakPassword = 'weak_password';
