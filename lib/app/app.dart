@@ -58,7 +58,7 @@ class _LinkAppState extends State<LinkApp> {
   @override
   void initState() {
     super.initState();
-    initDynamicLinks();
+    // initDynamicLinks();
   }
 
   @override

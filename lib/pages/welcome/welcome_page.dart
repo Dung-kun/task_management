@@ -32,8 +32,8 @@ class WelcomeState extends BaseState<WelcomePage, WelcomeViewModel> {
   }
 
   void init() async {
-    await Future.delayed(const Duration(seconds: 2));
-    Get.offAndToNamed(AppRoutes.SPLASH);
+    // await Future.delayed(const Duration(seconds: 2));
+    // Get.offAndToNamed(AppRoutes.SPLASH);
   }
 
   @override
