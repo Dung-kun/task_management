@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '/base/base_state.dart';
 import '/constants/strings.dart';
 import '/routing/app_routes.dart';
+import '/util/extension/extension.dart';
+import '/util/ui/common_widget/primary_button.dart';
+import '/util/ui/common_widget/sign_in_content.dart';
 import 'sign_in_provider.dart';
 import 'sign_in_vm.dart';
 
@@ -98,10 +101,30 @@ class SignInState extends BaseState<SignInPage, SignInViewModel> {
   }
 
   Widget buildForm() => SingleChildScrollView(
-          child: Form(
-        key: formKey,
-        child: Container(),
-      ));
+    child: Form(
+      key: formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 86.w),
+          SignInContent(
+            title: StringTranslateExtension(
+              AppStrings.welcomeBack,
+            ).tr(),
+            content: StringTranslateExtension(AppStrings.signInDes).tr(),
+          ),
+          SizedBox(height: 32.w),
+          '$signInStatusString'.text14(color: Colors.red).tr(),
+          SizedBox(height: 20.w),
+          PrimaryButton(
+            text: StringTranslateExtension(AppStrings.logIn).tr(),
+            press: signInClick,
+            disable: appStatus != SignInStatus.run,
+          ),
+        ],
+      ),
+    ),
+  ).marg(24.w);
 
   @override
   SignInViewModel getVm() => widget.watch(viewModelProvider).state;
