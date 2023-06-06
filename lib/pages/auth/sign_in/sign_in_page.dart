@@ -4,6 +4,9 @@ import '/base/base_state.dart';
 import '/constants/strings.dart';
 import '/routing/app_routes.dart';
 import '/util/extension/extension.dart';
+import '/util/ui/common_widget/auth_text_field.dart';
+import '/util/ui/common_widget/link_forgot_password.dart';
+import '/util/ui/common_widget/auth_switch.dart';
 import '/util/ui/common_widget/primary_button.dart';
 import '/util/ui/common_widget/sign_in_content.dart';
 import 'sign_in_provider.dart';
@@ -113,7 +116,29 @@ class SignInState extends BaseState<SignInPage, SignInViewModel> {
             ).tr(),
             content: StringTranslateExtension(AppStrings.signInDes).tr(),
           ),
+          AuthTextField(
+            controller: emailController,
+            label: AppStrings.username,
+            hint: AppStrings.usernameHint,
+            validator: (val) => val!.isNotEmpty
+                ? null
+                : StringTranslateExtension(
+              AppStrings.usernameValid,
+            ).tr(),
+            enabled: !(appStatus == SignInStatus.run),
+          ),
           SizedBox(height: 32.w),
+          AuthTextField(
+            controller: passwordController,
+            label: AppStrings.password,
+            hint: AppStrings.passwordHint,
+            validator: (val) => val!.length < 6
+                ? StringTranslateExtension(AppStrings.passwordValid).tr()
+                : null,
+            isPassword: true,
+            enabled: !(appStatus == SignInStatus.run),
+          ),
+          LinkForgotPassword(),
           '$signInStatusString'.text14(color: Colors.red).tr(),
           SizedBox(height: 20.w),
           PrimaryButton(
@@ -121,6 +146,9 @@ class SignInState extends BaseState<SignInPage, SignInViewModel> {
             press: signInClick,
             disable: appStatus != SignInStatus.run,
           ),
+          AuthSwitch(
+            auth: authCase.toSignUp,
+          ).pad(20.w, 0),
         ],
       ),
     ),
