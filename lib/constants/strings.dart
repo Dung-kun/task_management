@@ -26,12 +26,21 @@ class AppStrings {
   static const String passwordHint = 'enter_your_password';
   static const String passwordValid = 'enter_more_than_6_char';
   // login
+  static const String alreadyHaveAnAccount = 'already_have_an_account';
+  static const String forgotPassword = 'forgot_password';
   static const String networkError = 'network_error';
   static const String userDisabled = 'email_has_been_disabled';
   static const String invalidEmail = 'the_email_address_is_not_valid';
   static const String userNotFound = 'no_user_found_for_that_email';
   static const String wrongPassword = 'wrong_password_provided_for_that_user';
   static const String signIn = 'sign_in';
+
+  /// [Sign Up]
+  static const String createAccount = 'create_account';
+  static const String signUpDes = 'sign_up_to_continue';
+  static const String fullName = 'full_name';
+  static const String fullNameHint = 'enter_your_full_name';
+  static const String fullNameValid = 'enter_more_than_6_char';
 
   /// [Sign Up]
 
