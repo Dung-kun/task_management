@@ -5,8 +5,6 @@ import 'package:to_do_list/models/project_model.dart';
 
 import '/base/base_state.dart';
 import '/constants/constants.dart';
-import '/pages/home/tab/project/project_tab.dart';
-import '/pages/home/tab/profiles/profile_tab.dart';
 import '/util/extension/extension.dart';
 import 'home_provider.dart';
 import 'home_vm.dart';
@@ -54,11 +52,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
     //tab widget
     tabWidget = [
       MyTaskTab.instance(mode: projectMode, closeProjectMode: closeProjectMode),
-      ProjectTab.instance(mode: projectMode, pressMode: setProjectMode),
       MyNoteTab.instance(
-        mode: projectMode,
-      ),
-      ProfileTab.instance(
         mode: projectMode,
       ),
     ];
