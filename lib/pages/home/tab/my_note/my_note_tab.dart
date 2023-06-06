@@ -7,6 +7,7 @@ import '/routing/app_routes.dart';
 import '/util/extension/dimens.dart';
 import '/util/extension/widget_extension.dart';
 import '../../../../models/project_model.dart';
+import '../../../../util/ui/common_widget/quick_note_card.dart';
 import 'my_note_provider.dart';
 import 'my_note_vm.dart';
 
@@ -44,6 +45,46 @@ class MyNoteState extends BaseState<MyNoteTab, MyNoteViewModel> {
       color: AppColors.kPrimaryBackground,
       height: screenHeight,
       width: screenWidth,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 32.w),
+            StreamBuilder<List<QuickNoteModel>?>(
+                stream: getVm().bsListQuickNote,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text("Loading");
+                  }
+
+                  List<QuickNoteModel> data = snapshot.data!;
+                  return Column(
+                    children: [
+                      if (data.length == 0) buildNoneNote(),
+                      for (int i = 0; i < data.length; i++)
+                        isFullQuickNote == true ||
+                                (!isFullQuickNote &&
+                                    data[i].isSuccessful == false)
+                            ? QuickNoteCard(
+                                note: data[i],
+                                color: AppColors.kColorNote[data[i].indexColor],
+                                successfulPress: () =>
+                                    getVm().successfulQuickNote(data[i]),
+                                checkedPress: getVm().checkedNote,
+                                deletePress: () {
+                                  getVm().deleteNote(data[i]);
+                                },
+                              )
+                            : SizedBox(),
+                    ],
+                  );
+                }),
+          ],
+        ),
+      ),
     );
   }
 
