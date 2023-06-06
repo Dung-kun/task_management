@@ -168,27 +168,6 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
       currentIndex: currentIndex,
       backgroundColor: Color(0xFF292E4E),
       items: [
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.myTask).tr(),
-          icon: AppImages.myTaskIcon,
-          index: 0,
-        ),
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.project).tr(),
-          icon: AppImages.menuIcon,
-          index: 1,
-        ),
-        BottomNavigationBarItem(icon: Container(), label: ""),
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.myNote).tr(),
-          icon: AppImages.quickIcon,
-          index: 2,
-        ),
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.profiles).tr(),
-          icon: AppImages.profileIcon,
-          index: 3,
-        ),
       ],
       onTap: (index) => press(index),
     );
