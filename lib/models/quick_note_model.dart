@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_list/models/note_model.dart';
@@ -35,6 +36,30 @@ class QuickNoteModel extends Equatable {
       indexColor: json['index_color'],
       time: DateFormat("yyyy-MM-dd hh:mm:ss").parse(json['time']),
       isSuccessful: json['is_successful'],
+      listNote: _list,
+    );
+  }
+
+  factory QuickNoteModel.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    List<NoteModel> _list = [];
+
+    for (int i = 0; i < (doc['list.length'] ?? 0); i++) {
+      _list.add(
+        new NoteModel(
+          id: i,
+          text: doc['list.data_$i.note'],
+          check: doc['list.data_$i.check'],
+        ),
+      );
+    }
+
+    return QuickNoteModel(
+      id: doc.id,
+      content: data['content'],
+      indexColor: data['index_color'],
+      time: DateFormat("yyyy-MM-dd hh:mm:ss").parse(data['time']),
+      isSuccessful: data['is_successful'],
       listNote: _list,
     );
   }

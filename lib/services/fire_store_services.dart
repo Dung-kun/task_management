@@ -24,6 +24,13 @@ class FirestoreService {
         );
   }
 
+  Stream<List<TaskModel>> taskStream() {
+    return _firebaseFirestore.collection('task').snapshots().map(
+          (list) => list.docs.map((doc) {
+            return TaskModel.fromFirestore(doc);
+          }).toList(),
+        );
+  }
 
   Stream<List<CommentModel>> commentStream(String taskId) {
     return _firebaseFirestore
@@ -36,6 +43,14 @@ class FirestoreService {
             return CommentModel.fromFirestore(doc);
           }).toList(),
         );
+  }
+
+  Stream<TaskModel> taskStreamById(String id) {
+    return _firebaseFirestore
+        .collection('task')
+        .doc(id)
+        .snapshots()
+        .map((doc) => TaskModel.fromFirestore(doc));
   }
 
   Stream<MetaUserModel> userStreamById(String id) {
@@ -276,6 +291,19 @@ class FirestoreService {
       );
   }
 
+  Stream<List<QuickNoteModel>> quickNoteStream(String uid) {
+    return _firebaseFirestore
+        .collection('user')
+        .doc(uid)
+        .collection('quick_note')
+        .orderBy('time', descending: true)
+        .snapshots()
+        .map(
+          (list) => list.docs
+              .map((doc) => QuickNoteModel.fromFirestore(doc))
+              .toList(),
+        );
+  }
 
   Future<bool> addQuickNote(String uid, QuickNoteModel quickNote) async {
     await _firebaseFirestore
@@ -311,6 +339,20 @@ class FirestoreService {
       return false;
     });
     return false;
+  }
+
+  Stream<List<QuickNoteModel>> taskNoteStream(String uid) {
+    return _firebaseFirestore
+        .collection('task')
+        .doc(uid)
+        .collection('task_note')
+        .orderBy('time', descending: true)
+        .snapshots()
+        .map(
+          (list) => list.docs
+              .map((doc) => QuickNoteModel.fromFirestore(doc))
+              .toList(),
+        );
   }
 
   Future<bool> addTaskNote(String uid, QuickNoteModel quickNote) async {

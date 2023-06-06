@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
@@ -25,6 +26,24 @@ class TaskModel extends Equatable {
     this.completed = false,
     this.desUrl = '',
   });
+
+  factory TaskModel.fromFirestore(DocumentSnapshot doc) {
+    List<String> list = [];
+    for (int i = 0; i < doc['list_member'].length; i++) {
+      list.add(doc['list_member'][i]);
+    }
+    return TaskModel(
+        id: doc.id,
+        idAuthor: doc['id_author'],
+        idProject: doc['id_project'],
+        title: doc['title'],
+        description: doc['description'],
+        dueDate: DateFormat("yyyy-MM-dd hh:mm:ss").parse(doc['due_date']),
+        startDate: DateFormat("yyyy-MM-dd hh:mm:ss").parse(doc['start_date']),
+        listMember: list,
+        completed: doc['completed'],
+        desUrl: doc['des_url']);
+  }
 
   Map<String, dynamic> toFirestore() => {
         'id_author': this.idAuthor,
