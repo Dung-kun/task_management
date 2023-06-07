@@ -32,6 +32,27 @@ extension WidgetExtension on Widget {
     );
   }
 
+  Widget marg([double? a, double? b, double? c, double? d]) {
+    EdgeInsets mPad;
+
+    if (d != null) {
+      mPad = EdgeInsets.only(left: a!, right: b!, top: c!, bottom: d);
+    } else if (c != null) {
+      mPad = EdgeInsets.only(left: a!, right: b!, top: c);
+    } else if (b != null) {
+      mPad = EdgeInsets.symmetric(vertical: a!, horizontal: b);
+    } else if (a != null) {
+      mPad = EdgeInsets.all(a);
+    } else {
+      mPad = EdgeInsets.zero;
+    }
+
+    return Container(
+      margin: mPad,
+      child: this,
+    );
+  }
+
   Widget pad([double? a, double? b, double? c, double? d]) {
     EdgeInsets mPad;
 
@@ -171,6 +192,12 @@ extension TextBuilderExtension on String {
     return _TextWidgetBuilder(this)
         .color(AppColors.kText)
         .weight(FontWeight.w700);
+  }
+
+  Text text14(
+      {FontWeight fontWeight = FontWeight.w400,
+        Color color = AppColors.kText}) {
+    return plain().fSize(14).lHeight(16).color(color).weight(fontWeight).b();
   }
 
   Text text18(

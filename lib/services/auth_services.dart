@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '/constants/app_colors.dart';
+import '/pages/auth/sign_in/sign_in_vm.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -9,6 +10,34 @@ class AuthenticationService {
   AuthenticationService(this._firebaseAuth);
 
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
+
+  Future<SignInStatus> signIn(String email, String password) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      servicesResultPrint('Sign In Successful');
+      return SignInStatus.successful;
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'invalid-email':
+          servicesResultPrint('Invalid email');
+          return SignInStatus.invalidEmail;
+        case 'user-disabled':
+          servicesResultPrint('User disabled');
+          return SignInStatus.userDisabled;
+        case 'user-not-found':
+          servicesResultPrint('User not found');
+          return SignInStatus.userNotFound;
+        case 'wrong-password':
+          servicesResultPrint('Wrong password');
+          return SignInStatus.wrongPassword;
+        default:
+          return SignInStatus.wrongPassword;
+      }
+    }
+  }
 
   User? currentUser() {
     if (_firebaseAuth.currentUser == null) {

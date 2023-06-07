@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:to_do_list/pages/home/home_page.dart';
+import '../pages/auth/sign_in/sign_in_page.dart';
 import '../pages/splash/splash_page.dart';
 import '../pages/welcome/welcome_page.dart';
 import 'app_routes.dart';
@@ -29,6 +30,8 @@ class RouteGenerator {
         return page(child: WelcomePage.instance());
       case AppRoutes.HOME:
         return page(child: HomePage.instance());
+      case AppRoutes.SIGN_IN:
+        return page(child: SignInPage.instance());
       default:
         throw RouteException("Route not found");
     }
