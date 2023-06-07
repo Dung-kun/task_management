@@ -32,19 +32,7 @@ class WelcomeState extends BaseState<WelcomePage, WelcomeViewModel> {
     init();
   }
 
-  void init() async {
-    await Future.delayed(const Duration(seconds: 2));
-    getVm().auth.authStateChange.listen((event) {
-      switch (event) {
-        case null:
-          Get.offAndToNamed(AppRoutes.SPLASH);
-          break;
-        default:
-          Get.offAndToNamed(AppRoutes.HOME);
-          break;
-      }
-    });
-  }
+  void init() {}
 
   @override
   Widget build(BuildContext context) {

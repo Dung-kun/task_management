@@ -38,21 +38,9 @@ class LinkApp extends StatefulWidget {
 }
 
 class _LinkAppState extends State<LinkApp> {
-  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
-
-  Future<void> initDynamicLinks() async {
-    dynamicLinks.onLink.listen((dynamicLinkData) {
-      String dynamicLinkString = dynamicLinkData.link.path;
-    }).onError((error) {
-      print('onLink error');
-      print(error.message);
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    initDynamicLinks();
   }
 
   @override
