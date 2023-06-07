@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:to_do_list/util/extension/dimens.dart';
 
 import '/pages/welcome/welcome_page.dart';
+import '/routing/app_routes.dart';
+import '/routing/route_generator.dart';
 
 class App extends StatelessWidget {
   App({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class App extends StatelessWidget {
       locale: context.locale,
       supportedLocales: context.supportedLocales,
       localizationsDelegates: context.localizationDelegates,
+      onGenerateRoute: RouteGenerator().onGenerateRoute,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -39,6 +42,11 @@ class _LinkAppState extends State<LinkApp> {
 
   Future<void> initDynamicLinks() async {
     dynamicLinks.onLink.listen((dynamicLinkData) {
+      String dynamicLinkString = dynamicLinkData.link.path;
+      if (dynamicLinkString == AppRoutes.PATH_RESET_PASSWORD) {
+        Get.toNamed(AppRoutes.RESET_PASSWORD,
+            arguments: dynamicLinkData.link.queryParameters['oobCode']);
+      }
     }).onError((error) {
       print('onLink error');
       print(error.message);

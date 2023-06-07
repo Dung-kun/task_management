@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_list/base/base_state.dart';
 
 import 'app/app.dart';
 
@@ -16,6 +17,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -30,6 +32,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ProviderScope(
+      child: Consumer(
+        builder: (context, watch, _){
+          return EasyLocalization(
+            supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
+            path: 'assets/translations',
+            startLocale: const Locale('en', 'US'),
+            fallbackLocale: const Locale('en', 'US'),
+            child: App(),
+          );
+        },
+      ),
+    );
   }
 }
