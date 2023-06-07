@@ -1,24 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '/base/base_state.dart';
 import '/constants/constants.dart';
-import '/models/project_model.dart';
-import 'project_provider.dart';
+import '/util/extension/dimens.dart';
 import 'project_vm.dart';
+import 'widgets/add_project_button.dart';
 
 class ProjectTab extends StatefulWidget {
-  final ScopedReader watch;
-
-  final Function pressMode;
-  final ProjectModel? mode;
-
-  static Widget instance({ProjectModel? mode, required Function pressMode}) {
-    return Consumer(builder: (context, watch, _) {
-      return ProjectTab._(watch, mode, pressMode);
-    });
-  }
-
-  const ProjectTab._(this.watch, this.mode, this.pressMode);
 
   @override
   State<StatefulWidget> createState() {
@@ -38,9 +27,15 @@ class ProjectState extends BaseState<ProjectTab, ProjectViewModel> {
   }
 
   Widget buildBody() {
-    return SingleChildScrollView(child: Container());
+    return SingleChildScrollView(
+
+    );
   }
 
   @override
-  ProjectViewModel getVm() => widget.watch(viewModelProvider).state;
+  ProjectViewModel getVm() {
+    // TODO: implement getVm
+    throw UnimplementedError();
+  }
+
 }

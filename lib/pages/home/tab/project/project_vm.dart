@@ -1,26 +1,15 @@
 import '/base/base_view_model.dart';
-import '/models/project_model.dart';
 
 class ProjectViewModel extends BaseViewModel {
-  BehaviorSubject<List<ProjectModel>?> bsProject = BehaviorSubject();
 
-  ProjectViewModel(ref) : super(ref) {}
-
-  void addProject(String name, int indexColor) {
-    var temp = new ProjectModel(
-      name: name,
-      idAuthor: user!.uid,
-      indexColor: indexColor,
-      timeCreate: DateTime.now(),
-      listTask: [],
-    );
+  ProjectViewModel(ref) : super(ref) {
   }
 
-  void deleteProject(ProjectModel project) {}
+  void addProject(String name, int indexColor) {
+  }
+
 
   @override
   void dispose() {
-    bsProject.close();
-    super.dispose();
   }
 }

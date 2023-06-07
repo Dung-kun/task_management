@@ -1,18 +1,14 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:to_do_list/models/project_model.dart';
 
+import '../../util/extension/dimens.dart';
 import '/base/base_state.dart';
 import '/constants/constants.dart';
-import '/pages/home/tab/project/project_tab.dart';
-import '/pages/home/tab/profiles/profile_tab.dart';
-import '/util/extension/extension.dart';
 import 'home_provider.dart';
 import 'home_vm.dart';
-import 'tab/my_task/my_task_tab.dart';
-import 'tab/my_note/my_note_tab.dart';
-import 'widgets/add_new_button.dart';
 
 class HomePage extends StatefulWidget {
   final ScopedReader watch;
@@ -34,7 +30,6 @@ class HomePage extends StatefulWidget {
 class HomeState extends BaseState<HomePage, HomeViewModel> {
   int currentTab = 0;
   PageController tabController = PageController();
-  ProjectModel? projectMode;
 
   late AndroidNotificationChannel channel;
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -51,69 +46,90 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
 
     //notification
     getVm().initMessingToken();
+    requestMessagingPermission();
+    loadFCM();
+    listenFCM();
     //tab widget
     tabWidget = [
-      MyTaskTab.instance(mode: projectMode, closeProjectMode: closeProjectMode),
-      ProjectTab.instance(mode: projectMode, pressMode: setProjectMode),
-      MyNoteTab.instance(
-        mode: projectMode,
-      ),
-      ProfileTab.instance(
-        mode: projectMode,
-      ),
     ];
   }
 
-  void setProjectMode(ProjectModel value) async {
-    setState(() {
-      projectMode = value;
-      tabWidget[0] = MyTaskTab.instance(
-          mode: projectMode, closeProjectMode: closeProjectMode);
-    });
-    await tabController.animateToPage(
-      0,
-      duration: Duration(
-        milliseconds: 300,
-      ),
-      curve: Curves.easeIn,
-    );
+  requestMessagingPermission() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    NotificationSettings settings = await messaging.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true);
+    print("User granted permission: ${settings.authorizationStatus}");
   }
 
-  void closeProjectMode() async {
-    setState(() {
-      projectMode = null;
-      tabWidget[0] = MyTaskTab.instance(
-          mode: projectMode, closeProjectMode: closeProjectMode);
+  listenFCM() async {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+                android: AndroidNotificationDetails(channel.id, channel.name,
+                    channelDescription: channel.description,
+                    color: Colors.blue,
+                    playSound: false,
+                    icon: '@mipmap/launcher_icon')));
+      }
     });
-    await tabController.animateToPage(
-      0,
-      duration: Duration(
-        milliseconds: 300,
-      ),
-      curve: Curves.easeIn,
-    );
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenApp event was public');
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                  title: Text(notification.title!),
+                  content: SingleChildScrollView(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Text(notification.body!)]),
+                  ));
+            });
+      }
+    });
   }
 
-  void tabClick(int index) {
-    if (index > 1) {
-      setState(() {
-        currentTab = index - 1;
-      });
-    } else {
-      setState(() {
-        currentTab = index;
-      });
+  loadFCM() async {
+    if (!kIsWeb) {
+      channel = const AndroidNotificationChannel(
+          "high_important_channel", //id
+          "high important notification", //title
+          description:
+              "this channel is used for important notification.", //description
+          importance: Importance.high,
+          enableVibration: true,
+          playSound: true);
+
+      flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.createNotificationChannel(channel);
+      await FirebaseMessaging.instance
+          .setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
     }
-    tabController.animateToPage(
-      currentTab,
-      duration: Duration(
-        milliseconds: 300,
-      ),
-      curve: Curves.easeIn,
-    );
   }
 
-  void goTab(int index) {
+   void goTab(int index) {
     setState(() {
       currentTab = index;
     });
@@ -123,12 +139,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: buildBody(),
-      floatingActionButton: AddNewButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: buildBottomNavigationBar(
-        currentIndex: currentTab,
-        press: tabClick,
-      ),
     );
   }
 
@@ -157,27 +168,6 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
       currentIndex: currentIndex,
       backgroundColor: Color(0xFF292E4E),
       items: [
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.myTask).tr(),
-          icon: AppImages.myTaskIcon,
-          index: 0,
-        ),
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.project).tr(),
-          icon: AppImages.menuIcon,
-          index: 1,
-        ),
-        BottomNavigationBarItem(icon: Container(), label: ""),
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.myNote).tr(),
-          icon: AppImages.quickIcon,
-          index: 2,
-        ),
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.profiles).tr(),
-          icon: AppImages.profileIcon,
-          index: 3,
-        ),
       ],
       onTap: (index) => press(index),
     );
@@ -198,15 +188,8 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
             SvgPicture.asset(
               icon,
               color: Colors.white.withOpacity(currentTab == index ? 1 : .5),
-              width: 24.w,
-              height: 24.w,
             ),
             SizedBox(height: 4),
-            title
-                .plain()
-                .fSize(12)
-                .color(Colors.white.withOpacity(currentTab == index ? 1 : .5))
-                .b()
           ],
         ),
       ),

@@ -57,11 +57,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAfoCQwieHv3HTCzKvmBaTc8pfSu2voy2M',
-    appId: '1:959576308880:android:3146afbd1c5b2cae2e6c15',
-    messagingSenderId: '959576308880',
-    projectId: 'prime-works-315315',
-    storageBucket: 'prime-works-315315.appspot.com',
+    apiKey: 'AIzaSyAQysQGhw4kA3YCHxEm4fdUOoGDvL28SM4',
+    appId: '1:651047515303:android:582d2d235040cb36cf5782',
+    messagingSenderId: '651047515303',
+    projectId: 'tm-may2023',
+    storageBucket: 'tm-may2023.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
