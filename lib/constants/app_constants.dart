@@ -14,4 +14,9 @@ class AppConstants {
       blurRadius: 8,
     )
   ];
+
+  static const kLengthSplash = 3;
+  static const kAnimationDuration = Duration(milliseconds: 200);
+  static const double kDefaultBorderRadius = 5;
+
 }
