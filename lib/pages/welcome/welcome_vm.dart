@@ -1,11 +1,15 @@
 import '/base/base_view_model.dart';
 
 class WelcomeViewModel extends BaseViewModel {
-  WelcomeViewModel(AutoDisposeProviderReference ref) : super(ref);
+  BehaviorSubject<InitialStatus> bsInitSate =
+  BehaviorSubject.seeded(InitialStatus.loading);
 
+  WelcomeViewModel(ref) : super(ref);
 
   @override
   void dispose() {
+    bsInitSate.close();
+    super.dispose();
   }
 }
 

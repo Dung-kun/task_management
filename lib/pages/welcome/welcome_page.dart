@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_list/util/extension/widget_extension.dart';
 
+import '../../routing/app_routes.dart';
 import '../../util/extension/dimens.dart';
 import '/base/base_state.dart';
 import '/constants/constants.dart';
@@ -32,6 +34,16 @@ class WelcomeState extends BaseState<WelcomePage, WelcomeViewModel> {
 
   void init() async {
     await Future.delayed(const Duration(seconds: 2));
+    getVm().auth.authStateChange.listen((event) {
+      switch (event) {
+        case null:
+          Get.offAndToNamed(AppRoutes.SPLASH);
+          break;
+        default:
+          Get.offAndToNamed(AppRoutes.HOME);
+          break;
+      }
+    });
   }
 
   @override
@@ -47,6 +59,17 @@ class WelcomeState extends BaseState<WelcomePage, WelcomeViewModel> {
       width: screenWidth,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            AppImages.imgLogo,
+            width: 149.w,
+            fit: BoxFit.fitWidth,
+          ).pad(0, 0, 0, 12.w),
+          AppStrings.TaskManagement.bold()
+              .fSize(48)
+              .fShadow(AppConstants.kLogoTextShadow)
+              .btr(),
+        ],
       ),
     );
   }
