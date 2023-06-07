@@ -31,7 +31,8 @@ class WelcomeState extends BaseState<WelcomePage, WelcomeViewModel> {
     init();
   }
 
-  void init() async {
+  void init() {
+    print("Hello em");
     // await Future.delayed(const Duration(seconds: 2));
     // Get.offAndToNamed(AppRoutes.SPLASH);
   }

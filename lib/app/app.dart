@@ -40,24 +40,13 @@ class LinkApp extends StatefulWidget {
 }
 
 class _LinkAppState extends State<LinkApp> {
-  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
 
-  Future<void> initDynamicLinks() async {
-    dynamicLinks.onLink.listen((dynamicLinkData) {
-      String dynamicLinkString = dynamicLinkData.link.path;
-      if (dynamicLinkString == AppRoutes.PATH_RESET_PASSWORD) {
-        Get.toNamed(AppRoutes.RESET_PASSWORD,
-            arguments: dynamicLinkData.link.queryParameters['oobCode']);
-      }
-    }).onError((error) {
-      print('onLink error');
-      print(error.message);
-    });
-  }
 
   @override
   void initState() {
+    print("Hello em 5");
     super.initState();
+
     // initDynamicLinks();
   }
 

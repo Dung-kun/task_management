@@ -19,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
+    name: "dev project",
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
