@@ -23,7 +23,7 @@ class AppColors {
   // static const kGrayBack = Color(0xFFF4F4F4);
   // static const kGrayBack50 = Color(0xFFF8F8F8);
 
-  // static const kBarrierColor = Color(0x65000000);
+  static const kBarrierColor = Color(0x65000000);
   static const kBoxShadowColor = Color(0x80E3E3E3);
   static const kBoxShadowAddFormColor = Color.fromRGBO(221, 221, 221, .05);
   // static const KBoxShadowCard = Color.fromRGBO(227, 225, 225, 0.5019607843137255);
@@ -49,13 +49,13 @@ class AppColors {
     Color(0xFF8560F9),
   ];
 
-  // static const kColorNote = <Color>[
-  //   Color(0xFF6074F9),
-  //   Color(0xFFE42B6A),
-  //   Color(0xFF5ABB56),
-  //   Color(0xFF3D3A62),
-  //   Color(0xFFECB562),
-  // ];
+  static const kColorNote = <Color>[
+    Color(0xFF6074F9),
+    Color(0xFFE42B6A),
+    Color(0xFF5ABB56),
+    Color(0xFF3D3A62),
+    Color(0xFFECB562),
+  ];
 
   // static const kBackgroundColors = <Color>[
   //   Color(0xFFEEF0FF),

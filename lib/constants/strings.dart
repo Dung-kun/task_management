@@ -81,24 +81,24 @@ class AppStrings {
   //     'you_have_successfully_change_password_please_use_your_new_passwords_when_logging_in';
 
   /// [Home]
-  // static const String myTask = 'my_task';
-  // static const String project = 'Project';
-  // static const String myNote = 'My Note';
-  // static const String profile = 'profile';
-  // static const String backToLogin = 'back_to_login';
+  static const String myTask = 'my_task';
+  static const String project = 'Project';
+  static const String myNote = 'My Note';
+  static const String profile = 'profile';
+  static const String backToLogin = 'back_to_login';
 
   /// [Home] [Add Button]
-  // static const String addTask = 'add_task';
-  // static const String addQuickNote = 'add_quick_note';
-  // static const String addCheckList = 'add_check_list';
+  static const String addTask = 'add_task';
+  static const String addQuickNote = 'add_quick_note';
+  static const String addCheckList = 'add_check_list';
 
   /// [Home] [Add Button] [New Task] [Edit Task]
   // static const String newTask = 'new_task';
   // static const String editTask = 'edit_task';
   // static const String in_ = 'in';
-  // static const String confirmDelete = 'confirm_delete';
-  // static const String yes = 'yes';
-  // static const String no = 'no';
+  static const String confirmDelete = 'confirm_delete';
+  static const String yes = 'yes';
+  static const String no = 'no';
   // title
   // description
   // dueDate
@@ -165,17 +165,17 @@ class AppStrings {
   // static const String deleteTask = 'delete_task';
 
   /// [Home] [Menu]
-  // static const String projects = 'Projects';
+  static const String projects = 'Projects';
 
   /// [Home] [Menu] [Add Button]
-  // static const String title = 'Title';
-  // static const String chooseColor = 'choose_color';
+  static const String title = 'Title';
+  static const String chooseColor = 'choose_color';
 
   /// [Home] [Quick]
   // static const String quickNotes = 'quick_notes';
 
   /// [Home] [Profile]
-  // static const String profiles = 'profiles';
+  static const String profiles = 'profiles';
   // static const String createTasks = 'create_tasks';
   // completedTasks
   // static const String events = 'events';
@@ -185,8 +185,8 @@ class AppStrings {
 
   /// [List user form]
   // static const String selectUser = 'select_user';
-  // static const String loading = 'loading';
-  // static const String somethingWentWrong = 'something_went_wrong';
+  static const String loading = 'loading';
+  static const String somethingWentWrong = 'something_went_wrong';
   // static const String pleaseEnterYourText = 'please_enter_your_text';
   // static const String pleaseChooseProject = 'please_choose_project';
   // static const String pleaseSelectDate = 'please_select_date';

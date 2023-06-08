@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
@@ -22,10 +23,10 @@ class FirestoreMessagingService {
   }
 
   saveToken(String uid, String token) {
-    // FirebaseFirestore.instance
-    //     .collection("user")
-    //     .doc(uid)
-    //     .update({"messingToken": token});
+    FirebaseFirestore.instance
+        .collection("user")
+        .doc(uid)
+        .update({"messingToken": token});
   }
 
   Future<String> sendPushMessaging(

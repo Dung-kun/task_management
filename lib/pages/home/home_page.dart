@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:to_do_list/models/project_model.dart';
+import 'package:to_do_list/util/ui/common_widget/back_to_login.dart';
 
 import '/base/base_state.dart';
 import '/constants/constants.dart';
@@ -11,6 +12,7 @@ import '/pages/home/tab/project/project_tab.dart';
 import '/util/extension/extension.dart';
 import 'home_provider.dart';
 import 'home_vm.dart';
+import 'widgets/add_new_button.dart';
 
 class HomePage extends StatefulWidget {
   final ScopedReader watch;
@@ -139,8 +141,8 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
   void setProjectMode(ProjectModel value) async {
     setState(() {
       projectMode = value;
-      tabWidget[0] = MyTaskTab.instance(
-          mode: projectMode, closeProjectMode: closeProjectMode);
+      // tabWidget[0] = MyTaskTab.instance(
+      //     mode: projectMode, closeProjectMode: closeProjectMode);
     });
     await tabController.animateToPage(
       0,
@@ -154,8 +156,8 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
   void closeProjectMode() async {
     setState(() {
       projectMode = null;
-      tabWidget[0] = MyTaskTab.instance(
-          mode: projectMode, closeProjectMode: closeProjectMode);
+      // tabWidget[0] = MyTaskTab.instance(
+      //     mode: projectMode, closeProjectMode: closeProjectMode);
     });
     await tabController.animateToPage(
       0,
@@ -230,27 +232,27 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
       currentIndex: currentIndex,
       backgroundColor: Color(0xFF292E4E),
       items: [
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.myTask).tr(),
-          icon: AppImages.myTaskIcon,
-          index: 0,
-        ),
+        // buildBottomNavigationBarItem(
+        //   title: StringTranslateExtension(AppStrings.myTask).tr(),
+        //   icon: AppImages.myTaskIcon,
+        //   index: 0,
+        // ),
         buildBottomNavigationBarItem(
           title: StringTranslateExtension(AppStrings.project).tr(),
           icon: AppImages.menuIcon,
-          index: 1,
+          index: 0,
         ),
         BottomNavigationBarItem(icon: Container(), label: ""),
         buildBottomNavigationBarItem(
           title: StringTranslateExtension(AppStrings.myNote).tr(),
           icon: AppImages.quickIcon,
-          index: 2,
+          index: 1,
         ),
-        buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.profiles).tr(),
-          icon: AppImages.profileIcon,
-          index: 3,
-        ),
+        // buildBottomNavigationBarItem(
+        //   title: StringTranslateExtension(AppStrings.profiles).tr(),
+        //   icon: AppImages.profileIcon,
+        //   index: 3,
+        // ),
       ],
       onTap: (index) => press(index),
     );

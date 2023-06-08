@@ -21,11 +21,11 @@ class AppImages {
   // static const imgStatistic = "$_baseImageFolder/statistic.png";
 
   /// [Icons]
-  // static const _baseIconFolder = "assets/icons";
+  static const _baseIconFolder = "assets/icons";
   /// [Login]
   // static const prevIcon = "$_baseIconFolder/prev.svg";
   // [WorkList Navigator MyTask ]
-  // static const myTaskIcon = "$_baseIconFolder/my_task.svg";
+  static const myTaskIcon = "$_baseIconFolder/my_task.svg";
   // static const filterIcon = "$_baseIconFolder/filter.svg";
   // static const checkTrueIcon = "$_baseIconFolder/checked_true.svg";
   // static const checkFalseIcon = "$_baseIconFolder/checked_false.svg";
@@ -41,15 +41,15 @@ class AppImages {
   // static const tagProjectIcon = '$_baseIconFolder/tag_project.svg';
   // static const commentIcon = '$_baseIconFolder/comment.svg';
   /// [WorkList Navigator Menu]
-  // static const menuIcon = "$_baseIconFolder/menu.svg";
+  static const menuIcon = "$_baseIconFolder/menu.svg";
   // static const blueIcon = "$_baseIconFolder/blueicon.svg";
   // static const redIcon = "$_baseIconFolder/redicon.svg";
   // static const greenIcon = "$_baseIconFolder/greenicon.svg";
   // static const pupleIcon = "$_baseIconFolder/pupleicon.svg";
   /// [WorkList Navigator Quick]
-  // static const quickIcon = "$_baseIconFolder/quick.svg";
+  static const quickIcon = "$_baseIconFolder/quick.svg";
   // // [WorkList Navigator Profile]
-  // static const profileIcon = "$_baseIconFolder/profile.svg";
+  static const profileIcon = "$_baseIconFolder/profile.svg";
   // static const settingIcon = "$_baseIconFolder/setting.svg";
   // static const imageStatistic = '$_baseImageFolder/statistic.png';
   // static const imageNoneAvatar = '$_baseImageFolder/none-avatar.png';

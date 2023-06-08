@@ -1,22 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '/constants/app_colors.dart';
+import '/models/project_model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firebaseFirestore;
   FirestoreService(this._firebaseFirestore);
 
-  // Stream<List<ProjectModel>> projectStream(String uid) {
-  //   return _firebaseFirestore
-  //       .collection('project')
-  //       .where('id_author', isEqualTo: uid)
-  //       .snapshots()
-  //       .map(
-  //         (list) => list.docs.map((doc) {
-  //           return ProjectModel.fromFirestore(doc);
-  //         }).toList(),
-  //       );
-  // }
+  Stream<List<ProjectModel>> projectStream(String uid) {
+    return _firebaseFirestore
+        .collection('project')
+        .where('id_author', isEqualTo: uid)
+        .snapshots()
+        .map(
+          (list) => list.docs.map((doc) {
+            return ProjectModel.fromFirestore(doc);
+          }).toList(),
+        );
+  }
   //
   // Stream<List<TaskModel>> taskStream() {
   //   return _firebaseFirestore.collection('task').snapshots().map(
@@ -62,22 +63,26 @@ class FirestoreService {
   //       .get()
   //       .then((doc) => MetaUserModel.fromFirestore(doc));
   // }
-  //
-  // Future<ProjectModel> getProjectById(String id) {
-  //   return _firebaseFirestore
-  //       .collection('project')
-  //       .doc(id)
-  //       .get()
-  //       .then((doc) => ProjectModel.fromFirestore(doc));
-  // }
-  //
-  // Stream<ProjectModel> projectStreamById(String id) {
-  //   return _firebaseFirestore
-  //       .collection('project')
-  //       .doc(id)
-  //       .snapshots()
-  //       .map((doc) => ProjectModel.fromFirestore(doc));
-  // }
+
+  Future<ProjectModel> getProject(DocumentReference doc) {
+    return doc.get().then((value) => ProjectModel.fromFirestore(value));
+  }
+
+  Future<ProjectModel> getProjectById(String id) {
+    return _firebaseFirestore
+        .collection('project')
+        .doc(id)
+        .get()
+        .then((doc) => ProjectModel.fromFirestore(doc));
+  }
+
+  Stream<ProjectModel> projectStreamById(String id) {
+    return _firebaseFirestore
+        .collection('project')
+        .doc(id)
+        .snapshots()
+        .map((doc) => ProjectModel.fromFirestore(doc));
+  }
   //
   // Stream<List<MetaUserModel>> userStream(String email) {
   //   return _firebaseFirestore
@@ -91,18 +96,16 @@ class FirestoreService {
   //       );
   // }
 
-  // DocumentReference getDoc(String collectionPath, String id) {
-  //   return _firebaseFirestore.collection(collectionPath).doc(id);
-  // }
-
+  DocumentReference getDoc(String collectionPath, String id) {
+    return _firebaseFirestore.collection(collectionPath).doc(id);
+  }
+  //
   // Future<MetaUserModel> getMetaUserByIDoc(DocumentReference doc) {
   //   return doc.get().then((value) => MetaUserModel.fromFirestore(value));
   // }
-  //
-  // Future<ProjectModel> getProject(DocumentReference doc) {
-  //   return doc.get().then((value) => ProjectModel.fromFirestore(value));
-  // }
 
+
+  //
   // Future<bool> deleteQuickNote(String uid, String id) async {
   //   await _firebaseFirestore
   //       .collection('user')
@@ -120,21 +123,21 @@ class FirestoreService {
   //   return false;
   // }
 
-  // void addProject(ProjectModel project) {
-  //   _firebaseFirestore.collection('project').doc().set(project.toFirestore());
-  // }
-  //
-  // void deleteProject(ProjectModel project) {
-  //   _firebaseFirestore
-  //       .collection('project')
-  //       .doc(project.id)
-  //       .delete()
-  //       .then((value) {
-  //     servicesResultPrint("Project Deleted");
-  //   }).catchError((error) {
-  //     servicesResultPrint("Failed to delete project: $error");
-  //   });
-  // }
+  void addProject(ProjectModel project) {
+    _firebaseFirestore.collection('project').doc().set(project.toFirestore());
+  }
+
+  void deleteProject(ProjectModel project) {
+    _firebaseFirestore
+        .collection('project')
+        .doc(project.id)
+        .delete()
+        .then((value) {
+      servicesResultPrint("Project Deleted");
+    }).catchError((error) {
+      servicesResultPrint("Failed to delete project: $error");
+    });
+  }
   //
   // Future<bool> addTaskProject(ProjectModel projectModel, String taskID) async {
   //   List<String> list = projectModel.listTask;
@@ -168,7 +171,7 @@ class FirestoreService {
   //   });
   //   return true;
   // }
-
+  //
   // Future<void> completedTaskById(String id) async {
   //   await _firebaseFirestore
   //       .collection('task')
@@ -222,7 +225,7 @@ class FirestoreService {
   //     servicesResultPrint('Update avatar successful', isToast: false);
   //   });
   // }
-
+  //
   // Future<String> addTask(TaskModel task) async {
   //   DocumentReference doc = _firebaseFirestore.collection('task').doc();
   //   await doc.set(task.toFirestore()).then((onValue) {
@@ -246,18 +249,18 @@ class FirestoreService {
   //   });
   //   return doc.id;
   // }
-
-  Future<bool> deleteTask(String id) async {
-    await _firebaseFirestore.collection('task').doc(id).delete().then((value) {
-      servicesResultPrint("Task Deleted");
-      return true;
-    }).catchError((error) {
-      servicesResultPrint("Failed to delete task: $error");
-      return false;
-    });
-    return false;
-  }
-
+  //
+  // Future<bool> deleteTask(String id) async {
+  //   await _firebaseFirestore.collection('task').doc(id).delete().then((value) {
+  //     servicesResultPrint("Task Deleted");
+  //     return true;
+  //   }).catchError((error) {
+  //     servicesResultPrint("Failed to delete task: $error");
+  //     return false;
+  //   });
+  //   return false;
+  // }
+  //
   // Future<bool> updateTask(TaskModel task) async {
   //   await _firebaseFirestore
   //       .collection('task')
@@ -284,7 +287,7 @@ class FirestoreService {
         textColor: AppColors.kText,
       );
   }
-
+  //
   // Stream<List<QuickNoteModel>> quickNoteStream(String uid) {
   //   return _firebaseFirestore
   //       .collection('user')
@@ -383,7 +386,7 @@ class FirestoreService {
   //   });
   //   return false;
   // }
-
+  //
   // Future<bool> updateTaskNote(String uid, QuickNoteModel quickNoteModel) async {
   //   await _firebaseFirestore
   //       .collection('task')

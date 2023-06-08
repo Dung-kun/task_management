@@ -194,6 +194,17 @@ extension TextBuilderExtension on String {
         .weight(FontWeight.w700);
   }
 
+  Text text12() {
+    return plain()
+        .fSize(12)
+        .lHeight(16)
+        .multipleLines()
+        .weight(FontWeight.w500)
+        .center()
+        .overflow(TextOverflow.ellipsis)
+        .b();
+  }
+
   Text text14(
       {FontWeight fontWeight = FontWeight.w400,
         Color color = AppColors.kText}) {
@@ -227,76 +238,76 @@ extension TextExtension on _TextWidgetBuilder {
   }
 }
 
-// class _AppBarWidgetBuilder {
-//   Widget? title;
-//
-//   bool? _centerTitle;
-//
-//   Color? _backgroundColor;
-//
-//   double? _elevation;
-//
-//   Widget? _leading;
-//
-//   List<Widget>? _actions;
-//
-//   _AppBarWidgetBuilder(this.title);
-//
-//   _AppBarWidgetBuilder centerTitle(bool value) {
-//     _centerTitle = value;
-//     return this;
-//   }
-//
-//   _AppBarWidgetBuilder backgroundColor(Color? value) {
-//     _backgroundColor = value;
-//     return this;
-//   }
-//
-//   _AppBarWidgetBuilder elevation(double value) {
-//     _elevation = value;
-//     return this;
-//   }
-//
-//   _AppBarWidgetBuilder leading(Widget? value) {
-//     _leading = value;
-//     return this;
-//   }
-//
-//   _AppBarWidgetBuilder actions(List<Widget>? value) {
-//     _actions = value;
-//     return this;
-//   }
-//
-//   AppBar build() {
-//     return AppBar(
-//       title: title,
-//       centerTitle: _centerTitle ?? true,
-//       backgroundColor: _backgroundColor ?? AppColors.kPrimaryColor,
-//       elevation: _elevation ?? 0,
-//       leading: _leading,
-//       actions: _actions,
-//     );
-//   }
-// }
-//
-// extension AppBarBuilderExtension on String {
-//   _AppBarWidgetBuilder plainAppBar({Color color = Colors.white}) {
-//     return _AppBarWidgetBuilder(this
-//         .plain()
-//         .color(color)
-//         .weight(FontWeight.bold)
-//         .fSize(24)
-//         .weight(FontWeight.w600)
-//         .b());
-//   }
-// }
-//
-// extension AppBarExtension on _AppBarWidgetBuilder {
-//   AppBar bAppBar() {
-//     return build();
-//   }
-// }
-//
+class _AppBarWidgetBuilder {
+  Widget? title;
+
+  bool? _centerTitle;
+
+  Color? _backgroundColor;
+
+  double? _elevation;
+
+  Widget? _leading;
+
+  List<Widget>? _actions;
+
+  _AppBarWidgetBuilder(this.title);
+
+  _AppBarWidgetBuilder centerTitle(bool value) {
+    _centerTitle = value;
+    return this;
+  }
+
+  _AppBarWidgetBuilder backgroundColor(Color? value) {
+    _backgroundColor = value;
+    return this;
+  }
+
+  _AppBarWidgetBuilder elevation(double value) {
+    _elevation = value;
+    return this;
+  }
+
+  _AppBarWidgetBuilder leading(Widget? value) {
+    _leading = value;
+    return this;
+  }
+
+  _AppBarWidgetBuilder actions(List<Widget>? value) {
+    _actions = value;
+    return this;
+  }
+
+  AppBar build() {
+    return AppBar(
+      title: title,
+      centerTitle: _centerTitle ?? true,
+      backgroundColor: _backgroundColor ?? AppColors.kPrimaryColor,
+      elevation: _elevation ?? 0,
+      leading: _leading,
+      actions: _actions,
+    );
+  }
+}
+
+extension AppBarBuilderExtension on String {
+  _AppBarWidgetBuilder plainAppBar({Color color = Colors.white}) {
+    return _AppBarWidgetBuilder(this
+        .plain()
+        .color(color)
+        .weight(FontWeight.bold)
+        .fSize(24)
+        .weight(FontWeight.w600)
+        .b());
+  }
+}
+
+extension AppBarExtension on _AppBarWidgetBuilder {
+  AppBar bAppBar() {
+    return build();
+  }
+}
+
 // String toDateString(DateTime dateTime, {bool isUpCase = true}) {
 //   String result = '';
 //

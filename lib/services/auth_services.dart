@@ -68,6 +68,11 @@ class AuthenticationService {
     }
   }
 
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+    servicesResultPrint('Sign out');
+  }
+
   User? currentUser() {
     if (_firebaseAuth.currentUser == null) {
       servicesResultPrint('Current user not found', isToast: false);
