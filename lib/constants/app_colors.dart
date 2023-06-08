@@ -16,9 +16,9 @@ class AppColors {
   // static const kInnerBorderForm = Color(0xFFEAEAEA);
   static const kLightText = Color(0xFFC6C6C6);
   // static const kDarkText = Color(0xFF8E8E93);
-  // static const kGrayTextA = Color(0xFF9B9B9B);
+  static const kGrayTextA = Color(0xFF9B9B9B);
   // static const kGrayTextB = Color(0xFF9A9A9A);
-  // static const kGrayTextC = Color(0xFF7C7B7B);
+  static const kGrayTextC = Color(0xFF7C7B7B);
 
   // static const kGrayBack = Color(0xFFF4F4F4);
   // static const kGrayBack50 = Color(0xFFF8F8F8);
@@ -26,7 +26,7 @@ class AppColors {
   static const kBarrierColor = Color(0x65000000);
   static const kBoxShadowColor = Color(0x80E3E3E3);
   static const kBoxShadowAddFormColor = Color.fromRGBO(221, 221, 221, .05);
-  // static const KBoxShadowCard = Color.fromRGBO(227, 225, 225, 0.5019607843137255);
+  static const KBoxShadowCard = Color.fromRGBO(227, 225, 225, 0.5019607843137255);
   // static const kBoxShadowMonth = Color.fromRGBO(227, 227, 227, .5);
 
   // static const kLineColor = Color(0xFFE4E4E4);

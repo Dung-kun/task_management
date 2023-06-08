@@ -308,30 +308,30 @@ extension AppBarExtension on _AppBarWidgetBuilder {
   }
 }
 
-// String toDateString(DateTime dateTime, {bool isUpCase = true}) {
-//   String result = '';
-//
-//   DateTime toDay = DateTime.now();
-//
-//   if (dateTime.day == toDay.day &&
-//       dateTime.month == toDay.month &&
-//       dateTime.year == toDay.year) {
-//     result += 'Today, ';
-//   }
-//
-//   DateTime tomorrow = DateTime.now().add(const Duration(days: 1));
-//
-//   if (dateTime.day == tomorrow.day &&
-//       dateTime.month == tomorrow.month &&
-//       dateTime.year == tomorrow.year) {
-//     result += 'Tomorrow, ';
-//   }
-//
-//   result += AppStrings.kMonthHeader[dateTime.month - 1].tr().substring(0, 3) +
-//       " " +
-//       dateTime.day.toString() +
-//       '/' +
-//       dateTime.year.toString();
-//   if (isUpCase) return result.toUpperCase();
-//   return result;
-// }
+String toDateString(DateTime dateTime, {bool isUpCase = true}) {
+  String result = '';
+
+  DateTime toDay = DateTime.now();
+
+  if (dateTime.day == toDay.day &&
+      dateTime.month == toDay.month &&
+      dateTime.year == toDay.year) {
+    result += 'Today, ';
+  }
+
+  DateTime tomorrow = DateTime.now().add(const Duration(days: 1));
+
+  if (dateTime.day == tomorrow.day &&
+      dateTime.month == tomorrow.month &&
+      dateTime.year == tomorrow.year) {
+    result += 'Tomorrow, ';
+  }
+
+  result += AppStrings.kMonthHeader[dateTime.month - 1].tr().substring(0, 3) +
+      " " +
+      dateTime.day.toString() +
+      '/' +
+      dateTime.year.toString();
+  if (isUpCase) return result.toUpperCase();
+  return result;
+}

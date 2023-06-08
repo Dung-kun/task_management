@@ -26,9 +26,9 @@ class AppImages {
   // static const prevIcon = "$_baseIconFolder/prev.svg";
   // [WorkList Navigator MyTask ]
   static const myTaskIcon = "$_baseIconFolder/my_task.svg";
-  // static const filterIcon = "$_baseIconFolder/filter.svg";
-  // static const checkTrueIcon = "$_baseIconFolder/checked_true.svg";
-  // static const checkFalseIcon = "$_baseIconFolder/checked_false.svg";
+  static const filterIcon = "$_baseIconFolder/filter.svg";
+  static const checkTrueIcon = "$_baseIconFolder/checked_true.svg";
+  static const checkFalseIcon = "$_baseIconFolder/checked_false.svg";
   // static const upIcon = "$_baseIconFolder/up.svg";
   // static const downIcon = "$_baseIconFolder/down.svg";
   static const tickIcon = "$_baseIconFolder/tick.svg";

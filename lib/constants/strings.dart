@@ -124,28 +124,28 @@ class AppStrings {
   // static const String removeItem = 'remove_item';
 
   /// [Home] [My Task]
-  // static const String workList = 'work_list';
-  // static const String today = 'today';
-  // static const String timeline = 'Timeline';
-  // static const kMonthHeader = <String>[
-  //   "january",
-  //   "february",
-  //   "march",
-  //   "april",
-  //   "may",
-  //   "june",
-  //   "july",
-  //   "august",
-  //   "september",
-  //   "october",
-  //   "november",
-  //   "december"
-  // ];
+  static const String workList = 'work_list';
+  static const String today = 'today';
+  static const String timeline = 'Timeline';
+  static const kMonthHeader = <String>[
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december"
+  ];
 
   /// [Home] [My Task] [Filter]
-  // static const String incompleteTasks = 'incomplete_tasks';
-  // static const String completedTasks = 'completed_tasks';
-  // static const String allTasks = 'all_tasks';
+  static const String incompleteTasks = 'incomplete_tasks';
+  static const String completedTasks = 'completed_tasks';
+  static const String allTasks = 'all_tasks';
   // static const String Language = 'Language';
   // static const String ChangeAvatar = 'Change_avatar';
 

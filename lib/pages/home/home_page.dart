@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:to_do_list/models/project_model.dart';
+import 'package:to_do_list/pages/home/tab/my_task/my_task_tab.dart';
 import 'package:to_do_list/util/ui/common_widget/back_to_login.dart';
 
 import '/base/base_state.dart';
@@ -56,7 +57,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
     listenFCM();
     //tab widget
     tabWidget = [
-      // MyTaskTab.instance(mode: projectMode, closeProjectMode: closeProjectMode),
+      MyTaskTab.instance(mode: projectMode, closeProjectMode: closeProjectMode),
       ProjectTab.instance(mode: projectMode, pressMode: setProjectMode),
       // MyNoteTab.instance(mode: projectMode, ),
       // ProfileTab.instance(mode: projectMode,),
@@ -232,27 +233,27 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
       currentIndex: currentIndex,
       backgroundColor: Color(0xFF292E4E),
       items: [
-        // buildBottomNavigationBarItem(
-        //   title: StringTranslateExtension(AppStrings.myTask).tr(),
-        //   icon: AppImages.myTaskIcon,
-        //   index: 0,
-        // ),
+        buildBottomNavigationBarItem(
+          title: StringTranslateExtension(AppStrings.myTask).tr(),
+          icon: AppImages.myTaskIcon,
+          index: 0,
+        ),
         buildBottomNavigationBarItem(
           title: StringTranslateExtension(AppStrings.project).tr(),
           icon: AppImages.menuIcon,
-          index: 0,
+          index: 1,
         ),
         BottomNavigationBarItem(icon: Container(), label: ""),
         buildBottomNavigationBarItem(
           title: StringTranslateExtension(AppStrings.myNote).tr(),
           icon: AppImages.quickIcon,
-          index: 1,
+          index: 2,
         ),
-        // buildBottomNavigationBarItem(
-        //   title: StringTranslateExtension(AppStrings.profiles).tr(),
-        //   icon: AppImages.profileIcon,
-        //   index: 3,
-        // ),
+        buildBottomNavigationBarItem(
+          title: StringTranslateExtension(AppStrings.profiles).tr(),
+          icon: AppImages.profileIcon,
+          index: 3,
+        ),
       ],
       onTap: (index) => press(index),
     );
