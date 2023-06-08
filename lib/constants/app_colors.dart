@@ -50,11 +50,15 @@ class AppColors {
   ];
 
   static const kColorNote = <Color>[
-    Color(0xFF6074F9),
-    Color(0xFFE42B6A),
-    Color(0xFF5ABB56),
-    Color(0xFF3D3A62),
-    Color(0xFFECB562),
+    Colors.red,
+    Colors.pink,
+    Colors.orange,
+    Colors.yellow,
+    Colors.green,
+    Colors.greenAccent,
+    Colors.blue,
+    Colors.lightBlueAccent,
+    Colors.deepPurple,
   ];
 
   // static const kBackgroundColors = <Color>[

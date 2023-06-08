@@ -59,38 +59,40 @@ class ProjectState extends BaseState<ProjectTab, ProjectViewModel> {
           List<ProjectModel> data = snapshot.data!;
 
           return Wrap(
-            spacing: 12.w,
-            runSpacing: 24.w,
+            spacing: 5.w,
+            runSpacing: 5.w,
             children: [
               SizedBox(
-                height: 27.w,
+                height: 0,
                 width: screenWidth,
               ),
               for (int i = 0; i < data.length; i++)
                 ProjectCard(
-                    project: data[i],
-                    press: widget.pressMode,
-                    deletePress: (project) async => await showDialog(
-                        context: this.context,
-                        builder: (_) => CupertinoAlertDialog(
-                          title: Text(AppStrings.confirmDelete).tr(),
-                          actions: [
-                            CupertinoDialogAction(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                child: Text(AppStrings.no).tr()),
-                            CupertinoDialogAction(
-                                onPressed: () => {
-                                  getVm().deleteProject(project),
-                                  Get.back()
-                                },
-                                child: Text(AppStrings.yes).tr())
-                          ],
-                        ))),
+                  project: data[i],
+                  press: widget.pressMode,
+                  deletePress: (project) async => await showDialog(
+                    context: this.context,
+                    builder: (_) => CupertinoAlertDialog(
+                      title: Text(AppStrings.confirmDelete).tr(),
+                      actions: [
+                        CupertinoDialogAction(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text(AppStrings.no).tr()),
+                        CupertinoDialogAction(
+                            onPressed: () => {
+                              getVm().deleteProject(project),
+                              Get.back()
+                            },
+                            child: Text(AppStrings.yes).tr())
+                      ],
+                    )
+                  )
+                ),
               AddProjectButton(
                 press: getVm().addProject,
-              )
+              ),
             ],
           ).pad(0, 16);
         },

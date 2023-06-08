@@ -111,7 +111,7 @@ class AppStrings {
   // static const String addNote = 'add_note';
   // description
   // chooseColor
-  // static const String done = 'done';
+  static const String done = 'done';
 
   /// [Home] [Add Button] [Add Check List]
   // addCheckList
@@ -187,7 +187,7 @@ class AppStrings {
   // static const String selectUser = 'select_user';
   static const String loading = 'loading';
   static const String somethingWentWrong = 'something_went_wrong';
-  // static const String pleaseEnterYourText = 'please_enter_your_text';
+  static const String pleaseEnterYourText = 'please_enter_your_text';
   // static const String pleaseChooseProject = 'please_choose_project';
   // static const String pleaseSelectDate = 'please_select_date';
 }

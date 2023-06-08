@@ -31,7 +31,7 @@ class AppImages {
   // static const checkFalseIcon = "$_baseIconFolder/checked_false.svg";
   // static const upIcon = "$_baseIconFolder/up.svg";
   // static const downIcon = "$_baseIconFolder/down.svg";
-  // static const tickIcon = "$_baseIconFolder/tick.svg";
+  static const tickIcon = "$_baseIconFolder/tick.svg";
   // static const editIcon = "$_baseIconFolder/edit.svg";
   // static const deleteIcon = "$_baseIconFolder/delete.svg";
   // static const dueDateIcon = '$_baseIconFolder/due_date.svg';
