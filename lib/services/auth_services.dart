@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../pages/auth/sign_up/sign_up_vm.dart';
 
 import '/constants/app_colors.dart';
 import '/pages/auth/sign_in/sign_in_vm.dart';
@@ -35,6 +36,34 @@ class AuthenticationService {
           return SignInStatus.wrongPassword;
         default:
           return SignInStatus.wrongPassword;
+      }
+    }
+  }
+
+  Future<SignUpStatus> signUp(String email, String password) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      servicesResultPrint('Sign up successful');
+      return SignUpStatus.successfulEmail;
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'email-already-in-use':
+          servicesResultPrint('Email already in user');
+          return SignUpStatus.emailAlreadyInUse;
+        case 'operation-not-allowed':
+          servicesResultPrint('Operation not allowed');
+          return SignUpStatus.operationNotAllowed;
+        case 'invalid-email':
+          servicesResultPrint('Invalid email');
+          return SignUpStatus.invalidEmail;
+        case 'weak-password':
+          servicesResultPrint('Weak password');
+          return SignUpStatus.weakPassword;
+        default:
+          return SignUpStatus.weakPassword;
       }
     }
   }

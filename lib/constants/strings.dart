@@ -36,11 +36,11 @@ class AppStrings {
   static const String signIn = 'sign_in';
 
   /// [Sign Up]
-  // static const String createAccount = 'create_account';
-  // static const String signUpDes = 'sign_up_to_continue';
-  // static const String fullName = 'full_name';
-  // static const String fullNameHint = 'enter_your_full_name';
-  // static const String fullNameValid = 'enter_more_than_6_char';
+  static const String createAccount = 'create_account';
+  static const String signUpDes = 'sign_up_to_continue';
+  static const String fullName = 'full_name';
+  static const String fullNameHint = 'enter_your_full_name';
+  static const String fullNameValid = 'enter_more_than_6_char';
   // username
   // usernameHint
   // usernameValid
