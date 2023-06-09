@@ -103,6 +103,7 @@ class AppStrings {
   // description
   // dueDate
   static const String anytime = 'anytime';
+  static const String anydate = 'anydate';
   static const String addMember = 'add_member';
   static const String anyone = 'anyone';
   // addTask

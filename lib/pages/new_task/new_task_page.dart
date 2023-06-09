@@ -82,7 +82,7 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
         top: 10,
         left: 0,
         width: screenWidth,
-        height: screenHeight - buildAppBar().preferredSize.height - 100,
+        height: screenHeight - buildAppBar().preferredSize.height - 30,
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -104,15 +104,15 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
                   SizedBox(height: 24.w),
                   buildDueDateForm(),
                   SizedBox(height: 24.w),
-                  buildMemberForm(),
-                  SizedBox(height: 24.w),
+                  // buildMemberForm(),
+                  // SizedBox(height: 24.w),
                   buildDoneButton(),
                   SizedBox(height: 30.w),
                 ],
               ),
             ),
           ),
-        ).pad(0, 16),
+        ).pad(0, 0),
       );
 
   void setValueInForm(ProjectModel? value) {

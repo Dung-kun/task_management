@@ -36,7 +36,7 @@ class DueDateForm extends StatelessWidget {
               borderRadius: BorderRadius.circular(5.r),
             ),
             child: (valueDate == null
-                    ? StringTranslateExtension(AppStrings.anytime).tr()
+                    ? StringTranslateExtension(AppStrings.anydate).tr()
                     : fDate.format(valueDate!))
                 .plain()
                 .color(Colors.white)
