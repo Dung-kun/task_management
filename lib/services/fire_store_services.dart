@@ -8,6 +8,10 @@ class FirestoreService {
   final FirebaseFirestore _firebaseFirestore;
   FirestoreService(this._firebaseFirestore);
 
+  DocumentReference getDoc(String collectionPath, String id) {
+    return _firebaseFirestore.collection(collectionPath).doc(id);
+  }
+
   /// ProjectModel
   Stream<List<ProjectModel>> projectStream(String uid) {
     return _firebaseFirestore
@@ -60,7 +64,7 @@ class FirestoreService {
   }
 
 
-
+  ///Task
   Future<bool> addTaskProject(ProjectModel projectModel, String taskID) async {
     List<String> list = projectModel.listTask;
     list.add(taskID);
@@ -180,9 +184,7 @@ class FirestoreService {
   //       );
   // }
 
-  DocumentReference getDoc(String collectionPath, String id) {
-    return _firebaseFirestore.collection(collectionPath).doc(id);
-  }
+
   //
   // Future<MetaUserModel> getMetaUserByIDoc(DocumentReference doc) {
   //   return doc.get().then((value) => MetaUserModel.fromFirestore(value));
@@ -217,18 +219,18 @@ class FirestoreService {
   //     servicesResultPrint('Completed Task failed: $error');
   //   });
   // }
-  //
-  // Future<void> updateDescriptionUrlTaskById(String id, String url) async {
-  //   await _firebaseFirestore
-  //       .collection('task')
-  //       .doc(id)
-  //       .update({"des_url": url}).then((value) {
-  //     servicesResultPrint('Update url successful');
-  //   }).catchError((error) {
-  //     servicesResultPrint('Update url failed: $error');
-  //   });
-  // }
-  //
+
+  Future<void> updateDescriptionUrlTaskById(String id, String url) async {
+    await _firebaseFirestore
+        .collection('task')
+        .doc(id)
+        .update({"des_url": url}).then((value) {
+      servicesResultPrint('Update url successful');
+    }).catchError((error) {
+      servicesResultPrint('Update url failed: $error');
+    });
+  }
+
   // Future<void> updateDescriptionUrlCommentById(
   //     String taskId, String commentId, String url) async {
   //   await _firebaseFirestore

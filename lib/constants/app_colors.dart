@@ -9,7 +9,7 @@ class AppColors {
   // static const kTaskNotCompleted = Color(0xFFF62D2D);
   // [Text Color]
   static const kText = Color(0xFF313131);
-  // static const kText80 = Color.fromRGBO(49, 49, 49, .8);
+  static const kText80 = Color.fromRGBO(49, 49, 49, .8);
   static const kText10 = Color.fromRGBO(49, 49, 49, .1);
 
   // static const kInnerBorder = Color(0xFF979797);
@@ -20,8 +20,8 @@ class AppColors {
   // static const kGrayTextB = Color(0xFF9A9A9A);
   static const kGrayTextC = Color(0xFF7C7B7B);
 
-  // static const kGrayBack = Color(0xFFF4F4F4);
-  // static const kGrayBack50 = Color(0xFFF8F8F8);
+  static const kGrayBack = Color(0xFFF4F4F4);
+  static const kGrayBack50 = Color(0xFFF8F8F8);
 
   static const kBarrierColor = Color(0x65000000);
   static const kBoxShadowColor = Color(0x80E3E3E3);
