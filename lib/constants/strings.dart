@@ -93,18 +93,18 @@ class AppStrings {
   static const String addCheckList = 'add_check_list';
 
   /// [Home] [Add Button] [New Task] [Edit Task]
-  // static const String newTask = 'new_task';
+  static const String newTask = 'new_task';
   // static const String editTask = 'edit_task';
-  // static const String in_ = 'in';
+  static const String in_ = 'in';
   static const String confirmDelete = 'confirm_delete';
   static const String yes = 'yes';
   static const String no = 'no';
   // title
   // description
   // dueDate
-  // static const String anytime = 'anytime';
-  // static const String addMember = 'add_member';
-  // static const String anyone = 'anyone';
+  static const String anytime = 'anytime';
+  static const String addMember = 'add_member';
+  static const String anyone = 'anyone';
   // addTask
 
   /// [Home] [Add Button] [Add Note]
@@ -151,8 +151,8 @@ class AppStrings {
 
   /// [Home] [My Task] [View Task]
   // static const String assignedTo = 'assigned_to';
-  // static const String dueDate = 'due_date';
-  // static const String description = 'description';
+  static const String dueDate = 'due_date';
+  static const String description = 'description';
   // static const String members = 'members';
   // static const String tag = 'tag';
   // static const String completeTask = 'complete_task';
@@ -188,6 +188,6 @@ class AppStrings {
   static const String loading = 'loading';
   static const String somethingWentWrong = 'something_went_wrong';
   static const String pleaseEnterYourText = 'please_enter_your_text';
-  // static const String pleaseChooseProject = 'please_choose_project';
+  static const String pleaseChooseProject = 'please_choose_project';
   // static const String pleaseSelectDate = 'please_select_date';
 }

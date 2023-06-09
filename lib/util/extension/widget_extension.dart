@@ -73,6 +73,29 @@ extension WidgetExtension on Widget {
       child: this,
     );
   }
+
+  Widget rectAll(double radius,
+      {Color? color, Color? borderColor, double? borderWidth}) {
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(radius)),
+      child: Container(
+        child: this,
+        decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.all(Radius.circular(radius)),
+            border: Border.all(
+                color: borderColor ?? Colors.white, width: borderWidth ?? 0)),
+      ),
+    );
+  }
+
+  Widget square(double size) {
+    return rectangle(size, size);
+  }
+
+  Widget rectangle(double width, double height) {
+    return SizedBox(child: this, width: width, height: height);
+  }
 }
 
 class _TextWidgetBuilder {

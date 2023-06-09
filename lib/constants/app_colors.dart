@@ -13,7 +13,7 @@ class AppColors {
   static const kText10 = Color.fromRGBO(49, 49, 49, .1);
 
   // static const kInnerBorder = Color(0xFF979797);
-  // static const kInnerBorderForm = Color(0xFFEAEAEA);
+  static const kInnerBorderForm = Color(0xFFEAEAEA);
   static const kLightText = Color(0xFFC6C6C6);
   // static const kDarkText = Color(0xFF8E8E93);
   static const kGrayTextA = Color(0xFF9B9B9B);
@@ -31,7 +31,7 @@ class AppColors {
 
   // static const kLineColor = Color(0xFFE4E4E4);
 
-  // static const primary = Color(0xFF4FB3C1);
+  static const primary = Color(0xFF4FB3C1);
   // static const primaryBackground = Color(0xFF1B232A);
   // static const secondBackground = Color(0xFF161C22);
   static const grayText = Color(0xFF777777);

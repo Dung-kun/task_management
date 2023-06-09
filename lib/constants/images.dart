@@ -52,8 +52,8 @@ class AppImages {
   static const profileIcon = "$_baseIconFolder/profile.svg";
   // static const settingIcon = "$_baseIconFolder/setting.svg";
   // static const imageStatistic = '$_baseImageFolder/statistic.png';
-  // static const imageNoneAvatar = '$_baseImageFolder/none-avatar.png';
-  // static const imgErrorLoadImage = '$_baseImageFolder/error_load_image.png';
+  static const imageNoneAvatar = '$_baseImageFolder/none-avatar.png';
+  static const imgErrorLoadImage = '$_baseImageFolder/error_load_image.png';
   /// [New Task]
-  // static const attachIcon = "$_baseIconFolder/attach.svg";
+  static const attachIcon = "$_baseIconFolder/attach.svg";
 }

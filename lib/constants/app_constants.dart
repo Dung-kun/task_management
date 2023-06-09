@@ -15,13 +15,13 @@ class AppConstants {
     )
   ];
 
-  // static const List<BoxShadow> kFormShadow = [
-  //   BoxShadow(
-  //     offset: Offset(3, 3),
-  //     blurRadius: 9.0,
-  //     color: AppColors.kBoxShadowAddFormColor,
-  //   )
-  // ];
+  static const List<BoxShadow> kFormShadow = [
+    BoxShadow(
+      offset: Offset(3, 3),
+      blurRadius: 9.0,
+      color: AppColors.kBoxShadowAddFormColor,
+    )
+  ];
 
   static const kAnimationDuration = Duration(milliseconds: 200);
   static const double kDefaultBorderRadius = 5;
