@@ -37,7 +37,7 @@ class NewTaskPage extends StatefulWidget {
 class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   final formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  TextEditingController? descriptionController = TextEditingController();
   List<MetaUserModel> selectUsers = [];
 
   ProjectModel? dropValue;
@@ -211,7 +211,7 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
         idProject: dropValue!.id,
         idAuthor: getVm().user!.uid,
         title: titleController.text,
-        description: descriptionController.text,
+        description: descriptionController!.text,
         startDate: DateTime.now(),
         dueDate: dueDateValue!,
         listMember: list,

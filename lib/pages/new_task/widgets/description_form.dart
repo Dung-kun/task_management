@@ -11,13 +11,13 @@ import '/constants/constants.dart';
 class DescriptionForm extends StatelessWidget {
   const DescriptionForm({
     Key? key,
-    required this.controller,
+    this.controller,
     this.pickerImage,
     required this.press,
     required this.pressRemove,
   }) : super(key: key);
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   final XFile? pickerImage;
 
@@ -47,10 +47,10 @@ class DescriptionForm extends StatelessWidget {
               Container(
                 height: 75.w,
                 child: TextFormField(
-                  validator: (val) => val!.isNotEmpty
-                      ? null
-                      : StringTranslateExtension(AppStrings.pleaseEnterYourText)
-                          .tr(),
+                  // validator: (val) => val!.isNotEmpty
+                  //     ? null
+                  //     : StringTranslateExtension(AppStrings.pleaseEnterYourText)
+                  //         .tr(),
                   controller: controller,
                   maxLines: 3,
                   decoration: InputDecoration(
