@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:to_do_list/models/project_model.dart';
+import 'package:to_do_list/pages/home/tab/my_note/my_note_tab.dart';
 import 'package:to_do_list/pages/home/tab/my_task/my_task_tab.dart';
 import 'package:to_do_list/util/ui/common_widget/back_to_login.dart';
 
@@ -59,7 +60,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
     tabWidget = [
       MyTaskTab.instance(mode: projectMode, closeProjectMode: closeProjectMode),
       ProjectTab.instance(mode: projectMode, pressMode: setProjectMode),
-      // MyNoteTab.instance(mode: projectMode, ),
+      MyNoteTab.instance(mode: projectMode, ),
       // ProfileTab.instance(mode: projectMode,),
     ];
   }

@@ -194,23 +194,23 @@ class FirestoreService {
   // }
 
 
-  //
-  // Future<bool> deleteQuickNote(String uid, String id) async {
-  //   await _firebaseFirestore
-  //       .collection('user')
-  //       .doc(uid)
-  //       .collection('quick_note')
-  //       .doc(id)
-  //       .delete()
-  //       .then((value) {
-  //     servicesResultPrint("Quick note Deleted");
-  //     return true;
-  //   }).catchError((error) {
-  //     servicesResultPrint("Failed to delete quick note: $error");
-  //     return false;
-  //   });
-  //   return false;
-  // }
+
+  Future<bool> deleteQuickNote(String uid, String id) async {
+    await _firebaseFirestore
+        .collection('user')
+        .doc(uid)
+        .collection('quick_note')
+        .doc(id)
+        .delete()
+        .then((value) {
+      servicesResultPrint("Quick note Deleted");
+      return true;
+    }).catchError((error) {
+      servicesResultPrint("Failed to delete quick note: $error");
+      return false;
+    });
+    return false;
+  }
 
   Future<void> completedTaskById(String id) async {
     await _firebaseFirestore
