@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const kPrimaryColor = Color(0xFFF96060);
-  // static const kPrimaryColor_yellow = Color(0xFFF7D716);
+  static const kPrimaryColor_yellow = Color(0xFFF7D716);
 
   // [ Color Task Status Icon ]
   // static const kTaskCompleted = Color(0xFF24A156);

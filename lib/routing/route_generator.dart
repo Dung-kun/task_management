@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:to_do_list/pages/auth/sign_in/sign_in_page.dart';
 import 'package:to_do_list/pages/auth/sign_up/sign_up_page.dart';
 import 'package:to_do_list/pages/detail_task/detail_task_page.dart';
+import 'package:to_do_list/pages/edit_task/edit_task_page.dart';
 import 'package:to_do_list/pages/home/home_page.dart';
 import 'package:to_do_list/pages/new_check_list/new_check_list_page.dart';
 import 'package:to_do_list/pages/new_note/new_note_page.dart';
@@ -47,6 +48,8 @@ class RouteGenerator {
         return page(child: NewNotePage.instance());
       case AppRoutes.NEW_CHECK_LIST:
         return page(child: NewCheckListPage.instance());
+      case AppRoutes.EDIT_TASK:
+        return page(child: EditTaskPage.instance());
       default:
         throw RouteException("Route not found");
     }
