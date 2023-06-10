@@ -82,7 +82,7 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
     top: 10,
     left: 0,
     width: screenWidth,
-    height: screenHeight - buildAppBar().preferredSize.height - 100,
+    height: screenHeight - buildAppBar().preferredSize.height - 35,
     child: Container(
       decoration: BoxDecoration(
         color: Colors.white,

@@ -67,9 +67,9 @@ class TaskCard extends StatelessWidget {
         ],
       ),
     )
-    .inkTap(
-        onTap: () => Get.toNamed(AppRoutes.DETAIL_TASK, arguments: task.id))
-    .pad(8, 16);
+        .inkTap(
+            onTap: () => Get.toNamed(AppRoutes.DETAIL_TASK, arguments: task.id))
+        .pad(8, 16);
   }
 
   String toTimeString(DateTime dateTime) {

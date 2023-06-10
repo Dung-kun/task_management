@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:to_do_list/base/base_state.dart';
 
 import 'app/app.dart';
+import 'base/base_state.dart';
 
 // Import the generated file
 import 'firebase_options.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: Consumer(
-        builder: (context, watch, _){
+        builder: (context, watch, _) {
           return EasyLocalization(
             supportedLocales: const [Locale('en', 'US'), Locale('vi', 'VN')],
             path: 'assets/translations',

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:to_do_list/models/quick_note_model.dart';
-import 'package:to_do_list/pages/detail_task/widgets/setting_menu.dart';
 import 'package:to_do_list/routing/app_routes.dart';
+import 'package:to_do_list/services/fire_store_services.dart';
 import 'package:to_do_list/util/ui/common_widget/quick_note_card.dart';
+import '../edit_task/widgets/setting_menu.dart';
 import '/util/ui/common_widget/back_to_login.dart';
 import 'widgets/comment_button.dart';
 import 'widgets/comment_form.dart';
@@ -113,8 +114,8 @@ class DetailTaskState extends BaseState<DetailTaskPage, DetailTaskViewModel> {
         buildLine(),
         buildDescription(task.description, task.desUrl),
         buildLine(),
-        // buildNote(task.id),
-        // buildLine(),
+        buildNote(task.id),
+        buildLine(),
         buildListMember(task.listMember),
         buildLine(),
         buildTag(task.idProject),
@@ -233,8 +234,7 @@ class DetailTaskState extends BaseState<DetailTaskPage, DetailTaskViewModel> {
                         )
                     ],
                   );
-                }
-              ),
+                }),
           ],
         ),
       ),

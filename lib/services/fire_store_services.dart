@@ -1,21 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:to_do_list/models/comment_model.dart';
+import '/models/quick_note_model.dart';
 import 'package:to_do_list/models/meta_user_model.dart';
-import 'package:to_do_list/models/quick_note_model.dart';
-import 'package:to_do_list/models/task_model.dart';
+
+import '../models/comment_model.dart';
 import '/constants/app_colors.dart';
 import '/models/project_model.dart';
+import '/models/task_model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firebaseFirestore;
   FirestoreService(this._firebaseFirestore);
 
-  DocumentReference getDoc(String collectionPath, String id) {
-    return _firebaseFirestore.collection(collectionPath).doc(id);
-  }
-
-  /// ProjectModel
   Stream<List<ProjectModel>> projectStream(String uid) {
     return _firebaseFirestore
         .collection('project')
@@ -28,9 +24,49 @@ class FirestoreService {
         );
   }
 
+  Stream<List<TaskModel>> taskStream() {
+    return _firebaseFirestore.collection('task').snapshots().map(
+          (list) => list.docs.map((doc) {
+            return TaskModel.fromFirestore(doc);
+          }).toList(),
+        );
+  }
 
-  Future<ProjectModel> getProject(DocumentReference doc) {
-    return doc.get().then((value) => ProjectModel.fromFirestore(value));
+  Stream<List<CommentModel>> commentStream(String taskId) {
+    return _firebaseFirestore
+        .collection('task')
+        .doc(taskId)
+        .collection('comment')
+        .snapshots()
+        .map(
+          (list) => list.docs.map((doc) {
+            return CommentModel.fromFirestore(doc);
+          }).toList(),
+        );
+  }
+
+  Stream<TaskModel> taskStreamById(String id) {
+    return _firebaseFirestore
+        .collection('task')
+        .doc(id)
+        .snapshots()
+        .map((doc) => TaskModel.fromFirestore(doc));
+  }
+
+  Stream<MetaUserModel> userStreamById(String id) {
+    return _firebaseFirestore
+        .collection('user')
+        .doc(id)
+        .snapshots()
+        .map((doc) => MetaUserModel.fromFirestore(doc));
+  }
+
+  Future<MetaUserModel> getUserById(String id) {
+    return _firebaseFirestore
+        .collection('user')
+        .doc(id)
+        .get()
+        .then((doc) => MetaUserModel.fromFirestore(doc));
   }
 
   Future<ProjectModel> getProjectById(String id) {
@@ -49,6 +85,46 @@ class FirestoreService {
         .map((doc) => ProjectModel.fromFirestore(doc));
   }
 
+  Stream<List<MetaUserModel>> userStream(String email) {
+    return _firebaseFirestore
+        .collection('user')
+        .where('email', isNotEqualTo: email)
+        .snapshots()
+        .map(
+          (list) => list.docs.map((doc) {
+            return MetaUserModel.fromFirestore(doc);
+          }).toList(),
+        );
+  }
+
+  DocumentReference getDoc(String collectionPath, String id) {
+    return _firebaseFirestore.collection(collectionPath).doc(id);
+  }
+
+  Future<MetaUserModel> getMetaUserByIDoc(DocumentReference doc) {
+    return doc.get().then((value) => MetaUserModel.fromFirestore(value));
+  }
+
+  Future<ProjectModel> getProject(DocumentReference doc) {
+    return doc.get().then((value) => ProjectModel.fromFirestore(value));
+  }
+
+  Future<bool> deleteQuickNote(String uid, String id) async {
+    await _firebaseFirestore
+        .collection('user')
+        .doc(uid)
+        .collection('quick_note')
+        .doc(id)
+        .delete()
+        .then((value) {
+      servicesResultPrint("Quick note Deleted");
+      return true;
+    }).catchError((error) {
+      servicesResultPrint("Failed to delete quick note: $error");
+      return false;
+    });
+    return false;
+  }
 
   void addProject(ProjectModel project) {
     _firebaseFirestore.collection('project').doc().set(project.toFirestore());
@@ -66,8 +142,6 @@ class FirestoreService {
     });
   }
 
-
-  ///Task
   Future<bool> addTaskProject(ProjectModel projectModel, String taskID) async {
     List<String> list = projectModel.listTask;
     list.add(taskID);
@@ -99,119 +173,6 @@ class FirestoreService {
       return false;
     });
     return true;
-  }
-
-
-  Stream<List<TaskModel>> taskStream() {
-    return _firebaseFirestore.collection('task').snapshots().map(
-          (list) => list.docs.map((doc) {
-            return TaskModel.fromFirestore(doc);
-          }).toList(),
-        );
-  }
-
-  Stream<TaskModel> taskStreamById(String id) {
-    return _firebaseFirestore
-        .collection('task')
-        .doc(id)
-        .snapshots()
-        .map((doc) => TaskModel.fromFirestore(doc));
-  }
-
-
-  Future<bool> updateTask(TaskModel task) async {
-    await _firebaseFirestore
-        .collection('task')
-        .doc(task.id)
-        .set(task.toFirestore())
-        .then((value) {
-      servicesResultPrint("Task updated");
-      return true;
-    }).catchError((onError) {
-      servicesResultPrint("Failed to update task: $onError");
-      return false;
-    });
-    return false;
-  }
-
-
-  Future<String> addTask(TaskModel task) async {
-    DocumentReference doc = _firebaseFirestore.collection('task').doc();
-    await doc.set(task.toFirestore()).then((onValue) {
-      servicesResultPrint('Added task');
-    }).catchError((error) {
-      servicesResultPrint('Add task failed: $error');
-    });
-    return doc.id;
-  }
-
-  Stream<List<CommentModel>> commentStream(String taskId) {
-    return _firebaseFirestore
-        .collection('task')
-        .doc(taskId)
-        .collection('comment')
-        .snapshots()
-        .map(
-          (list) => list.docs.map((doc) {
-            return CommentModel.fromFirestore(doc);
-          }).toList(),
-        );
-  }
-
-
-  Stream<List<MetaUserModel>> userStream(String email) {
-    return _firebaseFirestore
-        .collection('user')
-        .where('email', isNotEqualTo: email)
-        .snapshots()
-        .map(
-          (list) => list.docs.map((doc) {
-        return MetaUserModel.fromFirestore(doc);
-      }).toList(),
-    );
-  }
-
-  Stream<MetaUserModel> userStreamById(String id) {
-    return _firebaseFirestore
-        .collection('user')
-        .doc(id)
-        .snapshots()
-        .map((doc) => MetaUserModel.fromFirestore(doc));
-  }
-
-  Future<MetaUserModel> getUserById(String id) {
-    return _firebaseFirestore
-        .collection('user')
-        .doc(id)
-        .get()
-        .then((doc) => MetaUserModel.fromFirestore(doc));
-  }
-
-
-
-
-  //
-  // Future<MetaUserModel> getMetaUserByIDoc(DocumentReference doc) {
-  //   return doc.get().then((value) => MetaUserModel.fromFirestore(value));
-  // }
-
-
-
-  Future<bool> deleteQuickNote(String uid, String id) async {
-    await _firebaseFirestore
-        .collection('user')
-        .doc(uid)
-        .collection('quick_note')
-        .doc(id)
-        .delete()
-        .then((value) {
-      servicesResultPrint("Quick note Deleted");
-      return true;
-    }).catchError((error) {
-      servicesResultPrint("Failed to delete quick note: $error");
-      return false;
-    });
-    return false;
   }
 
   Future<void> completedTaskById(String id) async {
@@ -268,6 +229,16 @@ class FirestoreService {
     });
   }
 
+  Future<String> addTask(TaskModel task) async {
+    DocumentReference doc = _firebaseFirestore.collection('task').doc();
+    await doc.set(task.toFirestore()).then((onValue) {
+      servicesResultPrint('Added task');
+    }).catchError((error) {
+      servicesResultPrint('Add task failed: $error');
+    });
+    return doc.id;
+  }
+
   Future<String> addComment(CommentModel comment, String taskId) async {
     DocumentReference doc = _firebaseFirestore
         .collection('task')
@@ -293,6 +264,20 @@ class FirestoreService {
     return false;
   }
 
+  Future<bool> updateTask(TaskModel task) async {
+    await _firebaseFirestore
+        .collection('task')
+        .doc(task.id)
+        .set(task.toFirestore())
+        .then((value) {
+      servicesResultPrint("Task updated");
+      return true;
+    }).catchError((onError) {
+      servicesResultPrint("Failed to update task: $onError");
+      return false;
+    });
+    return false;
+  }
 
   void servicesResultPrint(String result, {bool isToast = true}) async {
     print("FirebaseStore services result: $result");

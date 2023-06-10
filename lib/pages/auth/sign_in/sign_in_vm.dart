@@ -4,7 +4,7 @@ import '/providers/auth_provider.dart';
 class SignInViewModel extends BaseViewModel {
   SignInViewModel(ref) : super(ref);
   BehaviorSubject<SignInStatus> bsLoginStatus =
-  BehaviorSubject.seeded(SignInStatus.pause);
+      BehaviorSubject.seeded(SignInStatus.pause);
 
   void init(var ref) async {
     auth = ref.watch(authServicesProvider);

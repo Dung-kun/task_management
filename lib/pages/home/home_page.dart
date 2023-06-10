@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:to_do_list/models/project_model.dart';
-import 'package:to_do_list/pages/home/tab/my_note/my_note_tab.dart';
-import 'package:to_do_list/pages/home/tab/my_task/my_task_tab.dart';
-import 'package:to_do_list/pages/home/tab/profiles/profile_tab.dart';
 import 'package:to_do_list/util/ui/common_widget/back_to_login.dart';
 
 import '/base/base_state.dart';
 import '/constants/constants.dart';
 import '/pages/home/tab/project/project_tab.dart';
+import '/pages/home/tab/profiles/profile_tab.dart';
 import '/util/extension/extension.dart';
 import 'home_provider.dart';
 import 'home_vm.dart';
+import 'tab/my_task/my_task_tab.dart';
+import 'tab/my_note/my_note_tab.dart';
 import 'widgets/add_new_button.dart';
 
 class HomePage extends StatefulWidget {
@@ -122,7 +122,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
           "high_important_channel", //id
           "high important notification", //title
           description:
-          "this channel is used for important notification.", //description
+              "this channel is used for important notification.", //description
           importance: Importance.high,
           enableVibration: true,
           playSound: true);
@@ -130,7 +130,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
       flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
       await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
+              AndroidFlutterLocalNotificationsPlugin>()
           ?.createNotificationChannel(channel);
       await FirebaseMessaging.instance
           .setForegroundNotificationPresentationOptions(
@@ -159,8 +159,8 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
   void closeProjectMode() async {
     setState(() {
       projectMode = null;
-      // tabWidget[0] = MyTaskTab.instance(
-      //     mode: projectMode, closeProjectMode: closeProjectMode);
+      tabWidget[0] = MyTaskTab.instance(
+          mode: projectMode, closeProjectMode: closeProjectMode);
     });
     await tabController.animateToPage(
       0,
@@ -201,9 +201,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
     if (getVm().user == null) return BackToLogin();
     return Scaffold(
       body: buildBody(),
-      floatingActionButton: AddNewButton(
-        // press: getVm().addProject,
-      ),
+      floatingActionButton: AddNewButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: buildBottomNavigationBar(
         currentIndex: currentTab,

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/util/extension/dimens.dart';
-import 'package:to_do_list/util/extension/widget_extension.dart';
 
 import '/base/base_state.dart';
 import '/constants/strings.dart';

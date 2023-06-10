@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/util/extension/widget_extension.dart';
 
 import '/base/base_state.dart';
 import '/constants/constants.dart';
 import '/routing/app_routes.dart';
+import '/util/extension/extension.dart';
 
 class LinkForgotPassword extends StatelessWidget {
   const LinkForgotPassword({Key? key}) : super(key: key);

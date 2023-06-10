@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:to_do_list/pages/auth/forgot_password/forgot_password_vm.dart';
-import 'package:to_do_list/pages/auth/reset_password/reset_password_vm.dart';
-import '../pages/auth/sign_up/sign_up_vm.dart';
 
 import '/constants/app_colors.dart';
+import '/pages/auth/forgot_password/forgot_password_vm.dart';
 import '/pages/auth/sign_in/sign_in_vm.dart';
+import '/pages/auth/sign_up/sign_up_vm.dart';
+import '../pages/auth/reset_password/reset_password_vm.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -70,58 +70,6 @@ class AuthenticationService {
     }
   }
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-    servicesResultPrint('Sign out');
-  }
-
-  User? currentUser() {
-    if (_firebaseAuth.currentUser == null) {
-      servicesResultPrint('Current user not found', isToast: false);
-      return null;
-    }
-    servicesResultPrint("Current user: ${_firebaseAuth.currentUser!.uid}",
-        isToast: false);
-    return _firebaseAuth.currentUser;
-  }
-
-  void servicesResultPrint(String result, {bool isToast = true}) async {
-    print("FirebaseAuthentication services result: $result");
-    if (isToast)
-      await Fluttertoast.showToast(
-        msg: result,
-        timeInSecForIosWeb: 2,
-        backgroundColor: AppColors.kWhiteBackground,
-        textColor: AppColors.kText,
-      );
-  }
-
-  Future<ResetPasswordStatus> changePassword(
-      String code, String password) async {
-    try {
-      await _firebaseAuth.confirmPasswordReset(
-          code: code, newPassword: password);
-      servicesResultPrint('Reset password successful', isToast: false);
-      return ResetPasswordStatus.successful;
-    } on FirebaseAuthException catch (e) {
-      print(e.code);
-      switch (e.code) {
-        case 'invalid-action-code':
-          return ResetPasswordStatus.invalidActionCode;
-        case 'user-disabled':
-          return ResetPasswordStatus.userDisabled;
-        case 'user-not-found':
-          return ResetPasswordStatus.userNotFound;
-        case 'expired-action-code':
-          return ResetPasswordStatus.expiredActionCode;
-        case 'weak-password':
-          return ResetPasswordStatus.weakPassword;
-        default:
-          return ResetPasswordStatus.pause;
-      }
-    }
-  }
-
   Future<ForgotPasswordStatus> sendRequest(String email) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(
@@ -156,5 +104,57 @@ class AuthenticationService {
           return ForgotPasswordStatus.pause;
       }
     }
+  }
+
+  Future<ResetPasswordStatus> changePassword(
+      String code, String password) async {
+    try {
+      await _firebaseAuth.confirmPasswordReset(
+          code: code, newPassword: password);
+      servicesResultPrint('Reset password successful', isToast: false);
+      return ResetPasswordStatus.successful;
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      switch (e.code) {
+        case 'invalid-action-code':
+          return ResetPasswordStatus.invalidActionCode;
+        case 'user-disabled':
+          return ResetPasswordStatus.userDisabled;
+        case 'user-not-found':
+          return ResetPasswordStatus.userNotFound;
+        case 'expired-action-code':
+          return ResetPasswordStatus.expiredActionCode;
+        case 'weak-password':
+          return ResetPasswordStatus.weakPassword;
+        default:
+          return ResetPasswordStatus.pause;
+      }
+    }
+  }
+
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
+    servicesResultPrint('Sign out');
+  }
+
+  User? currentUser() {
+    if (_firebaseAuth.currentUser == null) {
+      servicesResultPrint('Current user not found', isToast: false);
+      return null;
+    }
+    servicesResultPrint("Current user: ${_firebaseAuth.currentUser!.uid}",
+        isToast: false);
+    return _firebaseAuth.currentUser;
+  }
+
+  void servicesResultPrint(String result, {bool isToast = true}) async {
+    print("FirebaseAuthentication services result: $result");
+    if (isToast)
+      await Fluttertoast.showToast(
+        msg: result,
+        timeInSecForIosWeb: 2,
+        backgroundColor: AppColors.kWhiteBackground,
+        textColor: AppColors.kText,
+      );
   }
 }

@@ -13,7 +13,7 @@ class TitleForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 66.w,
-      color: AppColors.kGrayBack,
+      // color: AppColors.kGrayBack,
       child: TextFormField(
         validator: (val) => val!.isNotEmpty
             ? null

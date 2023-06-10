@@ -24,9 +24,9 @@ class ProjectViewModel extends BaseViewModel {
 
   void deleteProject(ProjectModel project) {
     firestoreService.deleteProject(project);
-    // for (var task in project.listTask) {
-    //   firestoreService.deleteTask(task);
-    // }
+    for (var task in project.listTask) {
+      firestoreService.deleteTask(task);
+    }
   }
 
   @override

@@ -127,5 +127,9 @@
     "my_task": "My Task",
     "task_management": "Task Management",
     "project": "Project",
-    "projects": "Projects"
+    "projects": "Projects",
+    "timeline": "Timeline",
+    "projects": "Projects",
+    "project": "Project",
+    "my_note": "My Note"
 }

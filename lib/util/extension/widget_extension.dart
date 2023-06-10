@@ -4,6 +4,28 @@ import 'package:easy_localization/easy_localization.dart';
 import '/constants/constants.dart';
 
 extension WidgetExtension on Widget {
+  Widget square(double size) {
+    return rectangle(size, size);
+  }
+
+  Widget rectangle(double width, double height) {
+    return SizedBox(child: this, width: width, height: height);
+  }
+
+  Widget height(double size) {
+    return SizedBox(
+      height: size,
+      child: this,
+    );
+  }
+
+  Widget width(double size) {
+    return SizedBox(
+      width: size,
+      child: this,
+    );
+  }
+
   Widget center() {
     return Center(
       child: this,
@@ -74,6 +96,20 @@ extension WidgetExtension on Widget {
     );
   }
 
+  Widget align(AlignmentGeometry alignment) {
+    return Align(
+      alignment: alignment,
+      child: this,
+    );
+  }
+
+  Widget centerLeft() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: this,
+    );
+  }
+
   Widget rectAll(double radius,
       {Color? color, Color? borderColor, double? borderWidth}) {
     return ClipRRect(
@@ -88,22 +124,6 @@ extension WidgetExtension on Widget {
       ),
     );
   }
-
-  Widget square(double size) {
-    return rectangle(size, size);
-  }
-
-  Widget rectangle(double width, double height) {
-    return SizedBox(child: this, width: width, height: height);
-  }
-
-  Widget align(AlignmentGeometry alignment) {
-    return Align(
-      alignment: alignment,
-      child: this,
-    );
-  }
-
 }
 
 class _TextWidgetBuilder {
@@ -215,6 +235,10 @@ class _TextWidgetBuilder {
 }
 
 extension TextBuilderExtension on String {
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1)}';
+  }
+
   _TextWidgetBuilder plain() {
     return _TextWidgetBuilder(this).color(AppColors.kText);
   }
@@ -223,6 +247,55 @@ extension TextBuilderExtension on String {
     return _TextWidgetBuilder(this)
         .color(AppColors.kText)
         .weight(FontWeight.w700);
+  }
+
+  _TextWidgetBuilder lite() {
+    return _TextWidgetBuilder(this).weight(FontWeight.w300);
+  }
+
+  _TextWidgetBuilder plainErr() {
+    return plain().color(Colors.red);
+  }
+
+  _TextWidgetBuilder boldErr() {
+    return bold().color(Colors.red);
+  }
+
+  _TextWidgetBuilder liteErr() {
+    return bold().color(Colors.red);
+  }
+
+  _TextWidgetBuilder plainW() {
+    return plain().color(Colors.white);
+  }
+
+  _TextWidgetBuilder boldW() {
+    return bold().color(Colors.white);
+  }
+
+  _TextWidgetBuilder liteW() {
+    return bold().color(Colors.white);
+  }
+
+  Text mainTitle() {
+    return bold().fSize(16).lines(1).align(TextAlign.center).b();
+  }
+
+  Text secondaryTitle() {
+    return bold()
+        .fSize(16)
+        .lines(1)
+        .color(Colors.black)
+        .align(TextAlign.center)
+        .b();
+  }
+
+  Text title() {
+    return plain().fSize(14).lines(1).b();
+  }
+
+  Text mainDesc() {
+    return plain().fSize(14).multipleLines().b();
   }
 
   Text desc() {
@@ -242,13 +315,13 @@ extension TextBuilderExtension on String {
 
   Text text14(
       {FontWeight fontWeight = FontWeight.w400,
-        Color color = AppColors.kText}) {
+      Color color = AppColors.kText}) {
     return plain().fSize(14).lHeight(16).color(color).weight(fontWeight).b();
   }
 
   Text text18(
       {FontWeight fontWeight = FontWeight.w400,
-        Color color = AppColors.kText}) {
+      Color color = AppColors.kText}) {
     return plain().fSize(18).lHeight(22).color(color).weight(fontWeight).b();
   }
 
@@ -261,6 +334,38 @@ extension TextBuilderExtension on String {
         .b();
   }
 
+  Text descColor({Color? color, FontWeight? fontWeight}) {
+    return plain()
+        .fSize(12)
+        .lHeight(16)
+        .multipleLines()
+        .weight(fontWeight ?? FontWeight.w500)
+        .center()
+        .color(color ?? Colors.white)
+        .b();
+  }
+
+  Text secondaryDescColor({Color? color, FontWeight? fontWeight}) {
+    return plain()
+        .fSize(14)
+        .lHeight(20)
+        .multipleLines()
+        .weight(fontWeight ?? FontWeight.w500)
+        .center()
+        .b();
+  }
+
+  Text buttonTitle() {
+    return bold().fSize(14).lines(1).color(Colors.white).b();
+  }
+
+  Text disableButtonTitle() {
+    return bold().fSize(14).lines(1).color(Colors.grey).b();
+  }
+
+  Text appBarTitle() {
+    return plain().weight(FontWeight.w500).fSize(16).lHeight(24).lines(1).b();
+  }
 }
 
 extension TextExtension on _TextWidgetBuilder {

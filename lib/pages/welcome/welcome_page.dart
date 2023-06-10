@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/util/extension/widget_extension.dart';
 
-import '../../routing/app_routes.dart';
-import '../../util/extension/dimens.dart';
 import '/base/base_state.dart';
 import '/constants/constants.dart';
 import '/pages/welcome/welcome_provider.dart';
 import '/pages/welcome/welcome_vm.dart';
+import '/routing/app_routes.dart';
+import '/util/extension/extension.dart';
 
 class WelcomePage extends StatefulWidget {
   final ScopedReader watch;
@@ -65,7 +64,7 @@ class WelcomeState extends BaseState<WelcomePage, WelcomeViewModel> {
             width: 149.w,
             fit: BoxFit.fitWidth,
           ).pad(0, 0, 0, 12.w),
-          AppStrings.TaskManagement.bold()
+          AppStrings.CheemsTeam.bold()
               .fSize(48)
               .fShadow(AppConstants.kLogoTextShadow)
               .btr(),

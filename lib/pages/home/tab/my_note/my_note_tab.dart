@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/constants/strings.dart';
 
 import '/base/base_state.dart';
 import '/constants/app_colors.dart';
@@ -89,11 +88,10 @@ class MyNoteState extends BaseState<MyNoteTab, MyNoteViewModel> {
     );
   }
 
-  AppBar buildAppBar() => StringTranslateExtension(AppStrings.quickNotes)
-      .tr()
-      .plainAppBar(color: AppColors.kText)
-      .backgroundColor(AppColors.kPrimaryBackground)
-      .actions(
+  AppBar buildAppBar() => 'Quick Notes'
+          .plainAppBar(color: AppColors.kText)
+          .backgroundColor(AppColors.kPrimaryBackground)
+          .actions(
         [
           Switch(
             value: isFullQuickNote,
@@ -106,9 +104,8 @@ class MyNoteState extends BaseState<MyNoteTab, MyNoteViewModel> {
         ],
       ).bAppBar();
 
-  Widget buildNoneNote() => 'You are not have a note, create a note to continue'
-      .desc()
-      .inkTap(
+  Widget buildNoneNote() =>
+      'You are not have a note, create a note to continue'.desc().inkTap(
         onTap: () {
           Get.toNamed(AppRoutes.NEW_NOTE);
         },

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/util/extension/widget_extension.dart';
 
-import '../../../util/extension/dimens.dart';
 import '/base/base_state.dart';
 import '/constants/constants.dart';
 import '/routing/app_routes.dart';
+import '/util/extension/extension.dart';
 import '../../../util/ui/common_widget/primary_button.dart';
 
 class SplashNavigator extends StatelessWidget {

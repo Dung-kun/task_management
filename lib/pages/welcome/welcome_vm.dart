@@ -2,7 +2,7 @@ import '/base/base_view_model.dart';
 
 class WelcomeViewModel extends BaseViewModel {
   BehaviorSubject<InitialStatus> bsInitSate =
-  BehaviorSubject.seeded(InitialStatus.loading);
+      BehaviorSubject.seeded(InitialStatus.loading);
 
   WelcomeViewModel(ref) : super(ref);
 
