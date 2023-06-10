@@ -34,12 +34,12 @@ class AppImages {
   static const tickIcon = "$_baseIconFolder/tick.svg";
   // static const editIcon = "$_baseIconFolder/edit.svg";
   // static const deleteIcon = "$_baseIconFolder/delete.svg";
-  // static const dueDateIcon = '$_baseIconFolder/due_date.svg';
-  // static const descriptionIcon = '$_baseIconFolder/description.svg';
-  // static const memberIcon = '$_baseIconFolder/member.svg';
-  // static const tagIcon = '$_baseIconFolder/tag.svg';
-  // static const tagProjectIcon = '$_baseIconFolder/tag_project.svg';
-  // static const commentIcon = '$_baseIconFolder/comment.svg';
+  static const dueDateIcon = '$_baseIconFolder/due_date.svg';
+  static const descriptionIcon = '$_baseIconFolder/description.svg';
+  static const memberIcon = '$_baseIconFolder/member.svg';
+  static const tagIcon = '$_baseIconFolder/tag.svg';
+  static const tagProjectIcon = '$_baseIconFolder/tag_project.svg';
+  static const commentIcon = '$_baseIconFolder/comment.svg';
   /// [WorkList Navigator Menu]
   static const menuIcon = "$_baseIconFolder/menu.svg";
   // static const blueIcon = "$_baseIconFolder/blueicon.svg";

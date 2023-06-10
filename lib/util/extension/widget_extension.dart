@@ -96,6 +96,14 @@ extension WidgetExtension on Widget {
   Widget rectangle(double width, double height) {
     return SizedBox(child: this, width: width, height: height);
   }
+
+  Widget align(AlignmentGeometry alignment) {
+    return Align(
+      alignment: alignment,
+      child: this,
+    );
+  }
+
 }
 
 class _TextWidgetBuilder {
@@ -215,6 +223,10 @@ extension TextBuilderExtension on String {
     return _TextWidgetBuilder(this)
         .color(AppColors.kText)
         .weight(FontWeight.w700);
+  }
+
+  Text desc() {
+    return plain().fSize(14).multipleLines().color(Colors.black).b();
   }
 
   Text text12() {

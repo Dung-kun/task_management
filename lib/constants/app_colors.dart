@@ -12,7 +12,7 @@ class AppColors {
   static const kText80 = Color.fromRGBO(49, 49, 49, .8);
   static const kText10 = Color.fromRGBO(49, 49, 49, .1);
 
-  // static const kInnerBorder = Color(0xFF979797);
+  static const kInnerBorder = Color(0xFF979797);
   static const kInnerBorderForm = Color(0xFFEAEAEA);
   static const kLightText = Color(0xFFC6C6C6);
   // static const kDarkText = Color(0xFF8E8E93);
@@ -29,7 +29,7 @@ class AppColors {
   static const KBoxShadowCard = Color.fromRGBO(227, 225, 225, 0.5019607843137255);
   // static const kBoxShadowMonth = Color.fromRGBO(227, 227, 227, .5);
 
-  // static const kLineColor = Color(0xFFE4E4E4);
+  static const kLineColor = Color(0xFFE4E4E4);
 
   static const primary = Color(0xFF4FB3C1);
   // static const primaryBackground = Color(0xFF1B232A);
@@ -38,7 +38,7 @@ class AppColors {
   // static const blackText = Color(0xFF252E35);
   // static const text = Color(0xFF171D22);
   static const shadowColor = Color.fromRGBO(0, 0, 0, .25);
-  // static const kGrayBorderColor = Color(0xFFE8E8E8);
+  static const kGrayBorderColor = Color(0xFFE8E8E8);
   static const kWhiteBackground = Color(0xFFFDFDFD);
   static const kPrimaryBackground = Color(0xFFF8F7F7);
   // static const kColorTitle = Color(0xFFFFFFFF);

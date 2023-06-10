@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:to_do_list/pages/auth/sign_in/sign_in_page.dart';
 import 'package:to_do_list/pages/auth/sign_up/sign_up_page.dart';
+import 'package:to_do_list/pages/detail_task/detail_task_page.dart';
 import 'package:to_do_list/pages/home/home_page.dart';
 import 'package:to_do_list/pages/new_task/new_task_page.dart';
 import 'package:to_do_list/pages/splash/splash_page.dart';
@@ -38,6 +39,8 @@ class RouteGenerator {
         return page(child: SignUpPage.instance());
       case AppRoutes.NEW_TASK:
         return page(child: NewTaskPage.instance());
+      case AppRoutes.DETAIL_TASK:
+        return page(child: DetailTaskPage.instance());
       default:
         throw RouteException("Route not found");
     }

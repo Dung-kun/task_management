@@ -151,15 +151,15 @@ class AppStrings {
   // static const String ChangeAvatar = 'Change_avatar';
 
   /// [Home] [My Task] [View Task]
-  // static const String assignedTo = 'assigned_to';
+  static const String assignedTo = 'assigned_to';
   static const String dueDate = 'due_date';
   static const String description = 'description';
-  // static const String members = 'members';
-  // static const String tag = 'tag';
+  static const String members = 'members';
+  static const String tag = 'tag';
   // static const String completeTask = 'complete_task';
-  // static const String comment = 'comment';
-  // static const String commentHint = 'write_a_comment';
-  // static const String send = 'send';
+  static const String comment = 'comment';
+  static const String commentHint = 'write_a_comment';
+  static const String send = 'send';
 
   /// [Home] [My Task] [View Task] [Edit]
   // addMember
@@ -173,7 +173,7 @@ class AppStrings {
   static const String chooseColor = 'choose_color';
 
   /// [Home] [Quick]
-  // static const String quickNotes = 'quick_notes';
+  static const String quickNotes = 'quick_notes';
 
   /// [Home] [Profile]
   static const String profiles = 'profiles';
