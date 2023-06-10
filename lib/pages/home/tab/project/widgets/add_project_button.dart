@@ -29,11 +29,10 @@ class AddProjectButton extends StatelessWidget {
           .b()
           .center(),
     )
-        .inkTap(
+    .inkTap(
       onTap: () => showAddProjectDialog(context),
       borderRadius: BorderRadius.circular(5.r),
-    )
-        .pad(20, 0, 12);
+    ).pad(20, 0, 12);
   }
 
   Future<void> showAddProjectDialog(BuildContext context) async {

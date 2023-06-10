@@ -41,8 +41,8 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   List<MetaUserModel> selectUsers = [];
 
   ProjectModel? dropValue;
-  DateTime? dueDateValue;
-  TimeOfDay? dueTimeValue;
+  DateTime? dueDateValue = DateTime.now();
+  TimeOfDay? dueTimeValue = TimeOfDay(hour: 23, minute: 59);
   final f = new DateFormat('dd/MM/yyyy');
 
   final ImagePicker _picker = ImagePicker();
@@ -202,12 +202,12 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
     }
 
     if (formKey.currentState!.validate() &&
-        dropValue != null &&
-        dueDateValue != null &&
-        dueTimeValue != null) {
-      dueDateValue = new DateTime(dueDateValue!.year, dueDateValue!.month,
-          dueDateValue!.day, dueTimeValue!.hour, dueTimeValue!.minute);
-      TaskModel task = new TaskModel(
+      dropValue != null &&
+      dueDateValue != null &&
+      dueTimeValue != null) {
+        dueDateValue = new DateTime(dueDateValue!.year, dueDateValue!.month,
+        dueDateValue!.day, dueTimeValue!.hour, dueTimeValue!.minute);
+        TaskModel task = new TaskModel(
         idProject: dropValue!.id,
         idAuthor: getVm().user!.uid,
         title: titleController.text,

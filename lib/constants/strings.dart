@@ -88,6 +88,7 @@ class AppStrings {
   static const String backToLogin = 'back_to_login';
 
   /// [Home] [Add Button]
+  static const String addProject = 'add_project';
   static const String addTask = 'add_task';
   static const String addQuickNote = 'add_quick_note';
   static const String addCheckList = 'add_check_list';
