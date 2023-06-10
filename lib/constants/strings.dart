@@ -1,6 +1,6 @@
 class AppStrings {
   /// [Welcome]
-  static const String TaskManagement = 'task_management';
+  static const String CheemsTeam = 'Cheems Team';
 
   /// [Splash]
   static const String getStarted = 'get_started';
@@ -25,7 +25,7 @@ class AppStrings {
   static const String password = 'password';
   static const String passwordHint = 'enter_your_password';
   static const String passwordValid = 'enter_more_than_6_char';
-  /// [Login]
+  // login
   static const String alreadyHaveAnAccount = 'already_have_an_account';
   static const String forgotPassword = 'forgot_password';
   static const String networkError = 'network_error';
@@ -82,13 +82,12 @@ class AppStrings {
 
   /// [Home]
   static const String myTask = 'my_task';
-  static const String project = 'project';
-  static const String myNote = 'my_note';
+  static const String project = 'Project';
+  static const String myNote = 'My Note';
   static const String profile = 'profile';
   static const String backToLogin = 'back_to_login';
 
   /// [Home] [Add Button]
-  static const String addProject = 'add_project';
   static const String addTask = 'add_task';
   static const String addQuickNote = 'add_quick_note';
   static const String addCheckList = 'add_check_list';
@@ -104,7 +103,6 @@ class AppStrings {
   // description
   // dueDate
   static const String anytime = 'anytime';
-  static const String anydate = 'anydate';
   static const String addMember = 'add_member';
   static const String anyone = 'anyone';
   // addTask
@@ -128,7 +126,7 @@ class AppStrings {
   /// [Home] [My Task]
   static const String workList = 'work_list';
   static const String today = 'today';
-  static const String timeline = 'timeline';
+  static const String timeline = 'Timeline';
   static const kMonthHeader = <String>[
     "january",
     "february",
@@ -157,17 +155,17 @@ class AppStrings {
   static const String description = 'description';
   static const String members = 'members';
   static const String tag = 'tag';
-  // static const String completeTask = 'complete_task';
+  static const String completeTask = 'complete_task';
   static const String comment = 'comment';
   static const String commentHint = 'write_a_comment';
   static const String send = 'send';
 
   /// [Home] [My Task] [View Task] [Edit]
   // addMember
-  // static const String deleteTask = 'delete_task';
+  static const String deleteTask = 'delete_task';
 
   /// [Home] [Menu]
-  static const String projects = 'projects';
+  static const String projects = 'Projects';
 
   /// [Home] [Menu] [Add Button]
   static const String title = 'Title';
@@ -178,10 +176,10 @@ class AppStrings {
 
   /// [Home] [Profile]
   static const String profiles = 'profiles';
-  // static const String createTasks = 'create_tasks';
+  static const String createTasks = 'create_tasks';
   // completedTasks
-  // static const String events = 'events';
-  // static const String toDoTask = 'to_do_task';
+  static const String events = 'events';
+  static const String toDoTask = 'to_do_task';
   // quickNotes
   static const String statistic = 'statistic';
 
@@ -191,5 +189,5 @@ class AppStrings {
   static const String somethingWentWrong = 'something_went_wrong';
   static const String pleaseEnterYourText = 'please_enter_your_text';
   static const String pleaseChooseProject = 'please_choose_project';
-  // static const String pleaseSelectDate = 'please_select_date';
+  static const String pleaseSelectDate = 'please_select_date';
 }
