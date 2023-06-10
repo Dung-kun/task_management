@@ -87,61 +87,61 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
   }
 
   Widget buildForm() => Positioned(
-        top: 10,
-        left: 0,
-        width: screenWidth,
-        height: screenHeight - buildAppBar().preferredSize.height - 100,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5.r),
-            boxShadow: AppConstants.kFormShadow,
-          ),
-          child: Form(
-            key: formKey,
-            child: SingleChildScrollView(
-              child: StreamBuilder<TaskModel?>(
-                  stream: getVm().bsTask,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return AppStrings.somethingWentWrong
-                          .text12()
-                          .tr()
-                          .center();
-                    }
+    top: 10,
+    left: 0,
+    width: screenWidth,
+    height: screenHeight - buildAppBar().preferredSize.height - 100,
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5.r),
+        boxShadow: AppConstants.kFormShadow,
+      ),
+      child: Form(
+        key: formKey,
+        child: SingleChildScrollView(
+          child: StreamBuilder<TaskModel?>(
+              stream: getVm().bsTask,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return AppStrings.somethingWentWrong
+                      .text12()
+                      .tr()
+                      .center();
+                }
 
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return AppStrings.loading.text12().tr().center();
-                    }
-                    TaskModel task = snapshot.data!;
-                    titleController.text = task.title;
-                    descriptionController.text = task.description;
-                    dueDateValue = task.dueDate;
-                    dueTimeValue = TimeOfDay.fromDateTime(task.dueDate);
-                    oldMemberList = task.listMember;
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 32.w),
-                        buildInForm(task),
-                        SizedBox(height: 24.w),
-                        buildTitleForm(task),
-                        SizedBox(height: 16.w),
-                        buildDesForm(task),
-                        SizedBox(height: 24.w),
-                        buildDueDateForm(task),
-                        SizedBox(height: 24.w),
-                        buildMemberForm(task),
-                        SizedBox(height: 24.w),
-                        buildDoneButton(task),
-                        SizedBox(height: 30.w),
-                      ],
-                    );
-                  }),
-            ),
-          ),
-        ).pad(0, 16),
-      );
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return AppStrings.loading.text12().tr().center();
+                }
+                TaskModel task = snapshot.data!;
+                titleController.text = task.title;
+                descriptionController.text = task.description;
+                dueDateValue = task.dueDate;
+                dueTimeValue = TimeOfDay.fromDateTime(task.dueDate);
+                oldMemberList = task.listMember;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 32.w),
+                    buildInForm(task),
+                    SizedBox(height: 24.w),
+                    buildTitleForm(task),
+                    SizedBox(height: 16.w),
+                    buildDesForm(task),
+                    SizedBox(height: 24.w),
+                    buildDueDateForm(task),
+                    SizedBox(height: 24.w),
+                    buildMemberForm(task),
+                    SizedBox(height: 24.w),
+                    buildDoneButton(task),
+                    SizedBox(height: 30.w),
+                  ],
+                );
+              }),
+        ),
+      ),
+    ).pad(0, 16),
+  );
 
   void setValueInForm(ProjectModel? value) {
     setState(() {
@@ -164,7 +164,7 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
         List<ProjectModel> data = snapshot.data!;
         if (this.oldProject == null) {
           var taskdropValue =
-              data.where((element) => element.id == task.idProject);
+          data.where((element) => element.id == task.idProject);
           if (taskdropValue.length > 0) {
             this.dropValue = taskdropValue.first;
             this.oldProject = taskdropValue.first;
@@ -267,18 +267,18 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
         listMember: list,
       );
       String taskId =
-          await getVm().editTask(task, oldProject!, dropValue!, oldMemberList!);
+      await getVm().editTask(task, oldProject!, dropValue!, oldMemberList!);
       if (pickerFile != null) getVm().uploadDesTask(taskId, pickerFile!.path);
       Get.back();
     }
   }
 
   Widget buildDoneButton(TaskModel task) => PrimaryButton(
-        text: StringTranslateExtension(AppStrings.editTask).tr(),
-        press: () => editTaskClick(task),
-        backgroundColor: AppColors.kPrimaryColor_yellow,
-        disable: !onRunning,
-      ).pad(0, 24);
+    text: StringTranslateExtension(AppStrings.editTask).tr(),
+    press: () => editTaskClick(task),
+    backgroundColor: AppColors.kPrimaryColor_yellow,
+    disable: !onRunning,
+  ).pad(0, 24);
 
   AppBar buildAppBar() => StringTranslateExtension(AppStrings.editTask)
       .tr()

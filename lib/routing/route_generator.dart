@@ -8,6 +8,7 @@ import 'package:to_do_list/pages/auth/successful_screen.dart';
 import 'package:to_do_list/pages/detail_task/detail_task_page.dart';
 import 'package:to_do_list/pages/edit_task/edit_task_page.dart';
 import 'package:to_do_list/pages/home/home_page.dart';
+import 'package:to_do_list/pages/list_user_form/list_user_form_page.dart';
 import 'package:to_do_list/pages/new_check_list/new_check_list_page.dart';
 import 'package:to_do_list/pages/new_note/new_note_page.dart';
 import 'package:to_do_list/pages/new_task/new_task_page.dart';
@@ -59,6 +60,8 @@ class RouteGenerator {
         return page(child: ResetPasswordPage.instance());
       case AppRoutes.SUCCESSFUL:
         return page(child: SuccessfulScreen());
+      case AppRoutes.LIST_USER_FORM:
+        return page(child: ListUserFormPage.instance());
       default:
         throw RouteException("Route not found");
     }

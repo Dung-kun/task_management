@@ -37,12 +37,12 @@ class NewTaskPage extends StatefulWidget {
 class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   final formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
-  TextEditingController? descriptionController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   List<MetaUserModel> selectUsers = [];
 
   ProjectModel? dropValue;
-  DateTime? dueDateValue = DateTime.now();
-  TimeOfDay? dueTimeValue = TimeOfDay(hour: 23, minute: 59);
+  DateTime? dueDateValue;
+  TimeOfDay? dueTimeValue;
   final f = new DateFormat('dd/MM/yyyy');
 
   final ImagePicker _picker = ImagePicker();
@@ -79,41 +79,41 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   }
 
   Widget buildForm() => Positioned(
-        top: 10,
-        left: 0,
-        width: screenWidth,
-        height: screenHeight - buildAppBar().preferredSize.height - 30,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5.r),
-            boxShadow: AppConstants.kFormShadow,
+    top: 10,
+    left: 0,
+    width: screenWidth,
+    height: screenHeight - buildAppBar().preferredSize.height - 100,
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5.r),
+        boxShadow: AppConstants.kFormShadow,
+      ),
+      child: Form(
+        key: formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 32.w),
+              buildInForm(),
+              SizedBox(height: 24.w),
+              buildTitleForm(),
+              SizedBox(height: 16.w),
+              buildDesForm(),
+              SizedBox(height: 24.w),
+              buildDueDateForm(),
+              SizedBox(height: 24.w),
+              buildMemberForm(),
+              SizedBox(height: 24.w),
+              buildDoneButton(),
+              SizedBox(height: 30.w),
+            ],
           ),
-          child: Form(
-            key: formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 32.w),
-                  buildInForm(),
-                  SizedBox(height: 24.w),
-                  buildTitleForm(),
-                  SizedBox(height: 16.w),
-                  buildDesForm(),
-                  SizedBox(height: 24.w),
-                  buildDueDateForm(),
-                  SizedBox(height: 24.w),
-                  // buildMemberForm(),
-                  // SizedBox(height: 24.w),
-                  buildDoneButton(),
-                  SizedBox(height: 30.w),
-                ],
-              ),
-            ),
-          ),
-        ).pad(0, 0),
-      );
+        ),
+      ),
+    ).pad(0, 16),
+  );
 
   void setValueInForm(ProjectModel? value) {
     setState(() {
@@ -202,16 +202,16 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
     }
 
     if (formKey.currentState!.validate() &&
-      dropValue != null &&
-      dueDateValue != null &&
-      dueTimeValue != null) {
-        dueDateValue = new DateTime(dueDateValue!.year, dueDateValue!.month,
-        dueDateValue!.day, dueTimeValue!.hour, dueTimeValue!.minute);
-        TaskModel task = new TaskModel(
+        dropValue != null &&
+        dueDateValue != null &&
+        dueTimeValue != null) {
+      dueDateValue = new DateTime(dueDateValue!.year, dueDateValue!.month,
+          dueDateValue!.day, dueTimeValue!.hour, dueTimeValue!.minute);
+      TaskModel task = new TaskModel(
         idProject: dropValue!.id,
         idAuthor: getVm().user!.uid,
         title: titleController.text,
-        description: descriptionController!.text,
+        description: descriptionController.text,
         startDate: DateTime.now(),
         dueDate: dueDateValue!,
         listMember: list,
@@ -223,10 +223,10 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   }
 
   Widget buildDoneButton() => PrimaryButton(
-        text: StringTranslateExtension(AppStrings.addTask).tr(),
-        press: () => addTaskClick(),
-        disable: !onRunning,
-      ).pad(0, 24);
+    text: StringTranslateExtension(AppStrings.addTask).tr(),
+    press: () => addTaskClick(),
+    disable: !onRunning,
+  ).pad(0, 24);
 
   AppBar buildAppBar() =>
       StringTranslateExtension(AppStrings.newTask).tr().plainAppBar().bAppBar();

@@ -158,6 +158,19 @@ class FirestoreService {
         );
   }
 
+
+  Stream<List<MetaUserModel>> userStream(String email) {
+    return _firebaseFirestore
+        .collection('user')
+        .where('email', isNotEqualTo: email)
+        .snapshots()
+        .map(
+          (list) => list.docs.map((doc) {
+        return MetaUserModel.fromFirestore(doc);
+      }).toList(),
+    );
+  }
+
   Stream<MetaUserModel> userStreamById(String id) {
     return _firebaseFirestore
         .collection('user')
@@ -174,18 +187,7 @@ class FirestoreService {
         .then((doc) => MetaUserModel.fromFirestore(doc));
   }
 
-  //
-  // Stream<List<MetaUserModel>> userStream(String email) {
-  //   return _firebaseFirestore
-  //       .collection('user')
-  //       .where('email', isNotEqualTo: email)
-  //       .snapshots()
-  //       .map(
-  //         (list) => list.docs.map((doc) {
-  //           return MetaUserModel.fromFirestore(doc);
-  //         }).toList(),
-  //       );
-  // }
+
 
 
   //
