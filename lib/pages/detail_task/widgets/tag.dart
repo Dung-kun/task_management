@@ -29,7 +29,7 @@ class Tag extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppStrings.tag
+              AppStrings.project
                   .plain()
                   .fSize(16)
                   .color(AppColors.kGrayTextA)

@@ -1,6 +1,7 @@
 class AppStrings {
   /// [Welcome]
-  static const String CheemsTeam = 'Cheems Team';
+  static const String CheemsTeam = 'cheems_team';
+  static const String TaskManagement = 'task_management';
 
   /// [Splash]
   static const String getStarted = 'get_started';
@@ -173,6 +174,7 @@ class AppStrings {
 
   /// [Home] [Quick]
   static const String quickNotes = 'quick_notes';
+  static const String quickNotesMessage = "quick_notes_message";
 
   /// [Home] [Profile]
   static const String profiles = 'profiles';

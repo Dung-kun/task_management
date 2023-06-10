@@ -140,7 +140,7 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
                   }),
             ),
           ),
-        ).pad(0, 16),
+        ).pad(0, 12),
       );
 
   void setValueInForm(ProjectModel? value) {
@@ -278,7 +278,7 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
         press: () => editTaskClick(task),
         backgroundColor: AppColors.kPrimaryColor_yellow,
         disable: !onRunning,
-      ).pad(0, 24);
+      ).pad(0, 12);
 
   AppBar buildAppBar() => StringTranslateExtension(AppStrings.editTask)
       .tr()

@@ -103,6 +103,7 @@
     "menu": "Menu",
     "quick": "Quick",
     "quick_notes": "Quick Notes",
+    "quick_notes_message": "You are not have a note, create a note to continue",
     "home_work_today": "Home work today",
     "create_tasks": "Create Tasks",
     "events": "Events",
@@ -124,12 +125,6 @@
     "please_select_date": "Please select date",
     "timeline" : "Timeline",
     "my_note": "My Note",
-    "my_task": "My Task",
     "task_management": "Task Management",
-    "project": "Project",
-    "projects": "Projects",
-    "timeline": "Timeline",
-    "projects": "Projects",
-    "project": "Project",
-    "my_note": "My Note"
+    "project": "Project"
 }

@@ -33,7 +33,8 @@ class DescriptionForm extends StatelessWidget {
             .color(AppColors.kGrayTextC)
             .fSize(16)
             .b()
-            .tr(),
+            .tr()
+        .pad(0,12),
         SizedBox(height: 12.w),
         Container(
           decoration: BoxDecoration(
@@ -56,7 +57,7 @@ class DescriptionForm extends StatelessWidget {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
-                ).pad(0, 10),
+                ).pad(0, 12),
               ),
               Container(
                 width: screenWidth,
@@ -71,7 +72,7 @@ class DescriptionForm extends StatelessWidget {
           ),
         )
       ],
-    ).pad(0, 24);
+    ).pad(0, 0);
   }
 
   Widget buildImage() => Stack(

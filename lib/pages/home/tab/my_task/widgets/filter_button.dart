@@ -42,7 +42,7 @@ class FilterButton extends StatelessWidget {
             child: Column(
               children: [
                 buildItem(taskDisplayStatus.completedTasks,
-                    AppStrings.completedTasks),
+                    AppStrings.completeTask),
                 buildItem(taskDisplayStatus.incompleteTasks,
                     AppStrings.incompleteTasks),
                 buildItem(taskDisplayStatus.allTasks, AppStrings.allTasks),
