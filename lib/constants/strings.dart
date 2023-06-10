@@ -1,6 +1,6 @@
 class AppStrings {
   /// [Welcome]
-  static const String TaskManagement = 'Task Management';
+  static const String TaskManagement = 'task_management';
 
   /// [Splash]
   static const String getStarted = 'get_started';
@@ -82,8 +82,8 @@ class AppStrings {
 
   /// [Home]
   static const String myTask = 'my_task';
-  static const String project = 'Project';
-  static const String myNote = 'My Note';
+  static const String project = 'project';
+  static const String myNote = 'my_note';
   static const String profile = 'profile';
   static const String backToLogin = 'back_to_login';
 
@@ -128,7 +128,7 @@ class AppStrings {
   /// [Home] [My Task]
   static const String workList = 'work_list';
   static const String today = 'today';
-  static const String timeline = 'Timeline';
+  static const String timeline = 'timeline';
   static const kMonthHeader = <String>[
     "january",
     "february",
@@ -167,7 +167,7 @@ class AppStrings {
   // static const String deleteTask = 'delete_task';
 
   /// [Home] [Menu]
-  static const String projects = 'Projects';
+  static const String projects = 'projects';
 
   /// [Home] [Menu] [Add Button]
   static const String title = 'Title';

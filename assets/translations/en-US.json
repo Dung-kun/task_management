@@ -121,5 +121,11 @@
     "Language" : "Language",
     "Change_avatar" : "Change avatar",
     "please_choose_project": "Please choose project",
-    "please_select_date": "Please select date"
+    "please_select_date": "Please select date",
+    "timeline" : "Timeline",
+    "my_note": "My Note",
+    "my_task": "My Task",
+    "task_management": "Task Management",
+    "project": "Project",
+    "projects": "Projects"
 }

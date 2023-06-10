@@ -121,6 +121,12 @@
   "Language" : "Ngôn ngữ",
   "Change_avatar" : "Đổi ảnh đại diện",
   "please_choose_project": "Xin dự án",
-  "please_select_date": "Xin chọn ngày"
+  "please_select_date": "Xin chọn ngày",
+  "timeline" : "Theo lịch",
+  "my_note": "Ghi chú",
+  "my_task": "Công việc",
+  "task_management": "Quản lý Công việc",
+  "project": "Dự án",
+  "projects": "Dự án"
 
 }
