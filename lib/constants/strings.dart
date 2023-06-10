@@ -52,33 +52,33 @@ class AppStrings {
 
   /// [Forgot Password]
   // forgotPassword
-  // static const String forgotPasswordDes =
-  //     'please_enter_your_email_below_to_receive_your_password_reset_instructions';
+  static const String forgotPasswordDes =
+      'please_enter_your_email_below_to_receive_your_password_reset_instructions';
   // username
-  // static const String sendRequest = 'send_request';
+  static const String sendRequest = 'send_request';
 
   /// [Reset Password]
-  // static const String resetPassword = 'reset_password';
-  // static const String resetPasswordDes = 'please_create_new_password';
-  // static const String resetCode = 'reset_password';
-  // static const String enterYourNumber = 'enter_your_number';
-  // static const String newPassword = 'new_password';
+  static const String resetPassword = 'reset_password';
+  static const String resetPasswordDes = 'please_create_new_password';
+  static const String resetCode = 'reset_password';
+  static const String enterYourNumber = 'enter_your_number';
+  static const String newPassword = 'new_password';
   // passwordHint
   // passwordValid
-  // static const String confirmPassword = 'confirm_password';
-  // static const String confirmPasswordHint = 'enter_your_confirm_password';
-  // static const String confirmPasswordValid = 'incorrect_confirm_password';
-  // static const String changePassword = 'change_password';
-  // static const String invalidActionCode = 'invalid_action_code';
+  static const String confirmPassword = 'confirm_password';
+  static const String confirmPasswordHint = 'enter_your_confirm_password';
+  static const String confirmPasswordValid = 'incorrect_confirm_password';
+  static const String changePassword = 'change_password';
+  static const String invalidActionCode = 'invalid_action_code';
   // userDisable
   // userNotFound
-  // static const String expiredActionCode = 'expired_action_code';
-  // static const String weakPassword = 'weak_password';
+  static const String expiredActionCode = 'expired_action_code';
+  static const String weakPassword = 'weak_password';
 
   /// [Successful]
-  // static const String successful = 'successful';
-  // static const String successfulDes =
-  //     'you_have_successfully_change_password_please_use_your_new_passwords_when_logging_in';
+  static const String successful = 'successful';
+  static const String successfulDes =
+      'you_have_successfully_change_password_please_use_your_new_passwords_when_logging_in';
 
   /// [Home]
   static const String myTask = 'my_task';

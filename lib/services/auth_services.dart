@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:to_do_list/pages/auth/forgot_password/forgot_password_vm.dart';
+import 'package:to_do_list/pages/auth/reset_password/reset_password_vm.dart';
 import '../pages/auth/sign_up/sign_up_vm.dart';
 
 import '/constants/app_colors.dart';
@@ -92,5 +94,67 @@ class AuthenticationService {
         backgroundColor: AppColors.kWhiteBackground,
         textColor: AppColors.kText,
       );
+  }
+
+  Future<ResetPasswordStatus> changePassword(
+      String code, String password) async {
+    try {
+      await _firebaseAuth.confirmPasswordReset(
+          code: code, newPassword: password);
+      servicesResultPrint('Reset password successful', isToast: false);
+      return ResetPasswordStatus.successful;
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      switch (e.code) {
+        case 'invalid-action-code':
+          return ResetPasswordStatus.invalidActionCode;
+        case 'user-disabled':
+          return ResetPasswordStatus.userDisabled;
+        case 'user-not-found':
+          return ResetPasswordStatus.userNotFound;
+        case 'expired-action-code':
+          return ResetPasswordStatus.expiredActionCode;
+        case 'weak-password':
+          return ResetPasswordStatus.weakPassword;
+        default:
+          return ResetPasswordStatus.pause;
+      }
+    }
+  }
+
+  Future<ForgotPasswordStatus> sendRequest(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(
+        email: email,
+        actionCodeSettings: ActionCodeSettings(
+          url: 'https://CheemsTeams.page.link/ResetPass',
+          androidPackageName: 'com.example.to_do_list',
+          androidInstallApp: true,
+          handleCodeInApp: true,
+        ),
+      );
+      servicesResultPrint('Password reset email sent');
+      return ForgotPasswordStatus.successful;
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      print(e.message);
+      switch (e.code) {
+        case 'invalid-email':
+          servicesResultPrint('Invalid email');
+          return ForgotPasswordStatus.invalidEmail;
+        case 'user-disabled':
+          servicesResultPrint('User disabled');
+          return ForgotPasswordStatus.userDisabled;
+        case 'user-not-found':
+          servicesResultPrint('User not found');
+          return ForgotPasswordStatus.userNotFound;
+        case 'too-many-requests':
+          servicesResultPrint('Too many requests');
+          return ForgotPasswordStatus.tooManyRequest;
+
+        default:
+          return ForgotPasswordStatus.pause;
+      }
+    }
   }
 }

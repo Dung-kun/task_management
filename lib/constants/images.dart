@@ -14,7 +14,7 @@ class AppImages {
   static const imgWalkthroughBottom = "$_baseImageFolder/walk_bot.png";
 
   /// [Successful]
-  // static const imgSuccessful = "$_baseImageFolder/succesful.png";
+  static const imgSuccessful = "$_baseImageFolder/succesful.png";
 
   // [WorkList Navigator Profile]
   // static const imgAvatar = "$_baseImageFolder/avatar.png";

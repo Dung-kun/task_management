@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:to_do_list/pages/auth/forgot_password/forgot_password_page.dart';
+import 'package:to_do_list/pages/auth/reset_password/reset_password_page.dart';
 import 'package:to_do_list/pages/auth/sign_in/sign_in_page.dart';
 import 'package:to_do_list/pages/auth/sign_up/sign_up_page.dart';
+import 'package:to_do_list/pages/auth/successful_screen.dart';
 import 'package:to_do_list/pages/detail_task/detail_task_page.dart';
 import 'package:to_do_list/pages/edit_task/edit_task_page.dart';
 import 'package:to_do_list/pages/home/home_page.dart';
@@ -50,6 +53,12 @@ class RouteGenerator {
         return page(child: NewCheckListPage.instance());
       case AppRoutes.EDIT_TASK:
         return page(child: EditTaskPage.instance());
+      case AppRoutes.FORGOT_PASSWORD:
+        return page(child: ForgotPasswordPage.instance());
+      case AppRoutes.RESET_PASSWORD:
+        return page(child: ResetPasswordPage.instance());
+      case AppRoutes.SUCCESSFUL:
+        return page(child: SuccessfulScreen());
       default:
         throw RouteException("Route not found");
     }
