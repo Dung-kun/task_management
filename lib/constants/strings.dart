@@ -118,12 +118,12 @@ class AppStrings {
   /// [Home] [Add Button] [Add Check List]
   // addCheckList
   // title
-  // static const String listItem = 'list_item';
-  // static const String addNewItem = 'add_new_item';
+  static const String listItem = 'list_item';
+  static const String addNewItem = 'add_new_item';
   // chooseColor
   // done
-  // static const String pleaseEnterListItem = 'please_enter_list_item';
-  // static const String removeItem = 'remove_item';
+  static const String pleaseEnterListItem = 'please_enter_list_item';
+  static const String removeItem = 'remove_item';
 
   /// [Home] [My Task]
   static const String workList = 'work_list';
