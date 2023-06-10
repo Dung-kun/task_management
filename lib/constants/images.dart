@@ -18,7 +18,7 @@ class AppImages {
 
   // [WorkList Navigator Profile]
   // static const imgAvatar = "$_baseImageFolder/avatar.png";
-  // static const imgStatistic = "$_baseImageFolder/statistic.png";
+  static const imgStatistic = "$_baseImageFolder/statistic.png";
 
   /// [Icons]
   static const _baseIconFolder = "assets/icons";

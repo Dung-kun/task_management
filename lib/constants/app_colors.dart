@@ -17,7 +17,7 @@ class AppColors {
   static const kLightText = Color(0xFFC6C6C6);
   // static const kDarkText = Color(0xFF8E8E93);
   static const kGrayTextA = Color(0xFF9B9B9B);
-  // static const kGrayTextB = Color(0xFF9A9A9A);
+  static const kGrayTextB = Color(0xFF9A9A9A);
   static const kGrayTextC = Color(0xFF7C7B7B);
 
   static const kGrayBack = Color(0xFFF4F4F4);

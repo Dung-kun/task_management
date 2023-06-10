@@ -148,8 +148,8 @@ class AppStrings {
   static const String incompleteTasks = 'incomplete_tasks';
   static const String completedTasks = 'completed_tasks';
   static const String allTasks = 'all_tasks';
-  // static const String Language = 'Language';
-  // static const String ChangeAvatar = 'Change_avatar';
+  static const String Language = 'Language';
+  static const String ChangeAvatar = 'Change_avatar';
 
   /// [Home] [My Task] [View Task]
   static const String assignedTo = 'assigned_to';
@@ -183,7 +183,7 @@ class AppStrings {
   // static const String events = 'events';
   // static const String toDoTask = 'to_do_task';
   // quickNotes
-  // static const String statistic = 'statistic';
+  static const String statistic = 'statistic';
 
   /// [List user form]
   // static const String selectUser = 'select_user';

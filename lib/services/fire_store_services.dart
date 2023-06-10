@@ -258,14 +258,13 @@ class FirestoreService {
     });
   }
 
-  // Future<void> updateUserAvatar(String uid, String url) async {
-  //   await _firebaseFirestore.collection('user').doc(uid).update({
-  //     'url': url,
-  //   }).then((value) {
-  //     servicesResultPrint('Update avatar successful', isToast: false);
-  //   });
-  // }
-
+  Future<void> updateUserAvatar(String uid, String url) async {
+    await _firebaseFirestore.collection('user').doc(uid).update({
+      'url': url,
+    }).then((value) {
+      servicesResultPrint('Update avatar successful', isToast: false);
+    });
+  }
 
   Future<String> addComment(CommentModel comment, String taskId) async {
     DocumentReference doc = _firebaseFirestore

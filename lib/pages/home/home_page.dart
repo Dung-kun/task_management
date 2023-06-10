@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:to_do_list/models/project_model.dart';
 import 'package:to_do_list/pages/home/tab/my_note/my_note_tab.dart';
 import 'package:to_do_list/pages/home/tab/my_task/my_task_tab.dart';
+import 'package:to_do_list/pages/home/tab/profiles/profile_tab.dart';
 import 'package:to_do_list/util/ui/common_widget/back_to_login.dart';
 
 import '/base/base_state.dart';
@@ -61,7 +62,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
       MyTaskTab.instance(mode: projectMode, closeProjectMode: closeProjectMode),
       ProjectTab.instance(mode: projectMode, pressMode: setProjectMode),
       MyNoteTab.instance(mode: projectMode, ),
-      // ProfileTab.instance(mode: projectMode,),
+      ProfileTab.instance(mode: projectMode,),
     ];
   }
 
@@ -143,8 +144,8 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
   void setProjectMode(ProjectModel value) async {
     setState(() {
       projectMode = value;
-      // tabWidget[0] = MyTaskTab.instance(
-      //     mode: projectMode, closeProjectMode: closeProjectMode);
+      tabWidget[0] = MyTaskTab.instance(
+          mode: projectMode, closeProjectMode: closeProjectMode);
     });
     await tabController.animateToPage(
       0,

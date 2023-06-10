@@ -47,11 +47,11 @@ class AppConstants {
   //   'tasks_and_assign',
   // ];
 
-  // static const List<String> kStatisticTitle = [
-  //   'To do Tasks',
-  //   'Quick Notes',
-  //   'Check Lists',
-  // ];
+  static const List<String> kStatisticTitle = [
+    'To do Tasks',
+    'Quick Notes',
+    'Check Lists',
+  ];
 
   // static const List<String> kSplashDescription = [
   //   'whats_going_to_happen_tomorrow?',
@@ -59,11 +59,11 @@ class AppConstants {
   //   'task_and_assign_them_to_colleagues',
   // ];
 
-  // static const kBoxShadow = [
-  //   BoxShadow(
-  //     offset: Offset(2, 10),
-  //     color: AppColors.kBoxShadowColor,
-  //     blurRadius: 8.0,
-  //   )
-  // ];
+  static const kBoxShadow = [
+    BoxShadow(
+      offset: Offset(2, 10),
+      color: AppColors.kBoxShadowColor,
+      blurRadius: 8.0,
+    )
+  ];
 }
