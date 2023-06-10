@@ -110,7 +110,7 @@ class AppStrings {
   // addTask
 
   /// [Home] [Add Button] [Add Note]
-  // static const String addNote = 'add_note';
+  static const String addNote = 'add_note';
   // description
   // chooseColor
   static const String done = 'done';
