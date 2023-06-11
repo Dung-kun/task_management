@@ -126,5 +126,7 @@
     "timeline" : "Timeline",
     "my_note": "My Note",
     "task_management": "Task Management",
-    "project": "Project"
+    "project": "Project",
+    "please_enter_full_information": "Please enter full information!",
+    "VR001": " is not null!"
 }

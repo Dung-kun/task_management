@@ -85,7 +85,9 @@ class ProfileState extends BaseState<ProfileTab, ProfileViewModel> {
 
       // update quick note successful
       var networkQuickNoteSuccessfulLength =
-          listCheckList.where((element) => element.isSuccessful).length;
+          listCheckList
+              .where((element) => element.isSuccessful)
+              .length;
       if (checkListSuccessfulLength != networkQuickNoteSuccessfulLength) {
         setState(() {
           checkListSuccessfulLength = networkQuickNoteSuccessfulLength;
@@ -97,7 +99,10 @@ class ProfileState extends BaseState<ProfileTab, ProfileViewModel> {
       if (value != null) {
         setState(() {
           taskSuccessfulLength =
-              value.where((element) => element.completed).toList().length;
+              value
+                  .where((element) => element.completed)
+                  .toList()
+                  .length;
           taskLength = value.length;
         });
       }
@@ -152,11 +157,12 @@ class ProfileState extends BaseState<ProfileTab, ProfileViewModel> {
     );
   }
 
-  AppBar buildAppBar() => StringTranslateExtension('profiles')
-      .tr()
-      .plainAppBar(color: AppColors.kText)
-      .backgroundColor(AppColors.kPrimaryBackground)
-      .bAppBar();
+  AppBar buildAppBar() =>
+      StringTranslateExtension('profiles')
+          .tr()
+          .plainAppBar(color: AppColors.kText)
+          .backgroundColor(AppColors.kPrimaryBackground)
+          .bAppBar();
 
   Widget buildCardInfo() {
     return Container(
@@ -268,5 +274,8 @@ class ProfileState extends BaseState<ProfileTab, ProfileViewModel> {
   }
 
   @override
-  ProfileViewModel getVm() => widget.watch(viewModelProvider).state;
+  ProfileViewModel getVm() =>
+      widget
+          .watch(viewModelProvider)
+          .state;
 }

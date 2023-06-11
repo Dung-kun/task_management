@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:to_do_list/util/ui/common_widget/error_dialog.dart';
 import '/models/task_model.dart';
 import 'widgets/due_date_form.dart';
 import 'widgets/member_form.dart';
@@ -37,12 +39,12 @@ class NewTaskPage extends StatefulWidget {
 class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   final formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  TextEditingController? descriptionController = TextEditingController();
   List<MetaUserModel> selectUsers = [];
 
   ProjectModel? dropValue;
-  DateTime? dueDateValue;
-  TimeOfDay? dueTimeValue;
+  DateTime? dueDateValue = DateTime.now();
+  TimeOfDay? dueTimeValue = TimeOfDay(hour: 23, minute: 59);
   final f = new DateFormat('dd/MM/yyyy');
 
   final ImagePicker _picker = ImagePicker();
@@ -201,7 +203,48 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
       if (userDate.token != null) listToken.add(userDate.token!);
     }
 
-    if (formKey.currentState!.validate() &&
+    if (dropValue == null){
+      showDialog(
+          context: context,
+          builder: (c) {
+            return const ErrorDialog(
+              message: "Project is not null!",
+            );
+          }
+      );
+    }
+    else if(titleController.text.isEmpty){
+      showDialog(
+          context: context,
+          builder: (c) {
+            return const ErrorDialog(
+              message: "Title is not null!",
+            );
+          }
+      );
+    }
+    else if (dueDateValue == null || dueTimeValue == null) {
+      showDialog(
+          context: context,
+          builder: (c) {
+            return const ErrorDialog(
+              message: "Due Date is not null!",
+            );
+          }
+      );
+    }
+    else if(DateTime(dueDateValue!.year, dueDateValue!.month, dueDateValue!.day, dueTimeValue!.hour, dueTimeValue!.minute)
+        .isBefore(DateTime.now())) {
+      showDialog(
+          context: context,
+          builder: (c) {
+            return const ErrorDialog(
+              message: "Due Date is not before now!",
+            );
+          }
+      );
+    }
+    else if (formKey.currentState!.validate() &&
         dropValue != null &&
         dueDateValue != null &&
         dueTimeValue != null) {
@@ -211,7 +254,7 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
         idProject: dropValue!.id,
         idAuthor: getVm().user!.uid,
         title: titleController.text,
-        description: descriptionController.text,
+        description: descriptionController!.text,
         startDate: DateTime.now(),
         dueDate: dueDateValue!,
         listMember: list,

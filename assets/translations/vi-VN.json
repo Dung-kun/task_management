@@ -126,5 +126,8 @@
   "timeline" : "Theo lịch",
   "my_note": "Lời nhắc",
   "task_management": "Quản lý Công việc",
-  "project": "Dự án"
+  "project": "Dự án",
+  "please_enter_full_information": "Vui lòng nhập đầy đủ thông tin!",
+  "VR001": " không được trống!"
+
 }

@@ -169,7 +169,7 @@ class AppStrings {
   static const String projects = 'projects';
 
   /// [Home] [Menu] [Add Button]
-  static const String title = 'Title';
+  static const String title = 'title';
   static const String chooseColor = 'choose_color';
 
   /// [Home] [Quick]
@@ -192,4 +192,9 @@ class AppStrings {
   static const String pleaseEnterYourText = 'please_enter_your_text';
   static const String pleaseChooseProject = 'please_choose_project';
   static const String pleaseSelectDate = 'please_select_date';
+
+
+  ///[Show Message]
+  static const String pleaseEnterFullInformation = 'please_enter_full_information';
+  static const String VR001 = 'VR001';
 }

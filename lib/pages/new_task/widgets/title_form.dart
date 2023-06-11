@@ -13,22 +13,55 @@ class TitleForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 66.w,
-      // color: AppColors.kGrayBack,
+      color: AppColors.kGrayBack,
       child: TextFormField(
+        controller: controller,
+        style: TextStyle(
+          color: AppColors.kText,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
         validator: (val) => val!.isNotEmpty
             ? null
             : StringTranslateExtension(AppStrings.pleaseEnterYourText).tr(),
-        decoration: const InputDecoration(
-          border: UnderlineInputBorder(),
-          labelText: AppStrings.title,
-          labelStyle: TextStyle(
+        decoration: InputDecoration(
+          hintText: AppStrings.title.tr(),
+          hintStyle: TextStyle(
             color: AppColors.kText80,
             fontSize: 18,
             fontWeight: FontWeight.w500,
-          )
+          ),
+          border: InputBorder.none,
         ),
-        controller: controller,
       ).pad(24, 24, 10, 0),
     );
+    // return Container(
+    //   height: 66.w,
+    //   // color: AppColors.kGrayBack,
+    //   child: Column(
+    //     children: [
+    //       AppStrings.title
+    //           .plain()
+    //           .fSize(18)
+    //           .weight(FontWeight.bold)
+    //           .b(),
+    //       TextFormField(
+    //         validator: (val) => val!.isNotEmpty
+    //             ? null
+    //             : StringTranslateExtension(AppStrings.pleaseEnterYourText).tr(),
+    //         decoration: const InputDecoration(
+    //             border: UnderlineInputBorder(),
+    //             // labelText: AppStrings.title,
+    //             labelStyle: TextStyle(
+    //               color: AppColors.kText80,
+    //               fontSize: 18,
+    //               fontWeight: FontWeight.w500,
+    //             )
+    //         ),
+    //         controller: controller,
+    //       )
+    //     ],
+    //   ).pad(24, 24, 10, 0),
+    // );
   }
 }
