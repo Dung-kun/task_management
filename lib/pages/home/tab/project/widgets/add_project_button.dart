@@ -64,7 +64,8 @@ class AddProjectButton extends StatelessWidget {
                         .plain()
                         .fSize(18)
                         .weight(FontWeight.bold)
-                        .b(),
+                        .b()
+                    .tr(),
                     SizedBox(height: 16),
                     TextFormField(
                       decoration: const InputDecoration(

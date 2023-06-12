@@ -188,13 +188,17 @@ class FirestoreService {
 
   Future<void> updateDescriptionUrlTaskById(String id, String url) async {
     await _firebaseFirestore
-        .collection('task')
-        .doc(id)
-        .update({"des_url": url}).then((value) {
-      servicesResultPrint('Update url successful');
-    }).catchError((error) {
-      servicesResultPrint('Update url failed: $error');
-    });
+      .collection('task')
+      .doc(id)
+      .update({
+        "des_url": url
+      })
+      .then((value) {
+        servicesResultPrint('Update url successful');
+      })
+      .catchError((error) {
+        servicesResultPrint('Update url failed: $error');
+      });
   }
 
   Future<void> updateDescriptionUrlCommentById(

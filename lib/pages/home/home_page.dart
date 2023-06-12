@@ -252,7 +252,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
           index: 2,
         ),
         buildBottomNavigationBarItem(
-          title: StringTranslateExtension(AppStrings.profiles).tr(),
+          title: StringTranslateExtension(AppStrings.profile).tr(),
           icon: AppImages.profileIcon,
           index: 3,
         ),

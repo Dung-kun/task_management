@@ -177,7 +177,6 @@ class AppStrings {
   static const String quickNotesMessage = "quick_notes_message";
 
   /// [Home] [Profile]
-  static const String profiles = 'profiles';
   static const String createTasks = 'create_tasks';
   // completedTasks
   static const String events = 'events';
