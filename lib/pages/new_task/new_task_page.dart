@@ -185,7 +185,7 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
       arguments: selectUsers,
     )?.then((value) {
       setState(() {
-        this.selectUsers = value;
+        this.selectUsers = value??[];
       });
     });
   }

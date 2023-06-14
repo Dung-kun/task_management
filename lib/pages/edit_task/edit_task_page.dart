@@ -237,7 +237,10 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
         }
 
         List<MetaUserModel> data = snapshot.data!;
-        if (selectUsers == null) selectUsers = data;
+        print("$data");
+        if (selectUsers == null || selectUsers == []) selectUsers = data;
+        print("Select user: ");
+        print("$selectUsers");
         return MemberForm(listUser: selectUsers!, press: selectListUser);
       },
     );

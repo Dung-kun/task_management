@@ -74,12 +74,12 @@ class AuthenticationService {
     try {
       await _firebaseAuth.sendPasswordResetEmail(
         email: email,
-        actionCodeSettings: ActionCodeSettings(
-          url: 'https://CheemsTeams.page.link/ResetPass',
-          androidPackageName: 'com.example.to_do_list',
-          androidInstallApp: true,
-          handleCodeInApp: true,
-        ),
+        // actionCodeSettings: ActionCodeSettings(
+        //   url: 'https://CheemsTeams.page.link/ResetPass',
+        //   androidPackageName: 'com.example.task_management',
+        //   androidInstallApp: true,
+        //   handleCodeInApp: true,
+        // ),
       );
       servicesResultPrint('Password reset email sent');
       return ForgotPasswordStatus.successful;
