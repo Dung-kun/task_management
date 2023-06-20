@@ -40,24 +40,35 @@ class ProjectCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(
-                  width: 26,
-                  height: 26,
-                  decoration: BoxDecoration(
-                      color: AppColors.kColorNote[project.indexColor]
-                          .withOpacity(.3),
-                      shape: BoxShape.circle),
-                  child: Center(
-                    child: Container(
-                      width: 14,
-                      height: 14,
-                      decoration: BoxDecoration(
-                          color: AppColors.kColorNote[project.indexColor],
-                          shape: BoxShape.circle),
+                Expanded(
+                  child: Container(
+                    width: 26,
+                    height: 26,
+                    decoration: BoxDecoration(
+                        color: AppColors.kColorNote[project.indexColor]
+                            .withOpacity(.3),
+                        shape: BoxShape.circle),
+                    child: Center(
+                      child: Container(
+                        width: 14,
+                        height: 14,
+                        decoration: BoxDecoration(
+                            color: AppColors.kColorNote[project.indexColor],
+                            shape: BoxShape.circle),
+                      ),
                     ),
                   ),
                 ),
                 Spacer(),
+                Icon(
+                  Icons.edit,
+                  color: Colors.redAccent,
+                ).inkTap(
+                    onTap: () => deletePress(project),
+                    borderRadius: BorderRadius.circular(5)),
+                SizedBox(
+                  width: 10,
+                ),
                 Icon(
                   Icons.delete,
                   color: Colors.redAccent,

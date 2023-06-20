@@ -196,4 +196,13 @@ class AppStrings {
   ///[Show Message]
   static const String pleaseEnterFullInformation = 'please_enter_full_information';
   static const String VR001 = 'VR001';
+  static const String pleaseEnterIncorrectFormatEmail = 'please_enter_incorrect_format_email';
+
+  static const String hiMail = "Hi guy";
+  static const String nameMail = " want you to join his ";
+  static const String subject = "Join the project on Cheems Management";
+  static const String noAccountMessage = "Please visit the link and create an account to participate in the project";
+  static const String alreadyAccountMessage = "Please visit the link to accept participation in the project";
+  static const String messageLinkRegister = "https://angular-firebase-login-phi.vercel.app/register";
+  static const String messageLinkAccepted = "https://angular-firebase-login-phi.vercel.app/go-to-project";
 }

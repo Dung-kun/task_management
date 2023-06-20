@@ -47,6 +47,7 @@ dependencies:
   shimmer:
   fluttertoast: ^8.0.9
 
+  uuid: ^3.0.6
   intl: ^0.17.0
   firebase_dynamic_links: ^4.1.2
   equatable: ^2.0.3

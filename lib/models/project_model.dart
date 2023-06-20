@@ -10,6 +10,7 @@ class ProjectModel extends Equatable {
   final int indexColor;
   final DateTime timeCreate;
   final List<String> listTask;
+  final List<String> listMember;
 
   ProjectModel({
     this.id = '',
@@ -18,6 +19,7 @@ class ProjectModel extends Equatable {
     required this.indexColor,
     required this.listTask,
     required this.timeCreate,
+    required this.listMember,
   });
 
   // factory ProjectModel.fromJson(Map<String, dynamic> json) {
@@ -34,39 +36,49 @@ class ProjectModel extends Equatable {
   // }
 
   factory ProjectModel.fromFirestore(DocumentSnapshot doc) {
-    List<String> list = [];
+    List<String> listTask = [];
+    List<String> listMember = [];
     for (int i = 0; i < doc["list_task"].length; i++) {
-      list.add(doc["list_task"][i]);
+      listTask.add(doc["list_task"][i]);
     }
+    if(doc.data().toString().contains('list_member')) {
+      for (int i = 0; i < doc["list_member"].length; i++) {
+        listMember.add(doc["list_member"][i]);
+      }
+    }
+
     return ProjectModel(
-      id: doc.id,
-      name: doc['name'],
-      idAuthor: doc['id_author'],
-      indexColor: doc['index_color'],
-      timeCreate: DateFormat("yyyy-MM-dd hh:mm:ss").parse(
-        doc['time_create'],
-      ),
-      listTask: list,
+        id: doc.id,
+        name: doc['name'],
+        idAuthor: doc['id_author'],
+        indexColor: doc['index_color'],
+        timeCreate: DateFormat("yyyy-MM-dd hh:mm:ss").parse(
+          doc['time_create'],
+        ),
+        listTask: listTask,
+        listMember: listMember
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'id': this.id,
-        'name': this.name,
-        'id_author': this.idAuthor,
-        'index_color': this.indexColor,
-        'time_create':
-            DateFormat("yyyy-MM-dd hh:mm:ss").format(this.timeCreate),
-      };
+    'id': this.id,
+    'name': this.name,
+    'id_author': this.idAuthor,
+    'index_color': this.indexColor,
+    'time_create':
+    DateFormat("yyyy-MM-dd hh:mm:ss").format(this.timeCreate),
+    'list_member': this.listMember
+  };
 
   Map<String, dynamic> toFirestore() => {
-        'name': this.name,
-        'id_author': this.idAuthor,
-        'index_color': this.indexColor,
-        'time_create':
-            DateFormat("yyyy-MM-dd hh:mm:ss").format(this.timeCreate),
-        "list_task": this.listTask,
-      };
+    'name': this.name,
+    'id_author': this.idAuthor,
+    'index_color': this.indexColor,
+    'time_create':
+    DateFormat("yyyy-MM-dd hh:mm:ss").format(this.timeCreate),
+    "list_task": this.listTask,
+    'list_member': this.listMember
+  };
 
   @override
   // TODO: implement props

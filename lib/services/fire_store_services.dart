@@ -1,15 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import '/models/quick_note_model.dart';
 import 'package:to_do_list/models/meta_user_model.dart';
 
-import '../models/comment_model.dart';
 import '/constants/app_colors.dart';
 import '/models/project_model.dart';
+import '/models/quick_note_model.dart';
 import '/models/task_model.dart';
+import '../models/comment_model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firebaseFirestore;
+
   FirestoreService(this._firebaseFirestore);
 
   Stream<List<ProjectModel>> projectStream(String uid) {
@@ -19,17 +20,29 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs.map((doc) {
-            return ProjectModel.fromFirestore(doc);
-          }).toList(),
-        );
+        return ProjectModel.fromFirestore(doc);
+      }).toList(),
+    );
+  }
+
+  Stream<List<ProjectModel>> projectStreamWithListMember(String uid) {
+    return _firebaseFirestore
+        .collection('project')
+        .where('list_member', arrayContains: uid)
+        .snapshots()
+        .map(
+          (list) => list.docs.map((doc) {
+        return ProjectModel.fromFirestore(doc);
+      }).toList(),
+    );
   }
 
   Stream<List<TaskModel>> taskStream() {
     return _firebaseFirestore.collection('task').snapshots().map(
           (list) => list.docs.map((doc) {
-            return TaskModel.fromFirestore(doc);
-          }).toList(),
-        );
+        return TaskModel.fromFirestore(doc);
+      }).toList(),
+    );
   }
 
   Stream<List<CommentModel>> commentStream(String taskId) {
@@ -40,9 +53,9 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs.map((doc) {
-            return CommentModel.fromFirestore(doc);
-          }).toList(),
-        );
+        return CommentModel.fromFirestore(doc);
+      }).toList(),
+    );
   }
 
   Stream<TaskModel> taskStreamById(String id) {
@@ -69,6 +82,17 @@ class FirestoreService {
         .then((doc) => MetaUserModel.fromFirestore(doc));
   }
 
+  Future<MetaUserModel> getUserByEmail(String email) {
+    return _firebaseFirestore
+        .collection('user')
+        .where("email", isEqualTo: email)
+        .limit(1)
+        .get()
+        .then((doc) => (doc.size > 0)
+        ? MetaUserModel.fromFirestore(doc.docs.first)
+        : MetaUserModel(email: "", displayName: ""));
+  }
+
   Future<ProjectModel> getProjectById(String id) {
     return _firebaseFirestore
         .collection('project')
@@ -92,9 +116,9 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs.map((doc) {
-            return MetaUserModel.fromFirestore(doc);
-          }).toList(),
-        );
+        return MetaUserModel.fromFirestore(doc);
+      }).toList(),
+    );
   }
 
   DocumentReference getDoc(String collectionPath, String id) {
@@ -126,8 +150,13 @@ class FirestoreService {
     return false;
   }
 
-  void addProject(ProjectModel project) {
-    _firebaseFirestore.collection('project').doc().set(project.toFirestore());
+  void addProject(ProjectModel project, String uuid) {
+    _firebaseFirestore
+        .collection('project')
+        .doc(uuid)
+        .set(project.toFirestore())
+        .catchError(
+            (e) => servicesResultPrint("An error occurred, please try again"));
   }
 
   void deleteProject(ProjectModel project) {
@@ -188,17 +217,13 @@ class FirestoreService {
 
   Future<void> updateDescriptionUrlTaskById(String id, String url) async {
     await _firebaseFirestore
-      .collection('task')
-      .doc(id)
-      .update({
-        "des_url": url
-      })
-      .then((value) {
-        servicesResultPrint('Update url successful');
-      })
-      .catchError((error) {
-        servicesResultPrint('Update url failed: $error');
-      });
+        .collection('task')
+        .doc(id)
+        .update({"des_url": url}).then((value) {
+      servicesResultPrint('Update url successful');
+    }).catchError((error) {
+      servicesResultPrint('Update url failed: $error');
+    });
   }
 
   Future<void> updateDescriptionUrlCommentById(
@@ -304,9 +329,9 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs
-              .map((doc) => QuickNoteModel.fromFirestore(doc))
-              .toList(),
-        );
+          .map((doc) => QuickNoteModel.fromFirestore(doc))
+          .toList(),
+    );
   }
 
   Future<bool> addQuickNote(String uid, QuickNoteModel quickNote) async {
@@ -354,9 +379,9 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs
-              .map((doc) => QuickNoteModel.fromFirestore(doc))
-              .toList(),
-        );
+          .map((doc) => QuickNoteModel.fromFirestore(doc))
+          .toList(),
+    );
   }
 
   Future<bool> addTaskNote(String uid, QuickNoteModel quickNote) async {

@@ -34,6 +34,7 @@
   "please_enter_your_email_below_to_receive_your_password_reset_instructions": "Nhập Email bạn vào để đổi lại mật khẩu",
   "send_request": "Gửi yêu cầu",
   "reset_password": "Đổi mật khẩu",
+  "please_enter_incorrect_format_email": "Vui lòng nhập đúng định dạng email",
   "please_create_new_password": "Mật khẩu mới",
   "reset_code": "Mã xác thực",
   "enter_your_number": "mã xác thực",

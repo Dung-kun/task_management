@@ -46,6 +46,7 @@
     "expired_action_code": "Expired action code",
     "weak_password": "Weak password",
     "successful": "Successful!",
+    "please_enter_incorrect_format_email": "Please enter incorrect format email",
     "you_have_successfully_change_password_please_use_your_new_passwords_when_logging_in": "You have successfully change password. Please use your new passwords when logging in.",
     "work_list": "Work List",
     "today": "Today",

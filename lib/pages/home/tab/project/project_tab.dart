@@ -68,29 +68,32 @@ class ProjectState extends BaseState<ProjectTab, ProjectViewModel> {
               ),
               for (int i = 0; i < data.length; i++)
                 ProjectCard(
-                    project: data[i],
-                    press: widget.pressMode,
-                    deletePress: (project) async => await showDialog(
-                        context: this.context,
-                        builder: (_) => CupertinoAlertDialog(
-                              title: Text(AppStrings.confirmDelete).tr(),
-                              actions: [
-                                CupertinoDialogAction(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: Text(AppStrings.no).tr()),
-                                CupertinoDialogAction(
-                                    onPressed: () => {
-                                          getVm().deleteProject(project),
-                                          Get.back()
-                                        },
-                                    child: Text(AppStrings.yes).tr())
-                              ],
-                            ))),
+                  project: data[i],
+                  press: widget.pressMode,
+                  deletePress: (project) async => await showDialog(
+                    context: this.context,
+                    builder: (_) => CupertinoAlertDialog(
+                      title: Text(AppStrings.confirmDelete).tr(),
+                      actions: [
+                        CupertinoDialogAction(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text(AppStrings.no).tr()),
+                        CupertinoDialogAction(
+                            onPressed: () =>
+                            {getVm().deleteProject(project), Get.back()},
+                            child: Text(AppStrings.yes).tr())
+                      ],
+                    ),
+                  ),
+                ),
               AddProjectButton(
+                addMemberEmail: getVm().addMemberEmail,
                 press: getVm().addProject,
-              )
+                bsMemberEmail: getVm().bsMemberEmail,
+                deleteMemberEmail: getVm().deleteMemberEmail,
+              ),
             ],
           ).pad(0, 16);
         },
@@ -100,8 +103,7 @@ class ProjectState extends BaseState<ProjectTab, ProjectViewModel> {
 
   AppBar buildAppBar() => StringTranslateExtension(AppStrings.projects)
       .tr()
-      .plainAppBar(
-          color: Colors.black)
+      .plainAppBar(color: Colors.black)
       .backgroundColor(AppColors.kPrimaryBackground)
       .bAppBar();
 
