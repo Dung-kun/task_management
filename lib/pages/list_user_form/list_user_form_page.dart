@@ -27,11 +27,10 @@ class ListUserFormPage extends StatefulWidget {
 
 class ListUserFormState
     extends BaseState<ListUserFormPage, ListUserFormViewModel> {
-  List<MetaUserModel> list = [];
 
   @override
   void didChangeDependencies() {
-    getVm().initSelect(Get.arguments as List<MetaUserModel>);
+    getVm().initSelect(Get.arguments);
     super.didChangeDependencies();
   }
 

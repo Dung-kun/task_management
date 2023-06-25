@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:to_do_list/models/task_model.dart';
 import 'package:to_do_list/pages/auth/forgot_password/forgot_password_page.dart';
 import 'package:to_do_list/pages/auth/reset_password/reset_password_page.dart';
 import 'package:to_do_list/pages/detail_task/detail_task_page.dart';
@@ -8,6 +7,7 @@ import 'package:to_do_list/pages/home/home_page.dart';
 import 'package:to_do_list/pages/list_user_form/list_user_form_page.dart';
 import 'package:to_do_list/pages/new_task/new_task_page.dart';
 
+import '../pages/edit_project/edit_project_page.dart';
 import '../pages/edit_task/edit_task_page.dart';
 import '/pages/auth/sign_up/sign_up_page.dart';
 import '/pages/splash/splash_page.dart';
@@ -64,6 +64,8 @@ class RouteGenerator {
         return page(child: DetailTaskPage.instance());
       case AppRoutes.EDIT_TASK:
         return page(child: EditTaskPage.instance());
+      case AppRoutes.EDIT_PROJECT:
+        return page(child: EditProjectPage.instance());
       default:
         throw RouteException("Route not found");
     }

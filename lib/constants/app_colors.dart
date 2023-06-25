@@ -27,7 +27,7 @@ class AppColors {
   static const kBoxShadowColor = Color(0x80E3E3E3);
   static const kBoxShadowAddFormColor = Color.fromRGBO(221, 221, 221, .05);
   static const KBoxShadowCard = Color.fromRGBO(
-      227, 225, 225, 0.5019607843137255);
+      169, 169, 169, 0.5019607843137255);
   static const kBoxShadowMonth = Color.fromRGBO(227, 227, 227, .5);
 
   static const kLineColor = Color(0xFFE4E4E4);

@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:to_do_list/routing/app_routes.dart';
-import '/util/extension/extension.dart';
 
 import '/constants/constants.dart';
 import '/models/task_model.dart';
+import '/util/extension/extension.dart';
 
 class TaskCard extends StatelessWidget {
-  const TaskCard({Key? key, required this.task}) : super(key: key);
+  const TaskCard({Key? key, required this.task, this.press})
+      : super(key: key);
 
+  final Function? press;
   final TaskModel task;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,8 +31,8 @@ class TaskCard extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: 16.w,
-            height: 16.w,
+            width: 10.w,
+            height: 10.w,
             child: SvgPicture.asset(
               task.completed
                   ? AppImages.checkTrueIcon
@@ -57,13 +60,18 @@ class TaskCard extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: 4.w,
-            height: 21.w,
-            color: task.completed
-                ? AppColors.kPrimaryColor
-                : AppColors.kColorNote[0],
-          ).pad(10, 0, 0),
+          (press == null)
+              ? Container(
+                  width: 4.w,
+                  height: 21.w,
+                  color: task.completed
+                      ? AppColors.kPrimaryColor
+                      : AppColors.kColorNote[0],
+                ).pad(10, 0, 0)
+              : Icon(
+                  Icons.delete,
+                  color: Colors.redAccent,
+                )
         ],
       ),
     )

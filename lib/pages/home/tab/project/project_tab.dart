@@ -70,6 +70,7 @@ class ProjectState extends BaseState<ProjectTab, ProjectViewModel> {
                 ProjectCard(
                   project: data[i],
                   press: widget.pressMode,
+                  identify: getVm().getUid(),
                   deletePress: (project) async => await showDialog(
                     context: this.context,
                     builder: (_) => CupertinoAlertDialog(

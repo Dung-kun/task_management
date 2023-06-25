@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:to_do_list/constants/app_colors.dart';
 import 'package:to_do_list/constants/constants.dart';
 import 'package:to_do_list/models/project_model.dart';
 import 'package:to_do_list/util/extension/dimens.dart';
 import 'package:to_do_list/util/extension/widget_extension.dart';
 
+import '../../../routing/app_routes.dart';
+
 class ProjectCard extends StatelessWidget {
+
   const ProjectCard({
     Key? key,
     required this.project,
     required this.press,
     required this.deletePress,
+    required this.identify
   }) : super(key: key);
 
   final ProjectModel project;
   final Function press;
   final Function deletePress;
+  final String identify;
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +67,13 @@ class ProjectCard extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Icon(
+                if(project.idAuthor == identify) Icon(
                   Icons.edit,
                   color: Colors.redAccent,
                 ).inkTap(
-                    onTap: () => deletePress(project),
+                    onTap: () => Get.toNamed(AppRoutes.EDIT_PROJECT, arguments: project.id),
                     borderRadius: BorderRadius.circular(5)),
-                SizedBox(
+                if(project.idAuthor == identify) SizedBox(
                   width: 10,
                 ),
                 Icon(

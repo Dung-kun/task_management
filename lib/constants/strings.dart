@@ -167,6 +167,7 @@ class AppStrings {
 
   /// [Home] [Menu]
   static const String projects = 'projects';
+  static const String editProject = "edit_project";
 
   /// [Home] [Menu] [Add Button]
   static const String title = 'title';

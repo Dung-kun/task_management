@@ -4,12 +4,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class FirestoreMessagingService {
   final FirebaseMessaging _firebaseMessaging;
+
   FirestoreMessagingService(this._firebaseMessaging);
+
   String currentToken = '';
   String serverKey =
       'AAAA32s0fJA:APA91bHhkn8ptI0BDo1Om3vlNR-KrPT_vihl8ak63IC4Ak0OC_S2KtdPAZriahidO_ymZjZPq_iZD3PDuTkQbSwLBVJsFCB4WWA7TNulgDSGq-7DYcm7FjwAsJ3JaThXTN93I38cdeVG';

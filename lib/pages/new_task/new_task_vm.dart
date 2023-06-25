@@ -1,3 +1,5 @@
+import 'package:to_do_list/models/meta_user_model.dart';
+
 import '/models/task_model.dart';
 
 import '/base/base_view_model.dart';
@@ -6,6 +8,8 @@ import '/models/project_model.dart';
 class NewTaskViewModel extends BaseViewModel {
   BehaviorSubject<List<ProjectModel>?> bsListProject =
       BehaviorSubject<List<ProjectModel>>();
+  BehaviorSubject<List<MetaUserModel>?> bsListMember =
+  BehaviorSubject<List<MetaUserModel>>();
 
   NewTaskViewModel(ref) : super(ref) {
     // add project data
@@ -41,6 +45,20 @@ class NewTaskViewModel extends BaseViewModel {
     String url = await fireStorageService.loadTaskImage(taskId);
     firestoreService.updateDescriptionUrlTaskById(taskId, url);
     endRunning();
+  }
+
+  void getListMemberByProjectId(List<String>? mem) {
+    List<MetaUserModel> member = [];
+    if(mem!= null) {
+      mem.forEach((element)  {
+        firestoreService.getUserById(element).then((value) => {
+          if(!member.contains(value)) {
+            member.add(value)
+          },
+        });
+      });
+    }
+    bsListMember.add(member);
   }
 
   @override

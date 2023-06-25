@@ -20,9 +20,19 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs.map((doc) {
-        return ProjectModel.fromFirestore(doc);
-      }).toList(),
-    );
+            return ProjectModel.fromFirestore(doc);
+          }).toList(),
+        );
+  }
+
+  Future<void> updateProject(
+      String uid, String name, List<String> member) async {
+    await _firebaseFirestore.collection('project').doc(uid).update({
+      'name': name,
+      'list_member': member,
+    }).then((value) {
+      servicesResultPrint('Update project successful', isToast: false);
+    });
   }
 
   Stream<List<ProjectModel>> projectStreamWithListMember(String uid) {
@@ -32,17 +42,17 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs.map((doc) {
-        return ProjectModel.fromFirestore(doc);
-      }).toList(),
-    );
+            return ProjectModel.fromFirestore(doc);
+          }).toList(),
+        );
   }
 
   Stream<List<TaskModel>> taskStream() {
     return _firebaseFirestore.collection('task').snapshots().map(
           (list) => list.docs.map((doc) {
-        return TaskModel.fromFirestore(doc);
-      }).toList(),
-    );
+            return TaskModel.fromFirestore(doc);
+          }).toList(),
+        );
   }
 
   Stream<List<CommentModel>> commentStream(String taskId) {
@@ -53,9 +63,9 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs.map((doc) {
-        return CommentModel.fromFirestore(doc);
-      }).toList(),
-    );
+            return CommentModel.fromFirestore(doc);
+          }).toList(),
+        );
   }
 
   Stream<TaskModel> taskStreamById(String id) {
@@ -64,6 +74,14 @@ class FirestoreService {
         .doc(id)
         .snapshots()
         .map((doc) => TaskModel.fromFirestore(doc));
+  }
+
+  Future<TaskModel> getTaskById(String id) {
+    return _firebaseFirestore
+        .collection('task')
+        .doc(id)
+        .get()
+        .then((doc) => TaskModel.fromFirestore(doc));
   }
 
   Stream<MetaUserModel> userStreamById(String id) {
@@ -89,8 +107,8 @@ class FirestoreService {
         .limit(1)
         .get()
         .then((doc) => (doc.size > 0)
-        ? MetaUserModel.fromFirestore(doc.docs.first)
-        : MetaUserModel(email: "", displayName: ""));
+            ? MetaUserModel.fromFirestore(doc.docs.first)
+            : MetaUserModel(email: "", displayName: ""));
   }
 
   Future<ProjectModel> getProjectById(String id) {
@@ -116,9 +134,9 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs.map((doc) {
-        return MetaUserModel.fromFirestore(doc);
-      }).toList(),
-    );
+            return MetaUserModel.fromFirestore(doc);
+          }).toList(),
+        );
   }
 
   DocumentReference getDoc(String collectionPath, String id) {
@@ -308,6 +326,16 @@ class FirestoreService {
     return false;
   }
 
+  Future<void> updateTaskById(String id, List<String> mem) async {
+    await _firebaseFirestore
+        .collection('task')
+        .doc(id)
+        .update({"list_member": mem})
+        .then((value) => servicesResultPrint("Task updated"))
+        .catchError((onError) =>
+            servicesResultPrint("Failed to update task: $onError"));
+  }
+
   void servicesResultPrint(String result, {bool isToast = true}) async {
     print("FirebaseStore services result: $result");
 
@@ -329,9 +357,9 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs
-          .map((doc) => QuickNoteModel.fromFirestore(doc))
-          .toList(),
-    );
+              .map((doc) => QuickNoteModel.fromFirestore(doc))
+              .toList(),
+        );
   }
 
   Future<bool> addQuickNote(String uid, QuickNoteModel quickNote) async {
@@ -379,9 +407,9 @@ class FirestoreService {
         .snapshots()
         .map(
           (list) => list.docs
-          .map((doc) => QuickNoteModel.fromFirestore(doc))
-          .toList(),
-    );
+              .map((doc) => QuickNoteModel.fromFirestore(doc))
+              .toList(),
+        );
   }
 
   Future<bool> addTaskNote(String uid, QuickNoteModel quickNote) async {

@@ -35,6 +35,7 @@ abstract class AppRoutes {
   static const PATH_NEW_CHECK_LIST = '/add_check_list';
   static const NEW_CHECK_LIST = HOME + PATH_NEW_CHECK_LIST;
 
+  static const EDIT_PROJECT = '/edit_project';
   static const DETAIL_TASK = '/detail_task';
 
   static const LIST_USER_FORM = '/list_user_form';

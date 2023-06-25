@@ -129,6 +129,6 @@
   "task_management": "Quản lý Công việc",
   "project": "Dự án",
   "please_enter_full_information": "Vui lòng nhập đầy đủ thông tin!",
-  "VR001": " không được trống!"
-
+  "VR001": " không được trống!",
+  "edit_project" : "Chỉnh sửa dự án"
 }

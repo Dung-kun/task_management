@@ -2,12 +2,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:to_do_list/constants/constants.dart';
+import 'package:to_do_list/models/project_model.dart';
 import 'package:to_do_list/routing/app_routes.dart';
 
 class AddNewButton extends StatelessWidget {
   const AddNewButton({
-    Key? key,
+    Key? key, this.projectModel
   }) : super(key: key);
+
+  final ProjectModel? projectModel;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,7 @@ class AddNewButton extends StatelessWidget {
               child: CreateItem(
                 text: StringTranslateExtension(AppStrings.addTask).tr(),
                 press: () {
-                  Get.offAndToNamed(AppRoutes.NEW_TASK);
+                  Get.offAndToNamed(AppRoutes.NEW_TASK, arguments: projectModel??null);
                 },
               ),
             ),

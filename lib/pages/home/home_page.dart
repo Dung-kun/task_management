@@ -201,7 +201,7 @@ class HomeState extends BaseState<HomePage, HomeViewModel> {
     if (getVm().user == null) return BackToLogin();
     return Scaffold(
       body: buildBody(),
-      floatingActionButton: AddNewButton(),
+      floatingActionButton: AddNewButton(projectModel: projectMode),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: buildBottomNavigationBar(
         currentIndex: currentTab,

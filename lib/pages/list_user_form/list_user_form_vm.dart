@@ -10,10 +10,10 @@ class ListUserFormViewModel extends BaseViewModel {
 
   ListUserFormViewModel(ref) : super(ref) {
     bsSelectListUser.add([]);
-    if (user != null)
-      firestoreService.userStream(user!.email!).listen((event) {
-        bsListUser.add(event);
-      });
+    // if (user != null)
+    //   firestoreService.userStream(user!.email!).listen((event) {
+    //     bsListUser.add(event);
+    //   });
   }
 
   void checkClick(MetaUserModel value) {
@@ -25,10 +25,12 @@ class ListUserFormViewModel extends BaseViewModel {
       list.add(value);
     }
     bsSelectListUser.add(list);
+
   }
 
-  void initSelect(List<MetaUserModel> list) {
-    bsSelectListUser.add(list);
+  void initSelect(Map<String, List<MetaUserModel>> list) {
+    bsSelectListUser.add(list["selectUsers"]!);
+    bsListUser.add(list["listMember"]!);
   }
 
   @override

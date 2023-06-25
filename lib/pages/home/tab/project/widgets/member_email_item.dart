@@ -3,10 +3,11 @@ import 'package:to_do_list/util/extension/extension.dart';
 
 class MemberEmailItem extends StatelessWidget {
   const MemberEmailItem(
-      {Key? key, required this.deleteMemberEmail, required this.nameEmail})
+      {Key? key, required this.deleteMemberEmail, required this.nameEmail, required this.deleteEmailText})
       : super(key: key);
 
   final Function deleteMemberEmail;
+  final Function deleteEmailText;
   final String nameEmail;
 
   @override
@@ -18,7 +19,7 @@ class MemberEmailItem extends StatelessWidget {
         style: TextStyle(color: Colors.black, fontSize: 13),
       ),
       trailing: Icon(Icons.delete, color: Colors.redAccent).inkTap(
-          onTap:() => deleteMemberEmail(nameEmail),
+          onTap:() => {deleteMemberEmail(nameEmail), deleteMemberEmail()},
           borderRadius: BorderRadius.circular(5)),
     );
   }

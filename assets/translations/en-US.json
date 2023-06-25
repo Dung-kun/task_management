@@ -129,5 +129,6 @@
     "task_management": "Task Management",
     "project": "Project",
     "please_enter_full_information": "Please enter full information!",
-    "VR001": " is not null!"
+    "VR001": " is not null!",
+    "edit_project" : "Edit Project"
 }

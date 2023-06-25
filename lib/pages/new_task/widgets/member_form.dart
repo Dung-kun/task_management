@@ -49,7 +49,6 @@ class MemberForm extends StatelessWidget {
         Wrap(
           children: [
             for (int i = 0; i < listUser.length; i++)
-              if (listUser[i].url != null)
                 CustomAvatarLoadingImage(
                   url: listUser[i].url ?? '',
                   imageSize: 32,

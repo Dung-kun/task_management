@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:to_do_list/util/ui/common_widget/error_dialog.dart';
 import '/models/task_model.dart';
@@ -50,6 +49,16 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   final ImagePicker _picker = ImagePicker();
 
   XFile? pickerFile;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var temp = Get.arguments;
+    if(temp!= null) {
+      setValueInForm(temp);
+    }
+  }
 
   void getPhoto() async {
     pickerFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -120,6 +129,7 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   void setValueInForm(ProjectModel? value) {
     setState(() {
       dropValue = value;
+      getVm().getListMemberByProjectId(dropValue!.listMember);
     });
   }
 
@@ -180,9 +190,13 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
   }
 
   void selectListUser() {
+    Map<String, List<MetaUserModel>> arg = new Map<String, List<MetaUserModel>>();
+    arg["selectUsers"] = selectUsers;
+    arg["listMember"] = getVm().bsListMember.value!;
+
     Get.toNamed(
       AppRoutes.LIST_USER_FORM,
-      arguments: selectUsers,
+      arguments: arg,
     )?.then((value) {
       setState(() {
         this.selectUsers = value??[];

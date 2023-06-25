@@ -7,17 +7,16 @@ import '/models/project_model.dart';
 
 class EditTaskViewModel extends BaseViewModel {
   BehaviorSubject<TaskModel?> bsTask = BehaviorSubject<TaskModel?>();
-  BehaviorSubject<List<ProjectModel>?> bsListProject =
-      BehaviorSubject<List<ProjectModel>>();
+  BehaviorSubject<ProjectModel?> bsProject = BehaviorSubject<ProjectModel?>();
   BehaviorSubject<List<MetaUserModel>?> bsListMember =
       BehaviorSubject<List<MetaUserModel>>();
+  BehaviorSubject<List<MetaUserModel>?> bsListMemberInProject =
+  BehaviorSubject<List<MetaUserModel>>();
+
 
   EditTaskViewModel(ref) : super(ref) {
     // add project data
     if (user != null) {
-      firestoreService.projectStream(user!.uid).listen((event) {
-        bsListProject.add(event);
-      });
     }
   }
 
@@ -30,12 +29,17 @@ class EditTaskViewModel extends BaseViewModel {
         for (var mem in bsTask.value!.listMember) {
           firestoreService.userStreamById(mem).listen((event) {
             listMem.add(event);
-            print("list mem: $listMem");
             bsListMember.add(listMem);
           });
         }
       } else {
         bsListMember.add(listMem);
+      }
+      if(event.idProject != "") {
+        firestoreService.getProjectById(event.idProject).then((value) => {
+          bsProject.add(value),
+          loadMemberInProject(value.listMember)
+        });
       }
     });
   }
@@ -45,25 +49,28 @@ class EditTaskViewModel extends BaseViewModel {
     for (var mem in members) {
       firestoreService.userStreamById(mem).listen((event) {
         listMem.add(event);
-        print(listMem.last);
         bsListMember.add(listMem);
       });
     }
   }
 
-  Future<String> editTask(TaskModel task, ProjectModel oldproject,
-      ProjectModel newproject, List<String> oldMemberList) async {
+  void loadMemberInProject(List<String> members) async {
+    List<MetaUserModel> listMem = bsListMember.value!;
+    for (var mem in members) {
+      firestoreService.userStreamById(mem).listen((event) {
+        listMem.add(event);
+        bsListMemberInProject.add(listMem);
+      });
+    }
+  }
+
+  Future<String> editTask(TaskModel task, List<String> oldMemberList) async {
     startRunning();
     // add task to database
     String result = 'failed';
     bool hasUpdateTask = await firestoreService.updateTask(task);
     if (hasUpdateTask) result = 'success';
-    // print('old project ' + oldproject.id);
-    // print('new project ' + newproject.id);
-    if (oldproject.id != newproject.id) {
-      await firestoreService.deleteTaskProject(oldproject, task.id);
-      await firestoreService.addTaskProject(newproject, task.id);
-    }
+
     await sendNotification(task, oldMemberList, task.listMember);
     endRunning();
     return result;
@@ -134,7 +141,6 @@ class EditTaskViewModel extends BaseViewModel {
   @override
   void dispose() {
     bsTask.close();
-    bsListProject.close();
     bsListMember.close();
     super.dispose();
   }

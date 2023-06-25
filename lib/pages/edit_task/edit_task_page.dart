@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '/models/task_model.dart';
-import 'widgets/due_date_form.dart';
-import 'widgets/member_form.dart';
-import 'widgets/description_form.dart';
-import 'widgets/title_form.dart';
-import '/routing/app_routes.dart';
-import '/models/meta_user_model.dart';
-import '/models/project_model.dart';
+
 import '/base/base_state.dart';
 import '/constants/constants.dart';
+import '/models/meta_user_model.dart';
+import '/models/project_model.dart';
+import '/models/task_model.dart';
+import '/routing/app_routes.dart';
 import '/util/extension/dimens.dart';
 import '/util/extension/widget_extension.dart';
 import '/util/ui/common_widget/primary_button.dart';
 import 'edit_task_provider.dart';
 import 'edit_task_vm.dart';
-import 'widgets/in_form.dart';
+import 'widgets/description_form.dart';
+import 'widgets/due_date_form.dart';
+import 'widgets/member_form.dart';
+import 'widgets/title_form.dart';
 
 class EditTaskPage extends StatefulWidget {
   final ScopedReader watch;
@@ -42,7 +42,6 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
 
   ProjectModel? oldProject = null;
   List<String>? oldMemberList;
-  ProjectModel? dropValue;
   DateTime? dueDateValue;
   TimeOfDay? dueTimeValue;
   final f = new DateFormat('dd/MM/yyyy');
@@ -64,7 +63,9 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
   @override
   void initState() {
     super.initState();
-    getVm().loadTask(Get.arguments);
+    if(!getVm().bsTask.hasValue) {
+      getVm().loadTask(Get.arguments);
+    }
   }
 
   @override
@@ -114,8 +115,6 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
                       return AppStrings.loading.text12().tr().center();
                     }
                     TaskModel task = snapshot.data!;
-                    titleController.text = task.title;
-                    descriptionController.text = task.description;
                     dueDateValue = task.dueDate;
                     dueTimeValue = TimeOfDay.fromDateTime(task.dueDate);
                     oldMemberList = task.listMember;
@@ -123,15 +122,13 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 32.w),
-                        buildInForm(task),
-                        SizedBox(height: 24.w),
                         buildTitleForm(task),
                         SizedBox(height: 16.w),
                         buildDesForm(task),
                         SizedBox(height: 24.w),
                         buildDueDateForm(task),
                         SizedBox(height: 24.w),
-                        buildMemberForm(task),
+                        buildMemberForm(),
                         SizedBox(height: 24.w),
                         buildDoneButton(task),
                         SizedBox(height: 30.w),
@@ -143,47 +140,15 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
         ).pad(0, 12),
       );
 
-  void setValueInForm(ProjectModel? value) {
-    setState(() {
-      dropValue = value;
-    });
-  }
-
-  Widget buildInForm(TaskModel task) {
-    return StreamBuilder<List<ProjectModel>?>(
-      stream: getVm().bsListProject,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return AppStrings.somethingWentWrong.text12().tr().center();
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return AppStrings.loading.text12().tr().center();
-        }
-
-        List<ProjectModel> data = snapshot.data!;
-        if (this.oldProject == null) {
-          var taskdropValue =
-              data.where((element) => element.id == task.idProject);
-          if (taskdropValue.length > 0) {
-            this.dropValue = taskdropValue.first;
-            this.oldProject = taskdropValue.first;
-          }
-        }
-        return InForm(
-          value: dropValue,
-          listValue: data,
-          press: setValueInForm,
-        );
-      },
-    );
-  }
-
   Widget buildTitleForm(TaskModel task) {
+    if(titleController.text == "")
+    titleController.text = task.title;
     return TitleForm(controller: titleController);
   }
 
   Widget buildDesForm(TaskModel task) {
+    if(descriptionController.text == "")
+    descriptionController.text = task.description;
     return DescriptionForm(
       controller: descriptionController,
       pickerImage: pickerFile,
@@ -214,17 +179,22 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
   }
 
   void selectListUser() {
+    Map<String, List<MetaUserModel>> arg =
+        new Map<String, List<MetaUserModel>>();
+    arg["selectUsers"] = selectUsers ?? [];
+    arg["listMember"] = getVm().bsListMemberInProject.value ?? [];
     Get.toNamed(
       AppRoutes.LIST_USER_FORM,
-      arguments: selectUsers,
+      arguments: arg,
     )?.then((value) {
       setState(() {
+        print(value);
         this.selectUsers = value;
       });
     });
   }
 
-  Widget buildMemberForm(TaskModel task) {
+  Widget buildMemberForm() {
     return StreamBuilder<List<MetaUserModel>?>(
       stream: getVm().bsListMember,
       builder: (context, snapshot) {
@@ -253,15 +223,15 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
       list.add(user.uid);
     }
 
+    ProjectModel dropValue = getVm().bsProject.value!;
     if (formKey.currentState!.validate() &&
-        dropValue != null &&
         dueDateValue != null &&
         dueTimeValue != null) {
       dueDateValue = new DateTime(dueDateValue!.year, dueDateValue!.month,
           dueDateValue!.day, dueTimeValue!.hour, dueTimeValue!.minute);
       TaskModel task = new TaskModel(
         id: oldtask.id,
-        idProject: dropValue!.id,
+        idProject: dropValue.id,
         idAuthor: getVm().user!.uid,
         title: titleController.text,
         description: descriptionController.text,
@@ -269,8 +239,7 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
         dueDate: dueDateValue!,
         listMember: list,
       );
-      String taskId =
-          await getVm().editTask(task, oldProject!, dropValue!, oldMemberList!);
+      String taskId = await getVm().editTask(task, oldMemberList!);
       if (pickerFile != null) getVm().uploadDesTask(taskId, pickerFile!.path);
       Get.back();
     }

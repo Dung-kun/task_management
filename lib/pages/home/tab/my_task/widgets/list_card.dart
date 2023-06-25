@@ -47,16 +47,16 @@ class ListCard extends StatelessWidget {
       children: [
         for (int i = 0; i < statusDataAndMode.length; i++)
           if (i == 0 ||
-              statusDataAndMode[i - 1].startDate.year !=
-                  statusDataAndMode[i].startDate.year ||
-              statusDataAndMode[i - 1].startDate.month !=
-                  statusDataAndMode[i].startDate.month ||
-              statusDataAndMode[i - 1].startDate.day !=
-                  statusDataAndMode[i].startDate.day)
+              statusDataAndMode[i - 1].dueDate.year !=
+                  statusDataAndMode[i].dueDate.year ||
+              statusDataAndMode[i - 1].dueDate.month !=
+                  statusDataAndMode[i].dueDate.month ||
+              statusDataAndMode[i - 1].dueDate.day !=
+                  statusDataAndMode[i].dueDate.day)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                toDateString(statusDataAndMode[i].startDate)
+                toDateString(statusDataAndMode[i].dueDate)
                     .plain()
                     .color(AppColors.kGrayTextC)
                     .fSize(13.0)
