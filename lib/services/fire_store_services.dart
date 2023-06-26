@@ -26,10 +26,11 @@ class FirestoreService {
   }
 
   Future<void> updateProject(
-      String uid, String name, List<String> member) async {
+      String uid, String name, List<String> member, List<String> task) async {
     await _firebaseFirestore.collection('project').doc(uid).update({
       'name': name,
       'list_member': member,
+      'list_task': task
     }).then((value) {
       servicesResultPrint('Update project successful', isToast: false);
     });
@@ -317,6 +318,7 @@ class FirestoreService {
         .doc(task.id)
         .set(task.toFirestore())
         .then((value) {
+          print("buon vccc");
       servicesResultPrint("Task updated");
       return true;
     }).catchError((onError) {

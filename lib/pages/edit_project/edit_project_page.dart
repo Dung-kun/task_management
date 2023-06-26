@@ -279,7 +279,7 @@ class _EditProjectPageState
 
   Widget buildDoneButton() => PrimaryButton(
         text: StringTranslateExtension(AppStrings.editProject).tr(),
-        press: () => {},
+        press: () => { getVm().updateProject(titleController.text), Get.back() },
         backgroundColor: AppColors.kPrimaryColor_yellow,
         disable: !onRunning,
       ).pad(0, 12);

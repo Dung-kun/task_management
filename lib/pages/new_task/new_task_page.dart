@@ -208,7 +208,7 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
     return MemberForm(listUser: selectUsers, press: selectListUser);
   }
 
-  void addTaskClick() async {
+  Future<void> addTaskClick() async {
     List<String> list = [];
     List<String> listToken = [];
 
@@ -274,14 +274,14 @@ class NewTaskState extends BaseState<NewTaskPage, NewTaskViewModel> {
         listMember: list,
       );
       String taskId = await getVm().newTask(task, dropValue!, listToken);
-      if (pickerFile != null) getVm().uploadDesTask(taskId, pickerFile!.path);
       Get.back();
+      if (pickerFile != null) getVm().uploadDesTask(taskId, pickerFile!.path);
     }
   }
 
   Widget buildDoneButton() => PrimaryButton(
     text: StringTranslateExtension(AppStrings.addTask).tr(),
-    press: () => addTaskClick(),
+    press: () async => await addTaskClick(),
     disable: !onRunning,
   ).pad(0, 24);
 

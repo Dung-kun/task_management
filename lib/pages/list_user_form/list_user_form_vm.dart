@@ -10,6 +10,7 @@ class ListUserFormViewModel extends BaseViewModel {
 
   ListUserFormViewModel(ref) : super(ref) {
     bsSelectListUser.add([]);
+    bsListUser.add([]);
     // if (user != null)
     //   firestoreService.userStream(user!.email!).listen((event) {
     //     bsListUser.add(event);

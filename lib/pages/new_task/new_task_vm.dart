@@ -53,12 +53,12 @@ class NewTaskViewModel extends BaseViewModel {
       mem.forEach((element)  {
         firestoreService.getUserById(element).then((value) => {
           if(!member.contains(value)) {
-            member.add(value)
+            member.add(value),
+            bsListMember.add(member)
           },
         });
       });
     }
-    bsListMember.add(member);
   }
 
   @override

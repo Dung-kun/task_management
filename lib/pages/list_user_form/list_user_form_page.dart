@@ -29,9 +29,9 @@ class ListUserFormState
     extends BaseState<ListUserFormPage, ListUserFormViewModel> {
 
   @override
-  void didChangeDependencies() {
+  void initState() {
+    super.initState();
     getVm().initSelect(Get.arguments);
-    super.didChangeDependencies();
   }
 
   @override
@@ -72,6 +72,7 @@ class ListUserFormState
                 }
 
                 List<MetaUserModel> data = snapshot.data!;
+                print(data.length);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

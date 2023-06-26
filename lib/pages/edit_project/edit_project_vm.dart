@@ -15,7 +15,6 @@ class EditProjectViewModel extends BaseViewModel {
   BehaviorSubject<List<String>> bsMemberEmail =
       BehaviorSubject<List<String>>.seeded([]);
   EmailService _emailService = new EmailService();
-  List<String> deleteUserList = [];
   List<String> deleteTaskList = [];
 
   EditProjectViewModel(ref) : super(ref) {
@@ -55,10 +54,16 @@ class EditProjectViewModel extends BaseViewModel {
   deleteMember(MetaUserModel meUser) {
     List<MetaUserModel> listMem = List.from(bsListMember.value ?? []);
     if (listMem.contains(meUser)) {
-      deleteUserList.add(meUser.uid);
       listMem.remove(meUser);
     }
+    var task = bsListTask.value??[];
+    for (var i = 0; i < task.length; i++) {
+      if(task[i].listMember.contains(meUser)) {
+        task[i].listMember.remove(meUser);
+      }
+    }
 
+    bsListTask.add([...task]);
     bsListMember.add(listMem);
   }
 
@@ -72,22 +77,24 @@ class EditProjectViewModel extends BaseViewModel {
     bsListTask.add(listTask);
   }
 
-  updateProject(String name, String uid) {
+  updateProject(String name) {
     List<String> member = List.from(bsListMember.value!.map((e) => e.uid));
-    firestoreService.updateProject(uid, name, member);
+    var tasks = bsListTask.value!;
+    var stringTask = tasks.map((e) => e.id).toList();
+    ProjectModel project = bsProject.value!;
+    firestoreService.updateProject(project.id, name, member, stringTask);
 
 
-    sendEmail(uid, name);
-    var task = bsListTask.value!;
+    sendEmail(project.id, name);
 
-    for (var i = 0; i < task.length; i++) {
-      for (var item in deleteUserList) {
-        if (task[i].listMember.contains(item)) {
-          task[i].listMember.remove(item);
-        }
-        firestoreService.updateTaskById(task[i].id, task[i].listMember);
-      }
+
+    for (var i = 0; i < tasks.length; i++) {
+        firestoreService.updateTaskById(tasks[i].id, tasks[i].listMember);
     }
+
+    deleteTaskList.forEach((element) {
+      firestoreService.deleteTask(element);
+    });
   }
 
   void addMemberEmail(String email) {

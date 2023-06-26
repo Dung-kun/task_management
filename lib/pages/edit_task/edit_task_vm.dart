@@ -21,13 +21,12 @@ class EditTaskViewModel extends BaseViewModel {
   }
 
   void loadTask(String taskId) {
-    firestoreService.taskStreamById(taskId).listen((event) {
+    firestoreService.getTaskById(taskId).then((event) {
       bsTask.add(event);
-      List<MetaUserModel> listMem =
-          bsListMember.hasValue ? bsListMember.value! : [];
+      List<MetaUserModel> listMem = [];
       if (bsTask.value!.listMember.length > 0) {
         for (var mem in bsTask.value!.listMember) {
-          firestoreService.userStreamById(mem).listen((event) {
+          firestoreService.getUserById(mem).then((event) {
             listMem.add(event);
             bsListMember.add(listMem);
           });
@@ -44,22 +43,13 @@ class EditTaskViewModel extends BaseViewModel {
     });
   }
 
-  void loadMember(List<String> members) async {
-    List<MetaUserModel> listMem = bsListMember.value!;
-    for (var mem in members) {
-      firestoreService.userStreamById(mem).listen((event) {
-        listMem.add(event);
-        bsListMember.add(listMem);
-      });
-    }
-  }
 
   void loadMemberInProject(List<String> members) async {
-    List<MetaUserModel> listMem = bsListMember.value!;
+    List<MetaUserModel> listMember = [];
     for (var mem in members) {
       firestoreService.userStreamById(mem).listen((event) {
-        listMem.add(event);
-        bsListMemberInProject.add(listMem);
+        listMember.add(event);
+        bsListMemberInProject.add(listMember);
       });
     }
   }
@@ -71,13 +61,13 @@ class EditTaskViewModel extends BaseViewModel {
     bool hasUpdateTask = await firestoreService.updateTask(task);
     if (hasUpdateTask) result = 'success';
 
-    await sendNotification(task, oldMemberList, task.listMember);
+    sendNotification(task, oldMemberList, task.listMember);
     endRunning();
     return result;
   }
 
-  Future<bool> sendNotification(
-      TaskModel task, List<String> oldMemList, List<String> newMemList) async {
+  bool sendNotification(
+      TaskModel task, List<String> oldMemList, List<String> newMemList) {
     try {
       if (oldMemList.isEmpty && newMemList.isEmpty) {
         print("no member was add or remove");

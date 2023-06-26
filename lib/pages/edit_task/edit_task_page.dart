@@ -182,6 +182,7 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
     Map<String, List<MetaUserModel>> arg =
         new Map<String, List<MetaUserModel>>();
     arg["selectUsers"] = selectUsers ?? [];
+    print(selectUsers);
     arg["listMember"] = getVm().bsListMemberInProject.value ?? [];
     Get.toNamed(
       AppRoutes.LIST_USER_FORM,
@@ -207,10 +208,7 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
         }
 
         List<MetaUserModel> data = snapshot.data!;
-        print("$data");
         if (selectUsers == null || selectUsers == []) selectUsers = data;
-        print("Select user: ");
-        print("$selectUsers");
         return MemberForm(listUser: selectUsers!, press: selectListUser);
       },
     );
@@ -232,16 +230,17 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
       TaskModel task = new TaskModel(
         id: oldtask.id,
         idProject: dropValue.id,
-        idAuthor: getVm().user!.uid,
+        idAuthor: oldtask.idAuthor,
         title: titleController.text,
         description: descriptionController.text,
         startDate: DateTime.now(),
         dueDate: dueDateValue!,
         listMember: list,
       );
+
       String taskId = await getVm().editTask(task, oldMemberList!);
-      if (pickerFile != null) getVm().uploadDesTask(taskId, pickerFile!.path);
       Get.back();
+      if (pickerFile != null) getVm().uploadDesTask(taskId, pickerFile!.path);
     }
   }
 
