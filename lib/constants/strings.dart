@@ -86,6 +86,7 @@ class AppStrings {
   static const String project = 'project';
   static const String myNote = 'my_note';
   static const String profile = 'profile';
+  static const String profiles= 'profiles';
   static const String backToLogin = 'back_to_login';
 
   /// [Home] [Add Button]

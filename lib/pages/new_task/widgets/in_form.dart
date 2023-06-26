@@ -24,7 +24,7 @@ class InForm extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        AppStrings.in_.bold().fSize(18).b().tr(),
+        AppStrings.project.bold().fSize(18).b().tr(),
         SizedBox(width: 8.w),
         Container(
           width: 256.w,

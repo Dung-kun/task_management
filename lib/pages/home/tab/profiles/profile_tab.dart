@@ -158,7 +158,7 @@ class ProfileState extends BaseState<ProfileTab, ProfileViewModel> {
   }
 
   AppBar buildAppBar() =>
-      StringTranslateExtension('profiles')
+      StringTranslateExtension(AppStrings.profiles)
           .tr()
           .plainAppBar(color: AppColors.kText)
           .backgroundColor(AppColors.kPrimaryBackground)
