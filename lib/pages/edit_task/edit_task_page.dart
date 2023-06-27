@@ -116,6 +116,10 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
                     }
                     TaskModel task = snapshot.data!;
                     oldMemberList = task.listMember;
+                    if(dueTimeValue == null) {
+                      dueDateValue = task.dueDate;
+                      dueTimeValue = TimeOfDay.fromDateTime(getVm().bsTask.value!.dueDate);
+                    }
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -168,13 +172,6 @@ class EditTaskState extends BaseState<EditTaskPage, EditTaskViewModel> {
   }
 
   Widget buildDueDateForm(TaskModel task) {
-    if(dueDateValue == null) {
-      setValueDate(task.dueDate);
-    }
-    dueDateValue = task.dueDate;
-    if(dueTimeValue == null) {
-      setValueTime(TimeOfDay.fromDateTime(task.dueDate));
-    }
 
     return DueDateForm(
       valueDate: dueDateValue,
