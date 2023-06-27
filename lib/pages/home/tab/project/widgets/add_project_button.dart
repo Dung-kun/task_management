@@ -139,7 +139,7 @@ class AddProjectButton extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              for (int i = 0; i < 5; i++)
+                              for (int i = 0; i < 9; i++)
                                 ChooseColorIcon(
                                   index: i,
                                   press: _setColor,

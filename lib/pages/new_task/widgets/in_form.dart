@@ -28,7 +28,7 @@ class InForm extends StatelessWidget {
         SizedBox(width: 8.w),
         Container(
           width: 256.w,
-          height: 48.w,
+          height: 54.w,
           decoration: BoxDecoration(
             color: AppColors.kGrayBack,
             borderRadius: BorderRadius.circular(50.w),
@@ -42,8 +42,8 @@ class InForm extends StatelessWidget {
                       width: 200.w,
                       child: e.name
                           .plain()
-                          .fSize(14)
-                          .weight(FontWeight.w600)
+                          .fSize(16)
+                          .weight(FontWeight.w500)
                           .overflow(TextOverflow.ellipsis)
                           .b(),
                     ),
@@ -62,7 +62,7 @@ class InForm extends StatelessWidget {
               errorBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
             ),
-          ).pad(16, 16, 0, 10),
+          ).pad(12, 12, 0, 10),
         ),
       ],
     );
