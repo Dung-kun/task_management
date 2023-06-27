@@ -28,7 +28,7 @@ class MyTaskViewModel extends BaseViewModel {
           }
         }
         listData.sort((a, b) => a.startDate.compareTo(b.startDate));
-        bsListTask.add(listData);
+        if(!bsListTask.isClosed) bsListTask.add(listData);
       });
     }
   }

@@ -131,6 +131,8 @@ class EditTaskViewModel extends BaseViewModel {
   @override
   void dispose() {
     bsTask.close();
+    bsProject.close();
+    bsListMemberInProject.close();
     bsListMember.close();
     super.dispose();
   }

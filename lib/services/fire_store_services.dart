@@ -16,7 +16,7 @@ class FirestoreService {
   Stream<List<ProjectModel>> projectStream(String uid) {
     return _firebaseFirestore
         .collection('project')
-        .where('id_author', isEqualTo: uid)
+        .where('list_member', arrayContains: uid)
         .snapshots()
         .map(
           (list) => list.docs.map((doc) {

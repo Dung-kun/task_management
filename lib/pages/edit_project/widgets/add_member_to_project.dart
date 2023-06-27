@@ -127,9 +127,9 @@ class AddMemberToProject extends StatelessWidget {
                           SizedBox(height: 8),
                           for (int i = 0; i < data.length; i++)
                             MemberEmailItem(
-                              deleteMemberEmail: deleteMemberEmail,
-                              nameEmail: data[i],
-                              deleteEmailText: _setEmailFormatController,
+                                deleteMemberEmail: () =>
+                                {deleteMemberEmail(data[i])},
+                                nameEmail: data[i]
                             ),
                           SizedBox(height: 20),
                           PrimaryButton(

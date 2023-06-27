@@ -16,7 +16,7 @@ class ProjectViewModel extends BaseViewModel {
   ProjectViewModel(ref) : super(ref) {
     if (user != null)
       firestoreService.projectStreamWithListMember(user!.uid).listen((event) {
-        bsProject.add(event);
+        if(!bsProject.isClosed) bsProject.add(event);
       });
   }
 
@@ -62,8 +62,8 @@ class ProjectViewModel extends BaseViewModel {
 
   void addMemberEmail(String email) {
     if (email.isValidEmail()) {
-      List<String> list = List.from(bsMemberEmail.value);
-
+      List<String> list = [];
+      if(bsMemberEmail.hasValue) list = List.from(bsMemberEmail.value);
       if (!list.contains(email)) {
         list = [email, ...list];
       }
@@ -84,6 +84,7 @@ class ProjectViewModel extends BaseViewModel {
   @override
   void dispose() {
     bsProject.close();
+    bsMemberEmail.close();
     super.dispose();
   }
 }

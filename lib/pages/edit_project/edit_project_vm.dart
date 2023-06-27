@@ -9,11 +9,11 @@ import '../../services/email_service.dart';
 class EditProjectViewModel extends BaseViewModel {
   BehaviorSubject<ProjectModel?> bsProject = BehaviorSubject<ProjectModel?>();
   BehaviorSubject<List<MetaUserModel>?> bsListMember =
-      BehaviorSubject<List<MetaUserModel>>();
+  BehaviorSubject<List<MetaUserModel>>();
   BehaviorSubject<List<TaskModel>?> bsListTask =
-      BehaviorSubject<List<TaskModel>?>();
+  BehaviorSubject<List<TaskModel>?>();
   BehaviorSubject<List<String>> bsMemberEmail =
-      BehaviorSubject<List<String>>.seeded([]);
+  BehaviorSubject<List<String>>.seeded([]);
   EmailService _emailService = new EmailService();
   List<String> deleteTaskList = [];
 
@@ -28,7 +28,7 @@ class EditProjectViewModel extends BaseViewModel {
 
   loadProject(String idProject) {
     firestoreService.projectStreamById(idProject).listen((event) {
-      bsProject.add(event);
+      if(!bsProject.isClosed) bsProject.add(event);
       List<MetaUserModel> listMem = [];
       List<TaskModel> listTask = [];
 
@@ -56,9 +56,9 @@ class EditProjectViewModel extends BaseViewModel {
     if (listMem.contains(meUser)) {
       listMem.remove(meUser);
     }
-    var task = bsListTask.value??[];
+    var task = bsListTask.value ?? [];
     for (var i = 0; i < task.length; i++) {
-      if(task[i].listMember.contains(meUser)) {
+      if (task[i].listMember.contains(meUser)) {
         task[i].listMember.remove(meUser);
       }
     }
@@ -78,9 +78,11 @@ class EditProjectViewModel extends BaseViewModel {
   }
 
   updateProject(String name) {
-    List<String> member = List.from(bsListMember.value!.map((e) => e.uid));
-    var tasks = bsListTask.value!;
-    var stringTask = tasks.map((e) => e.id).toList();
+    var listMember = bsListMember.hasValue? bsListMember.value! : [];
+    List<String> member = List.from(listMember.map((e) => e.uid));
+
+    var tasks = bsListTask.hasValue? bsListTask.value! : [];
+    List<String> stringTask = List.from(tasks.map((e) => e.id));
     ProjectModel project = bsProject.value!;
     firestoreService.updateProject(project.id, name, member, stringTask);
 
@@ -89,7 +91,7 @@ class EditProjectViewModel extends BaseViewModel {
 
 
     for (var i = 0; i < tasks.length; i++) {
-        firestoreService.updateTaskById(tasks[i].id, tasks[i].listMember);
+      firestoreService.updateTaskById(tasks[i].id, tasks[i].listMember);
     }
 
     deleteTaskList.forEach((element) {
@@ -99,7 +101,9 @@ class EditProjectViewModel extends BaseViewModel {
 
   void addMemberEmail(String email) {
     if (email.isValidEmail()) {
-      List<String> list = List.from(bsMemberEmail.value);
+      List<String> list = [];
+      if (bsMemberEmail.hasValue)
+        list = List.from(bsMemberEmail.value);
 
       if (!list.contains(email)) {
         list = [email, ...list];
@@ -121,8 +125,9 @@ class EditProjectViewModel extends BaseViewModel {
   void sendEmail(String id, String name) {
     List<String> list = List.from(bsMemberEmail.value);
     list.forEach((element) {
-      firestoreService.getUserByEmail(element).then((value) => {
-         _emailService.sendEmail(
+      firestoreService.getUserByEmail(element).then((value) =>
+      {
+        _emailService.sendEmail(
             element, id, name, user!.displayName ?? "", value)
       });
     });
@@ -132,6 +137,8 @@ class EditProjectViewModel extends BaseViewModel {
 
   void dispose() {
     bsListTask.close();
+    bsListMember.close();
+    bsProject.close();
     bsListMember.close();
     super.dispose();
   }

@@ -14,10 +14,10 @@ import 'member_email_item.dart';
 class AddProjectButton extends StatelessWidget {
   const AddProjectButton(
       {Key? key,
-        required this.press,
-        required this.addMemberEmail,
-        required this.bsMemberEmail,
-        required this.deleteMemberEmail})
+      required this.press,
+      required this.addMemberEmail,
+      required this.bsMemberEmail,
+      required this.deleteMemberEmail})
       : super(key: key);
 
   final BehaviorSubject<List<String>> bsMemberEmail;
@@ -43,9 +43,9 @@ class AddProjectButton extends StatelessWidget {
           .center(),
     )
         .inkTap(
-      onTap: () => {showAddProjectDialog(context)},
-      borderRadius: BorderRadius.circular(5.r),
-    )
+          onTap: () => {showAddProjectDialog(context)},
+          borderRadius: BorderRadius.circular(5.r),
+        )
         .pad(20, 0, 12);
   }
 
@@ -117,15 +117,15 @@ class AddProjectButton extends StatelessWidget {
                               border: OutlineInputBorder(
                                 borderRadius: new BorderRadius.circular(25.0),
                                 borderSide:
-                                BorderSide(color: Colors.black, width: 1.0),
+                                    BorderSide(color: Colors.black, width: 1.0),
                               ),
                             ),
                             style: new TextStyle(color: Colors.black),
                             validator: (val) => val!.isNotEmpty
                                 ? null
                                 : StringTranslateExtension(
-                                AppStrings.pleaseEnterYourText)
-                                .tr(),
+                                        AppStrings.pleaseEnterYourText)
+                                    .tr(),
                             controller: _projectController,
                           ),
                           SizedBox(height: 16),
@@ -155,9 +155,13 @@ class AddProjectButton extends StatelessWidget {
                                 color: Colors.redAccent,
                               ).inkTap(
                                   onTap: () => {
-                                    addMemberEmail(
-                                        _emailFormatController.text)
-                                  },
+                                        if (_formKey.currentState!.validate())
+                                          {
+                                            addMemberEmail(
+                                                _emailFormatController.text),
+                                            _setEmailFormatController()
+                                          }
+                                      },
                                   borderRadius: BorderRadius.circular(5)),
                               errorStyle: TextStyle(fontSize: 18.0),
                               labelText: 'Add member',
@@ -177,31 +181,30 @@ class AddProjectButton extends StatelessWidget {
                               border: OutlineInputBorder(
                                 borderRadius: new BorderRadius.circular(25.0),
                                 borderSide:
-                                BorderSide(color: Colors.black, width: 1.0),
+                                    BorderSide(color: Colors.black, width: 1.0),
                               ),
                             ),
                             style: new TextStyle(color: Colors.black),
                             validator: (val) =>
-                            (val!.isValidEmail() || val.isEmpty)
-                                ? null
-                                : StringTranslateExtension(AppStrings
-                                .pleaseEnterIncorrectFormatEmail)
-                                .tr(),
+                                (val!.isValidEmail() || val.isEmpty)
+                                    ? null
+                                    : StringTranslateExtension(AppStrings
+                                            .pleaseEnterIncorrectFormatEmail)
+                                        .tr(),
                             controller: _emailFormatController,
                           ),
                           SizedBox(height: 8),
                           for (int i = 0; i < data.length; i++)
                             MemberEmailItem(
-                              deleteMemberEmail: deleteMemberEmail,
-                              nameEmail: data[i],
-                              deleteEmailText: _setEmailFormatController,
-                            ),
+                                deleteMemberEmail: () =>
+                                    {deleteMemberEmail(data[i])},
+                                nameEmail: data[i]),
                           SizedBox(height: 20),
                           PrimaryButton(
                             text:
-                            StringTranslateExtension(AppStrings.done).tr(),
+                                StringTranslateExtension(AppStrings.done).tr(),
                             press: () async {
-                              if (_formKey.currentState!.validate()) {
+                              if (_formKey.currentState!.validate() || _emailFormatController.text == "") {
                                 press(
                                     _projectController.text, indexChooseColor);
                                 Get.back();
