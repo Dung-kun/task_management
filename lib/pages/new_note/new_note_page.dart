@@ -122,7 +122,7 @@ class NewNoteState extends BaseState<NewNotePage, NewNoteViewModel> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              for (int i = 0; i < 5; i++)
+              for (int i = 0; i < 9; i++)
                 ChooseColorIcon(
                   index: i,
                   press: setColor,
